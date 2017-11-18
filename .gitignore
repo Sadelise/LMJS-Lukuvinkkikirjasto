@@ -1,5 +1,8 @@
-/Lukuvinkkikirjasto/.nb-gradle/
+**/.nb-gradle/
 /Lukuvinkkikirjasto/build/
 /Lukuvinkkikirjasto/gradlew
 /Lukuvinkkikirjasto/.gradle/
 /Lukuvinkkikirjasto/settings.gradle
+
+*.tmp
+gradle.properties
