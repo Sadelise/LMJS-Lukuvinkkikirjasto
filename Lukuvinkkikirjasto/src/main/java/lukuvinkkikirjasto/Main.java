@@ -27,7 +27,7 @@ public class Main {
                 String name = scanner.nextLine();
                 System.out.println("And the name of the author: ");
                 String author = scanner.nextLine();
-                Book book = new Book(name, author);
+                Tip book = new Book(name, author);
                 tips.add(book);
                 System.out.println("\nKirja lisätty!\n" + book);
             }

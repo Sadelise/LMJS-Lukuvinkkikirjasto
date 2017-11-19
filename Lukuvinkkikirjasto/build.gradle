@@ -1,5 +1,11 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: "jacoco" 
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -18,17 +24,25 @@ if (!hasProperty('mainClass')) {
 repositories {
     mavenCentral()
     jcenter()
-    // You may define additional repositories, or even remove "mavenCentral()".
     // Read more about repositories here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
 }
 
+project.ext {
+    cucumberVersion = '1.2.5'
+    junitVersion = '4.12'
+}
+
 dependencies {
-    // TODO: Add dependencies here ...
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
+    // You can read more about how to add dependency here: http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     compile 'com.google.guava:guava:20.0'
-    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    testCompile 'junit:junit:' + junitVersion
+
+	compileOnly 'org.projectlombok:lombok:1.16.18'
+	
+	apt "org.projectlombok:lombok:1.16.18"
 }
 
 mainClass = 'lukuvinkkikirjasto.Main'
