@@ -12,7 +12,7 @@ sourceCompatibility = '1.8'
 // prefer. In this case NetBeans will not add these tasks but you may rely on
 // your own implementation.
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'Main'
+    ext.mainClass = 'lukuvinkkikirjasto.Main'
 }
 
 repositories {
@@ -31,8 +31,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.10'
 }
 
-mainClass = 'Main'
-mainClassName = 'Main'
+mainClass = 'lukuvinkkikirjasto.Main'
+mainClassName = 'lukuvinkkikirjasto.Main'
 
 run {
     standardInput = System.in
