@@ -65,4 +65,24 @@ public class Stepdefs {
         tipDao = new BasicTipDao();
         Main.run(io, tipDao);
     }
+    
+    @And("^command remove has been selected$")
+    public void command_remove_has_been_selected() throws Throwable {
+        inputLines.add("remove");
+    }  
+    
+    @When("^user gives the book number (\\d+)$")
+    public void user_gives_the_book_number(int num) throws Throwable {
+        inputLines.add(""+num);
+    }
+    
+    @And("^when user enters \"([^\"]*)\"$")
+    public void when_user_enters(String input) throws Throwable {
+        inputLines.add(input);
+        inputLines.add("quit");
+        io = new StubIO(inputLines);
+        tipDao = new BasicTipDao();
+        Main.run(io, tipDao);
+    }
+    
 }

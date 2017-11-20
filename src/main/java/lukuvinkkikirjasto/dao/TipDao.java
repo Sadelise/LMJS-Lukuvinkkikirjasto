@@ -12,4 +12,6 @@ public interface TipDao {
     public void markTip(int tip);
     
     public void removeTip(int tip);
+    
+    public boolean testTipNumber(int tip);
 }

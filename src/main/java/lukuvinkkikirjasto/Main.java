@@ -39,10 +39,10 @@ public class Main {
             if (command.equals("view")) {
                 scanner.print(tipDao.toString());
 
-                if(tipDao.getAllTips().size()>0){
+                if (tipDao.getAllTips().size() > 0) {
                     String s = scanner.readLine("Do you want to mark a book as read? y/n");
-                    if(s.equals("y")) {
-                        int i = Integer.parseInt(scanner.readLine("Enter book number"))-1;
+                    if (s.equals("y")) {
+                        int i = Integer.parseInt(scanner.readLine("Enter book number")) - 1;
                         tipDao.markTip(i);
                         scanner.print("Book now marked as read");
                         scanner.print(tipDao.getAllTips().get(i).toString());
@@ -50,16 +50,22 @@ public class Main {
                 }
             }
             if (command.equals("remove")) {
-                int i = Integer.parseInt(scanner.readLine("Enter book numer"))-1;
-                scanner.print(tipDao.getAllTips().get(i).toString());
-                String s = scanner.readLine("Are you sure you want to delete this book? y/n");
-                if(s.equals("y")) {
-                    tipDao.removeTip(i);
-                    System.out.println("The book was removed");
+                if (tipDao.getAllTips().size() > 0) {
+                    int i = Integer.parseInt(scanner.readLine("Enter book numer")) - 1;
+                    if (tipDao.testTipNumber(i)) {
+                        scanner.print(tipDao.getAllTips().get(i).toString());
+                        String s = scanner.readLine("Are you sure you want to delete this book? y/n");
+                        if (s.equals("y")) {
+                            tipDao.removeTip(i);
+                            scanner.print("The book was removed");
+                        }
+                    }
+                } else {
+                    scanner.print("No books to remove");
                 }
             }
             if (command.equals("commands")) {
-                System.out.println("To add a new book, type 'add' and press Enter.\n"
+                scanner.print("To add a new book, type 'add' and press Enter.\n"
                         + "To view all tips, type 'view' and press Enter.\n"
                         + "To remove a book, type 'remove' and press Enter.\n"
                         + "To exit, type 'quit' and press Enter.");
