@@ -17,7 +17,7 @@ public class Book implements Tip {
     private boolean read = false;
 
     public Book(String title, String author) {
-        this(title, author, "", "");
+        this(title, author, "", "", false);
     }
 
     public boolean markRead(){
