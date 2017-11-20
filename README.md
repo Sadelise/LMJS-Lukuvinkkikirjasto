@@ -12,10 +12,10 @@ Ohjelmasta voi poistua "quit"-komennolla.
 
 ### Definiton of done
 
-..* User storyille on määritelty hyväksymäkriteerit, jotka dokumentoidaan Cucumber-featureiksi. [Linkki featureihin](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/tree/master/src/test/resources/lukuvinkkikirjasto)
-..* Asiakas pääsee näkemään koko ajan koodin ja testien tilanteen CI-palvelimelta
-..* Luokat/metodit/muuttujat nimetty järkevästi
-..* Selkeä ja perusteltu arkkitehtuuri
+* User storyille on määritelty hyväksymäkriteerit, jotka dokumentoidaan Cucumber-featureiksi. [Linkki featureihin](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/tree/master/src/test/resources/lukuvinkkikirjasto)
+* Asiakas pääsee näkemään koko ajan koodin ja testien tilanteen CI-palvelimelta
+* Luokat/metodit/muuttujat nimetty järkevästi
+* Selkeä ja perusteltu arkkitehtuuri
 
 ### Backlog
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/1OgjUlsgwDmvzZTyIIeAkLIftJII5E7hFcgInnRusNN4/edit#gid=1257881806)
