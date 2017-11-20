@@ -37,7 +37,7 @@ public class BookTest {
 
     @Test
     public void bookHasAllInformation() {
-        Book book = new Book("A book about books", "Billy Book", "This book has a lot of information about books", "ISBN1234");
+        Book book = new Book("A book about books", "Billy Book", "This book has a lot of information about books", "ISBN1234", false);
         assertEquals("A book about books", book.getTitle());
         assertEquals("Billy Book", book.getAuthor());
         assertEquals("This book has a lot of information about books", book.getDescription());
