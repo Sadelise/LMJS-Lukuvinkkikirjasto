@@ -8,4 +8,6 @@ public interface TipDao {
     public List<Tip> getAllTips();
     
     public void addTip(Tip tip);
+
+    public void markTip(int tip);
 }

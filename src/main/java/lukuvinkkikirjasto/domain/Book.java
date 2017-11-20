@@ -14,12 +14,24 @@ public class Book implements Tip {
     private String description;
     private String ISBN;
 
+    private boolean read = false;
+
     public Book(String title, String author) {
         this(title, author, "", "");
     }
 
+    public boolean markRead(){
+        if(this.read)
+            return false;
+        this.read=true;
+        return true;
+    }
+
     @Override
     public String toString() {
-        return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN;
+        String r;
+        if(read) r = "Read";
+        else r = "Not read";
+        return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN + "\n"+r;
     }
 }

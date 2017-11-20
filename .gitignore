@@ -6,3 +6,4 @@ settings.gradle
 
 *.tmp
 gradle.properties
+.idea/

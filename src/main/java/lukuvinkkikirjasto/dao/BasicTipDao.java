@@ -28,6 +28,16 @@ public class BasicTipDao implements TipDao {
     }
 
     @Override
+    public void markTip(int tip){
+
+        if(tip<0||tip>=tips.size()){
+            System.out.println("Not a valid book. \n Enter a number between 1 and " + tips.size());
+            return;
+        }
+        tips.get(tip).markRead();
+    }
+
+    @Override
     public String toString() {
         String string = "";
         int tipNumber = 1;

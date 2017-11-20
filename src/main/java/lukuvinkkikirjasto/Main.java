@@ -37,6 +37,16 @@ public class Main {
             }
             if (command.equals("view")) {
                 scanner.print(tipDao.toString());
+
+                if(tipDao.getAllTips().size()>0){
+                    String s = scanner.readLine("Do you want to mark a book as read? y/n");
+                    if(s.equals("y")) {
+                        int i = Integer.parseInt(scanner.readLine("Enter book number"))-1;
+                        tipDao.markTip(i);
+                        scanner.print("Book now marked as read");
+                        scanner.print(tipDao.getAllTips().get(i).toString());
+                    }
+                }
             }
         }
     }
