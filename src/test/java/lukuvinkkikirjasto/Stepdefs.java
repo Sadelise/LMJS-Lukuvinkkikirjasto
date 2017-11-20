@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.util.ArrayList;
 import java.util.List;
+import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.io.StubIO;
 import static org.junit.Assert.*;
 
@@ -12,6 +13,7 @@ public class Stepdefs {
 
     List<String> inputLines = new ArrayList<>();
     StubIO io;
+    BasicTipDao tipDao;
 
     @Given("^command add is selected$")
     public void command_add_selected() throws Throwable {
@@ -24,7 +26,8 @@ public class Stepdefs {
         inputLines.add(author);
         inputLines.add("quit");
         io = new StubIO(inputLines);
-        Main.run(io);
+        tipDao = new BasicTipDao();
+        Main.run(io, tipDao);
     }
 
     @Then("^system will respond with \"([^\"]*)\"$")
