@@ -22,7 +22,8 @@ public class Main {
     public static void run(IO scanner, TipDao tipDao) {
         while (true) {
             System.out.println("");
-            String command = scanner.readLine("To add a new book, type 'add' and press Enter. To view all tips, type 'view' and press Enter. To exit, type 'quit' and press Enter.");
+            String command = scanner.readLine("Type a command and press Enter "
+                    + "(to see the list of all commands, type 'commands' and press Enter)");
             if (command.equals("quit")) {
                 break;
             }
@@ -32,7 +33,7 @@ public class Main {
                 Tip book = new Book(name, author);
                 tipDao.addTip(book);
                 System.out.println();
-                scanner.print("Kirja lisatty!");
+                scanner.print("Book added!");
                 scanner.print(book.toString());
             }
             if (command.equals("view")) {
@@ -47,6 +48,21 @@ public class Main {
                         scanner.print(tipDao.getAllTips().get(i).toString());
                     }
                 }
+            }
+            if (command.equals("remove")) {
+                int i = Integer.parseInt(scanner.readLine("Enter book numer"))-1;
+                scanner.print(tipDao.getAllTips().get(i).toString());
+                String s = scanner.readLine("Are you sure you want to delete this book? y/n");
+                if(s.equals("y")) {
+                    tipDao.removeTip(i);
+                    System.out.println("The book was removed");
+                }
+            }
+            if (command.equals("commands")) {
+                System.out.println("To add a new book, type 'add' and press Enter.\n"
+                        + "To view all tips, type 'view' and press Enter.\n"
+                        + "To remove a book, type 'remove' and press Enter.\n"
+                        + "To exit, type 'quit' and press Enter.");
             }
         }
     }

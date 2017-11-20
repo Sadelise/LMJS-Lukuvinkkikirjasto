@@ -36,6 +36,16 @@ public class BasicTipDao implements TipDao {
         }
         tips.get(tip).markRead();
     }
+    
+    @Override
+    public void removeTip(int tip) {
+        
+        if(tip<0||tip>=tips.size()){
+            System.out.println("Not a valid book. \n Enter a number between 1 and " + tips.size());
+            return;
+        }
+        tips.remove(tip);
+    }
 
     @Override
     public String toString() {
@@ -43,7 +53,7 @@ public class BasicTipDao implements TipDao {
         int tipNumber = 1;
         for(Tip tip : tips) {
             string += "Tip " + tipNumber + ":\n";
-            string += tip.toString() + "\n";
+            string += tip.toString() + "\n" + "\n";
             tipNumber++;
         }
         return string;

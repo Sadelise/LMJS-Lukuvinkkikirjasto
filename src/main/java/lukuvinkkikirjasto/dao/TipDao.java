@@ -10,4 +10,6 @@ public interface TipDao {
     public void addTip(Tip tip);
 
     public void markTip(int tip);
+    
+    public void removeTip(int tip);
 }
