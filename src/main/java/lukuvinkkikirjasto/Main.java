@@ -51,7 +51,7 @@ public class Main {
             }
             if (command.equals("remove")) {
                 if (tipDao.getAllTips().size() > 0) {
-                    int i = Integer.parseInt(scanner.readLine("Enter book numer")) - 1;
+                    int i = Integer.parseInt(scanner.readLine("Enter book number")) - 1;
                     if (tipDao.testTipNumber(i)) {
                         scanner.print(tipDao.getAllTips().get(i).toString());
                         String s = scanner.readLine("Are you sure you want to delete this book? y/n");

@@ -26,15 +26,28 @@ public class Stepdefs {
     public void title_and_author_are_entered(String title, String author) throws Throwable {
         inputLines.add(title);
         inputLines.add(author);
-        inputLines.add("quit");
-        io = new StubIO(inputLines);
-        tipDao = new BasicTipDao();
-        Main.run(io, tipDao);
     }
 
     @Then("^system will respond with \"([^\"]*)\"$")
     public void system_will_respond_with(String expectedOutput) throws Throwable {
+        runProgram();
+
         assertTrue(io.getOutput().contains(expectedOutput));
+    }
+
+    @Then("^system response will contain \"([^\"]*)\"$")
+    public void system_response_will_contain(String expectedOutput) throws Throwable {
+        runProgram();
+
+        List<String> output = io.getOutput();
+        boolean stringContained = false;
+        for (String string : output) {
+            if (string.contains(expectedOutput)) {
+                stringContained = true;
+            }
+        }
+
+        assertTrue(stringContained);
     }
 
     @Given("^a book has been added$")
@@ -43,6 +56,13 @@ public class Stepdefs {
         inputLines.add("title");
         inputLines.add("author");
 
+    }
+
+    @Given("^a book titled \"([^\"]*)\" by \"([^\"]*)\" has been added$")
+    public void specific_book_has_been_added(String title, String author) throws Throwable {
+        inputLines.add("add");
+        inputLines.add(title);
+        inputLines.add(author);
     }
 
     @And("^command view has been selected$")
@@ -59,30 +79,34 @@ public class Stepdefs {
 
     @And("^gives the correct book number of (\\d+)$")
     public void gives_the_correct_book_number_Of(int num) throws Throwable {
-        inputLines.add(""+num);
+        inputLines.add("" + num);
         inputLines.add("quit");
         io = new StubIO(inputLines);
         tipDao = new BasicTipDao();
         Main.run(io, tipDao);
     }
-    
+
     @And("^command remove has been selected$")
     public void command_remove_has_been_selected() throws Throwable {
         inputLines.add("remove");
-    }  
-    
+    }
+
     @When("^user gives the book number (\\d+)$")
     public void user_gives_the_book_number(int num) throws Throwable {
-        inputLines.add(""+num);
+        inputLines.add("" + num);
     }
-    
+
     @And("^when user enters \"([^\"]*)\"$")
     public void when_user_enters(String input) throws Throwable {
         inputLines.add(input);
+        runProgram();
+    }
+
+    private void runProgram() {
+        inputLines.add("quit");
         inputLines.add("quit");
         io = new StubIO(inputLines);
         tipDao = new BasicTipDao();
         Main.run(io, tipDao);
     }
-    
 }
