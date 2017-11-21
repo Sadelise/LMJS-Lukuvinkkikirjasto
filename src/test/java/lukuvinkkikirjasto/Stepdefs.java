@@ -80,10 +80,6 @@ public class Stepdefs {
     @And("^gives the correct book number of (\\d+)$")
     public void gives_the_correct_book_number_Of(int num) throws Throwable {
         inputLines.add("" + num);
-        inputLines.add("quit");
-        io = new StubIO(inputLines);
-        tipDao = new BasicTipDao();
-        Main.run(io, tipDao);
     }
 
     @And("^command remove has been selected$")
