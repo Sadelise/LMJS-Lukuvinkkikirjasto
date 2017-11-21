@@ -13,8 +13,7 @@ public class Book implements Tip {
     private String author;
     private String description;
     private String ISBN;
-
-    private boolean read = false;
+    private boolean read;
 
     public Book(String title, String author) {
         this(title, author, "", "", false);
