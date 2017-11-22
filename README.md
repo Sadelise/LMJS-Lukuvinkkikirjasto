@@ -10,7 +10,7 @@ Ohjelmaa käytetään komentoriviltä. Käyttäjä näkee kaikki käytettäviss�
 Ohjelmasta voi poistua "quit"-komennolla.
 
 
-### Definiton of done
+### Definition of done
 
 * User storyille on määritelty hyväksymäkriteerit, jotka dokumentoidaan Cucumber-featureiksi. [Linkki featureihin](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/tree/master/src/test/resources/lukuvinkkikirjasto)
 * Asiakas pääsee näkemään koko ajan koodin ja testien tilanteen CI-palvelimelta
