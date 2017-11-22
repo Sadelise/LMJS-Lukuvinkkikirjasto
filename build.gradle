@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+	mavenCentral()
+    }
+    dependencies {
+    	classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
 plugins {
     id 'net.ltgt.apt' version '0.10'
 }
@@ -5,6 +14,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "jacoco" 
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -29,6 +39,7 @@ jar {
 repositories {
     mavenCentral()
     jcenter()
+    maven { url 'https://repo.spring.io/snapshot' }
     // Read more about repositories here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
 }
@@ -46,6 +57,14 @@ dependencies {
     testCompile 'junit:junit:' + junitVersion
     compileOnly 'org.projectlombok:lombok:1.16.18'
     apt "org.projectlombok:lombok:1.16.18"
+
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.springframework:spring-test")
 }
 
 mainClass = 'lukuvinkkikirjasto.Main'
