@@ -2,7 +2,6 @@ plugins {
     id 'net.ltgt.apt' version '0.10'
 }
 
-
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "jacoco" 
@@ -19,6 +18,12 @@ sourceCompatibility = '1.8'
 // your own implementation.
 if (!hasProperty('mainClass')) {
     ext.mainClass = 'lukuvinkkikirjasto.Main'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'lukuvinkkikirjasto.Main'
+    }
 }
 
 repositories {
