@@ -1,4 +1,4 @@
-# LMJS-Lukuvinkkikirjasto
+﻿# LMJS-Lukuvinkkikirjasto
 
 
 ### Käyttöohje
@@ -21,4 +21,5 @@ Ohjelmasta voi poistua "quit"-komennolla.
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/1OgjUlsgwDmvzZTyIIeAkLIftJII5E7hFcgInnRusNN4/edit#gid=1257881806)
 
 ### Travis
+[![Build Status](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto)
 [Linkki Travisiin](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto?utm_source=email&utm_medium=notification)
