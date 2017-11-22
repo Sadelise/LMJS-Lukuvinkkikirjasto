@@ -22,4 +22,5 @@ Ohjelmasta voi poistua "quit"-komennolla.
 
 ### Travis
 [![Build Status](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto)
+
 [Linkki Travisiin](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto?utm_source=email&utm_medium=notification)
