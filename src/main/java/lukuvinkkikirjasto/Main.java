@@ -1,21 +1,23 @@
 package lukuvinkkikirjasto;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.domain.Book;
 import lukuvinkkikirjasto.domain.Tip;
 import lukuvinkkikirjasto.io.ConsoleIO;
 import lukuvinkkikirjasto.io.IO;
 import lukuvinkkikirjasto.dao.TipDao;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
 public class Main {
 
     private TipDao tipDao;
     private IO io;
 
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+
         run(new ConsoleIO(), new BasicTipDao());
     }
 
