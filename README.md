@@ -3,7 +3,7 @@
 
 ### Käyttöohje
 
-Ohjelman voi ottaa käyttöön kloonamalla sen GitHub-repositoriosta tai käynnistämällä [jar-tiedoston](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/blob/master/LMJS-lukuvinkkikirjasto.jar). Jar-tiedoston voi käynnistää jar-tiedoston sisältämässä kansiossa käyttämällä komentoa _java -jar LMJS-Lukuvinkkikirjasto.jar_.
+Ohjelman voi ottaa käyttöön kloonamalla sen GitHub-repositoriosta tai käynnistämällä [jar-tiedoston](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/blob/master/LMJS-Lukuvinkkikirjasto.jar). Jar-tiedoston voi käynnistää jar-tiedoston sisältämässä kansiossa käyttämällä komentoa _java -jar LMJS-Lukuvinkkikirjasto.jar_.
 
 Ohjelmaa käytetään komentoriviltä. Käyttäjä näkee kaikki käytettävissä olevat komennot kirjoittamalla "commands" ja painamalla Enteriä. Käyttäjä voi sitten käyttää haluamiaan komentoja kirjoittamalla niitä kysyttäessä ja painaessaan sen jälkeen Enter-näppäintä.
 
