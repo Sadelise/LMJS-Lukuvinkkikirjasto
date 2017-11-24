@@ -21,9 +21,11 @@ public class TipDaoTest {
     class TestTip implements Tip {
 
         public boolean isRead;
+        String id;
 
-        public TestTip() {
+        public TestTip(String id) {
             isRead = false;
+            this.id = id;
         }
 
         public boolean markRead() {
@@ -34,12 +36,16 @@ public class TipDaoTest {
         public boolean isRead() {
             return isRead;
         }
+        
+        public String getId() {
+            return id;
+        }
     }
 
     @Before
     public void setUp() {
         tipDao = new BasicTipDao();
-        tip = new TestTip();
+        tip = new TestTip("1");
     }
 
     @Test
@@ -53,7 +59,8 @@ public class TipDaoTest {
     public void multipleTipsCanBeAddedAndRead() {
         assertEquals(tipDao.getAllTips().size(), 0);
         tipDao.addTip(tip);
-        tipDao.addTip(tip);
+        Tip tip2 = new TestTip("2");
+        tipDao.addTip(tip2);
         assertEquals(tipDao.getAllTips().size(), 2);
     }
 
@@ -67,21 +74,21 @@ public class TipDaoTest {
     public void bookCanBeMarkedAsRead() {
         assertFalse(tip.isRead());
         tipDao.addTip(tip);
-        tipDao.markTip(0);
+        tipDao.markTip(tip.getId());
         assertTrue(tip.isRead());
     }
 
     @Test
     public void bookCanBeRemoved() {
         tipDao.addTip(tip);
-        tipDao.removeTip(0);
+        tipDao.removeTip(tip.getId());
         assertEquals(0, tipDao.getAllTips().size());
     }
 
     @Test
     public void nonexistentBookCanNotBeRemoved() {
         tipDao.addTip(tip);
-        tipDao.removeTip(1);
+        tipDao.removeTip("Wrong");
         assertEquals(1, tipDao.getAllTips().size());
     }
 }

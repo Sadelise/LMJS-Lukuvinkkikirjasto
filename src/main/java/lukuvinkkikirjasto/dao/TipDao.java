@@ -9,9 +9,11 @@ public interface TipDao {
     
     public void addTip(Tip tip);
 
-    public void markTip(int tip);
+    public Tip getTipByNumber(int tipNumber);
     
-    public void removeTip(int tip);
+    public void markTip(String id);
+    
+    public void removeTip(String id);
     
     public boolean testTipNumber(int tip);
 }

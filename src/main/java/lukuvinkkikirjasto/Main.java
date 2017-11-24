@@ -1,6 +1,7 @@
 package lukuvinkkikirjasto;
 
 import lukuvinkkikirjasto.dao.BasicTipDao;
+import lukuvinkkikirjasto.dao.FireBaseTipDao;
 import lukuvinkkikirjasto.domain.Book;
 import lukuvinkkikirjasto.domain.Tip;
 import lukuvinkkikirjasto.io.ConsoleIO;
@@ -18,12 +19,12 @@ public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
 
-        run(new ConsoleIO(), new BasicTipDao());
+        run(new ConsoleIO(), new FireBaseTipDao());
     }
 
     public static void run(IO scanner, TipDao tipDao) {
         while (true) {
-            System.out.println("");
+            System.out.println("");            
             String command = scanner.readLine("Type a command and press Enter "
                     + "(to see the list of all commands, type 'commands' and press Enter)");
             if (command.equals("quit")) {
@@ -45,7 +46,10 @@ public class Main {
                     String s = scanner.readLine("Do you want to mark a book as read? y/n");
                     if (s.equals("y")) {
                         int i = Integer.parseInt(scanner.readLine("Enter book number")) - 1;
-                        tipDao.markTip(i);
+                        Tip tip = tipDao.getTipByNumber(i);
+                            if (tip != null) {
+                                tipDao.markTip(tip.getId());
+                            }
                         scanner.print("Book now marked as read");
                         scanner.print(tipDao.getAllTips().get(i).toString());
                     }
@@ -54,11 +58,13 @@ public class Main {
             if (command.equals("remove")) {
                 if (tipDao.getAllTips().size() > 0) {
                     int i = Integer.parseInt(scanner.readLine("Enter book number")) - 1;
-                    if (tipDao.testTipNumber(i)) {
+
+                    Tip tip = tipDao.getTipByNumber(i);
+                    if (tip != null) {
                         scanner.print(tipDao.getAllTips().get(i).toString());
                         String s = scanner.readLine("Are you sure you want to delete this book? y/n");
                         if (s.equals("y")) {
-                            tipDao.removeTip(i);
+                            tipDao.removeTip(tip.getId());
                             scanner.print("The book was removed");
                         }
                     }

@@ -1,7 +1,9 @@
 package lukuvinkkikirjasto.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lukuvinkkikirjasto.domain.Tip;
 import lukuvinkkikirjasto.dao.TipDao;
 
@@ -11,38 +13,31 @@ import lukuvinkkikirjasto.dao.TipDao;
  */
 public class BasicTipDao implements TipDao {
 
-    List<Tip> tips;
+    private Map<String, Tip> tips;
     
     public BasicTipDao() {
-        tips = new ArrayList<Tip>();
+        tips = new HashMap<String, Tip>();
     }
         
     @Override
     public List<Tip> getAllTips() {
-        return tips;
+        return new ArrayList<>(tips.values());
     }
 
     @Override
     public void addTip(Tip tip) {
-        tips.add(tip);
+        tips.put(tip.getId(), tip);
     }
 
     @Override
-    public void markTip(int tip){
-
-        if (!testTipNumber(tip)) {
-            return;
-        }
-        tips.get(tip).markRead();
+    public void markTip(String id){
+        Tip tip = tips.get(id);
+        tip.markRead();
     }
     
     @Override
-    public void removeTip(int tip) {
-        
-        if (!testTipNumber(tip)) {
-            return;
-        }
-        tips.remove(tip);
+    public void removeTip(String id) {
+        tips.remove(id);
     }
     
     @Override
@@ -54,12 +49,21 @@ public class BasicTipDao implements TipDao {
         }
         return true;
     }
+    
+    @Override
+    public Tip getTipByNumber(int tipNumber) {
+        if (testTipNumber(tipNumber)) {
+            return getAllTips().get(tipNumber);
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {
         String string = "";
         int tipNumber = 1;
-        for(Tip tip : tips) {
+        for(Tip tip : tips.values()) {
             string += "Tip " + tipNumber + ":\n";
             string += tip.toString() + "\n" + "\n";
             tipNumber++;

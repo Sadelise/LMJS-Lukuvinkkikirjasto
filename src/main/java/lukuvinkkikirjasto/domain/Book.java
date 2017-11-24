@@ -33,4 +33,9 @@ public class Book implements Tip {
         else r = "Not read";
         return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN + "\n"+r;
     }
+    
+    @Override
+    public String getId() {
+        return title;
+    }
 }
