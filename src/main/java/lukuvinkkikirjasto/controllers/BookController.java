@@ -20,9 +20,9 @@ public class BookController {
 
     // This is a test method
     @GetMapping("/")
-    //@ResponseBody //returns plain object, does not try to find a template
+    @ResponseBody //returns plain object, does not try to find a template
     public String test(Model model) {
-        return "redirect:/books";
+        return "Hello!";
     }
 
     @GetMapping("/books")
