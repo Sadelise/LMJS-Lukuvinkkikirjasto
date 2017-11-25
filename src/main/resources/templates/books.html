@@ -15,11 +15,12 @@ and open the template in the editor.
 
             <ul>
                 <li th:each="book : ${books}">
-
+                    <a href="/books/${book.id}">
                     <span th:text="${book.title}">title</span> --
                     <span th:text="${book.author}">author</span> -- 
                     <span th:text="${book.description}">description</span> -- 
                     <span th:text="${book.ISBN}">ISBN</span> -- 
+                    </a>
                 </li>
             </ul>
         </div>

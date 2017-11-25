@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${book.id}">Lukuvinkit</title>
+        <meta charset="utf-8"></meta>
+    </head>
+    <body>
+        <h1>Vinkin tiedot</h1>
+        <div>
+            <form action="/book" method="POST">
+                <span>Kirjan nimi: </span>
+                <input type="text" name="title" value="${book.title}"/>
+                <span>Kirjailija: </span>
+                <input type="text" name="author" value="${book.author}"/>
+                <span>Kuvaus: </span>
+                <input type="text" name="description" value="${book.description}"/>
+                <span>ISBN: </span>
+                <input type="text" name="ISBN" value="${book.ISBN}"/>-->
+
+                <input type="submit" value="Tallenna muutokset"/>
+            </form>
+        </div>
+        <div>
+            <p></p>
+            <form action="/books">
+                <input type="submit" value="Kaikki kirjat" />
+            </form>
+        </div>
+    </body>
+</html>
