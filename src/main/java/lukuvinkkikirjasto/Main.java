@@ -95,7 +95,7 @@ public class Main {
                 }
                 String edit = scanner.readLine("What do you want to change "+element.toUpperCase()+" to?");
                 tipDao.editTip(id, element, edit);
-
+                scanner.print("Changes saved");
             }
         }
     }

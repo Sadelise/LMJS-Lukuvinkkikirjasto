@@ -65,6 +65,11 @@ public class Stepdefs {
         inputLines.add(author);
     }
 
+    @Given("^command edit has been selected$")
+    public void command_edit_has_been_selected() throws Throwable {
+        inputLines.add("edit");
+    }
+
     @And("^command view has been selected$")
     public void command_view_has_been_selected() throws Throwable {
         inputLines.add("view");
@@ -89,6 +94,11 @@ public class Stepdefs {
 
     @When("^user gives the book number (\\d+)$")
     public void user_gives_the_book_number(int num) throws Throwable {
+        inputLines.add("" + num);
+    }
+
+    @When("^when user gives the number (\\d+)$")
+    public void when_user_gives_the_number(int num) throws Throwable {
         inputLines.add("" + num);
     }
 
