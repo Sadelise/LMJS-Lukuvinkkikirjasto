@@ -92,6 +92,18 @@ public class FireBaseTipDao implements TipDao {
     }
 
     @Override
+    public void editTip(int id, String element, String edit) {
+        Tip tip = getTipByNumber(id);
+        if(tip == null)
+            return;
+
+        tip.edit(element, edit);
+
+        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        this.tips.put(tip.identify(), tip);
+    }
+
+    @Override
     public String toString() {
         String string = "";
         int tipNumber = 1;

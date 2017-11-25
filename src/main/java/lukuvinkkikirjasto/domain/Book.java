@@ -27,6 +27,27 @@ public class Book implements Tip {
     }
 
     @Override
+    public boolean edit(String element, String edit){
+        switch (element ){
+            case "title":
+                changeTitle(edit);
+                break;
+            case "author":
+                changeAuthor(edit);
+                break;
+            case "description":
+                changeDescription(edit);
+                break;
+            case "isbn":
+                changeISBN(edit);
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    @Override
     public String toString() {
         String r;
         if(read) r = "Read";
@@ -37,5 +58,21 @@ public class Book implements Tip {
     @Override
     public String identify() {
         return title;
+    }
+
+    private void changeTitle(String title){
+        this.title = title;
+    }
+
+    private void changeAuthor(String author){
+        this.author = author;
+    }
+
+    private void changeDescription(String description){
+        this.description = description;
+    }
+
+    private void changeISBN(String isbn){
+        this.ISBN = isbn;
     }
 }

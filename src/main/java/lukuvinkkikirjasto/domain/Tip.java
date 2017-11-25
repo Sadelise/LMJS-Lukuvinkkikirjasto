@@ -7,4 +7,6 @@ public interface Tip {
     boolean isRead();
     
     String identify();
+
+    boolean edit(String element, String edit);
 }

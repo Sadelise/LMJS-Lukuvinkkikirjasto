@@ -16,4 +16,6 @@ public interface TipDao {
     public void removeTip(String id);
     
     public boolean testTipNumber(int tip);
+
+    public void editTip(int tip, String element, String edit);
 }

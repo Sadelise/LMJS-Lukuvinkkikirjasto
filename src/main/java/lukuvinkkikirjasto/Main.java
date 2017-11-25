@@ -10,6 +10,9 @@ import lukuvinkkikirjasto.dao.TipDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 @SpringBootApplication
 public class Main {
 
@@ -77,6 +80,22 @@ public class Main {
                         + "To view all tips, type 'view' and press Enter.\n"
                         + "To remove a book, type 'remove' and press Enter.\n"
                         + "To exit, type 'quit' and press Enter.");
+            }
+            if(command.equals("edit")){
+                String[] responses = {"author","title","description","isbn"};
+                int id = Integer.parseInt(scanner.readLine("Enter book number:")) - 1;
+
+                String element;
+                while(true) {
+                    element = scanner.readLine("What would you like to change?").toLowerCase();
+
+                    if(Arrays.asList(responses).contains(element))
+                        break;
+                    scanner.print("Accepted responses: author, title, description, isbn");
+                }
+                String edit = scanner.readLine("What do you want to change "+element.toUpperCase()+" to?");
+                tipDao.editTip(id, element, edit);
+
             }
         }
     }

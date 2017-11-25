@@ -18,10 +18,12 @@ public class TipDaoTest {
     BasicTipDao tipDao;
     Tip tip;
 
+
     class TestTip implements Tip {
 
         public boolean isRead;
         String id;
+        public String descrption;
 
         public TestTip(String id) {
             isRead = false;
@@ -39,6 +41,14 @@ public class TipDaoTest {
         
         public String identify() {
             return id;
+        }
+
+        @Override
+        public boolean edit(String element, String edit) {
+            if (!element.equals("description"))
+                return false;
+            descrption = edit;
+            return true;
         }
     }
 
@@ -91,4 +101,5 @@ public class TipDaoTest {
         tipDao.removeTip("Wrong");
         assertEquals(1, tipDao.getAllTips().size());
     }
+
 }

@@ -49,7 +49,12 @@ public class BasicTipDao implements TipDao {
         }
         return true;
     }
-    
+
+    @Override
+    public void editTip(int tip, String element, String edit) {
+
+    }
+
     @Override
     public Tip getTipByNumber(int tipNumber) {
         if (testTipNumber(tipNumber)) {
