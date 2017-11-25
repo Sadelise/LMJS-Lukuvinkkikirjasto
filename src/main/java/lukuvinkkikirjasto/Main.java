@@ -48,7 +48,7 @@ public class Main {
                         int i = Integer.parseInt(scanner.readLine("Enter book number")) - 1;
                         Tip tip = tipDao.getTipByNumber(i);
                             if (tip != null) {
-                                tipDao.markTip(tip.getId());
+                                tipDao.markTip(tip.identify());
                             }
                         scanner.print("Book now marked as read");
                         scanner.print(tipDao.getAllTips().get(i).toString());
@@ -64,7 +64,7 @@ public class Main {
                         scanner.print(tipDao.getAllTips().get(i).toString());
                         String s = scanner.readLine("Are you sure you want to delete this book? y/n");
                         if (s.equals("y")) {
-                            tipDao.removeTip(tip.getId());
+                            tipDao.removeTip(tip.identify());
                             scanner.print("The book was removed");
                         }
                     }

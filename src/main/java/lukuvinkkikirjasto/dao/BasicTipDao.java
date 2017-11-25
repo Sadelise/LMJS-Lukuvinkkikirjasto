@@ -26,7 +26,7 @@ public class BasicTipDao implements TipDao {
 
     @Override
     public void addTip(Tip tip) {
-        tips.put(tip.getId(), tip);
+        tips.put(tip.identify(), tip);
     }
 
     @Override

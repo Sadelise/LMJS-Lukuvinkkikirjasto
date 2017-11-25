@@ -9,19 +9,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import lukuvinkkikirjasto.dao.FireBaseTipDao;
+import lukuvinkkikirjasto.dao.TipDao;
+import lukuvinkkikirjasto.domain.Book;
+
 @Controller
 public class BookController {
 
+    TipDao tipDao = new FireBaseTipDao();
+
     // This is a test method
     @GetMapping("/")
-    @ResponseBody //returns plain object, does not try to find a template
+    //@ResponseBody //returns plain object, does not try to find a template
     public String test(Model model) {
-        return "Hello!";
+        return "redirect:/books";
     }
 
     @GetMapping("/books")
     public String listBooks(Model model) {
-//        model.addAttribute("books", getAllTheBooks()); //give a list of book to thymeleaf
+        model.addAttribute("books", tipDao.getAllTips());
         return "books"; // refers to books.html
     }
 
@@ -37,7 +43,8 @@ public class BookController {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             return "redirect:/fail";
         }
-// to do: save book to database
+        tipDao.addTip(new Book(title, author));
+
         return "redirect:/books"; // tai kirjan sivulle tai johonkin muualle?
     }
 

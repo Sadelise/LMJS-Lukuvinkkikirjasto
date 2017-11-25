@@ -35,7 +35,7 @@ public class Book implements Tip {
     }
     
     @Override
-    public String getId() {
+    public String identify() {
         return title;
     }
 }

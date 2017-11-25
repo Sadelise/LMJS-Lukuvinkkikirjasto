@@ -29,7 +29,7 @@ public class FireBaseTipDao implements TipDao {
             public void onDataChange(DataSnapshot data) {
                 for (DataSnapshot snapshot : data.getChildren()) {
                     Tip tip = snapshot.getValue(Book.class);
-                    tips.put(tip.getId(), tip);
+                    tips.put(tip.identify(), tip);
                 }
                 /*for (String key : tips.keySet()) {
                     System.out.println(tips.get(key));
@@ -42,22 +42,6 @@ public class FireBaseTipDao implements TipDao {
         });
     }
 
-    /*public void delete(String key) {
-        new Firebase(this.url).child(key).removeValue();
-        this.items.remove(key);
-    }
-
-    public FirebaseItem get(String key) {
-        return this.items.get(key);
-    }
-
-    public List<FirebaseItem> list() {
-        return this.items.values().stream()
-                .filter(o -> o.getName() != null)
-                .sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
-                .collect(Collectors.toList());
-    }
-}*/
     @Override
     public List<Tip> getAllTips() {
         return new ArrayList<>(tips.values());
@@ -65,14 +49,14 @@ public class FireBaseTipDao implements TipDao {
 
     @Override
     public void addTip(Tip tip) {
-        new Firebase(this.url).child(tip.getId()).setValue(tip);
-        this.tips.put(tip.getId(), tip);
+        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        this.tips.put(tip.identify(), tip);
     }
 
     @Override
     public Tip getTipByNumber(int tipNumber) {
         ArrayList<Tip> values = new ArrayList<>(tips.values());
-        String key = values.get(tipNumber).getId();
+        String key = values.get(tipNumber).identify();
 
         if (testTipNumber(tipNumber)) {
             return values.get(tipNumber);
@@ -89,8 +73,8 @@ public class FireBaseTipDao implements TipDao {
         }
         tip.markRead();
         
-        new Firebase(this.url).child(tip.getId()).setValue(tip);
-        this.tips.put(tip.getId(), tip);
+        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        this.tips.put(tip.identify(), tip);
     }
 
     @Override
@@ -102,7 +86,6 @@ public class FireBaseTipDao implements TipDao {
     @Override
     public boolean testTipNumber(int tip) {
         if (tip < 0 || tip >= tips.size()) {
-            //System.out.println("Not a valid book. \n Enter a number between 1 and " + tips.size());
             return false;
         }
         return true;

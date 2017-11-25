@@ -37,7 +37,7 @@ public class TipDaoTest {
             return isRead;
         }
         
-        public String getId() {
+        public String identify() {
             return id;
         }
     }
@@ -74,14 +74,14 @@ public class TipDaoTest {
     public void bookCanBeMarkedAsRead() {
         assertFalse(tip.isRead());
         tipDao.addTip(tip);
-        tipDao.markTip(tip.getId());
+        tipDao.markTip(tip.identify());
         assertTrue(tip.isRead());
     }
 
     @Test
     public void bookCanBeRemoved() {
         tipDao.addTip(tip);
-        tipDao.removeTip(tip.getId());
+        tipDao.removeTip(tip.identify());
         assertEquals(0, tipDao.getAllTips().size());
     }
 

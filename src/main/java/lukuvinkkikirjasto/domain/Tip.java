@@ -6,5 +6,5 @@ public interface Tip {
     
     boolean isRead();
     
-    String getId();
+    String identify();
 }
