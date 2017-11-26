@@ -50,6 +50,12 @@ public class TipDaoTest {
             descrption = edit;
             return true;
         }
+
+        @Override
+        public boolean markNotRead() {
+            isRead = false;
+            return isRead;
+        }
     }
 
     @Before
