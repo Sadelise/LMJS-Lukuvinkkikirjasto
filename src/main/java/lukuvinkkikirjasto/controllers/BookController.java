@@ -28,51 +28,58 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public String listBooks(Model model, RedirectAttributes redirectAttributes) {
+    public String listBooks(Model model) {
         model.addAttribute("books", tipDao.getAllTips());
         return "books";
     }
 
     @GetMapping("/books/{id}")
-    public String viewBook(Model model, @PathVariable String id) {
+    public String viewBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         Tip tip = tipDao.getTip(id);
         if (tip != null) {
             model.addAttribute("book", tip);
             return "book";
         }
+        redirectAttributes.addFlashAttribute("message", "Jokin meni vikaan... :(");
         return "redirect:/fail";
     }
 
     @PostMapping("/books/{id}")
-    public String viewBook(Model model,RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String author, @RequestParam String title,
+    public String viewBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String author, @RequestParam String title,
             @RequestParam String description, @RequestParam String ISBN) {
+        if (author.trim().isEmpty() || title.trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
+            return "redirect:/books";
+        }
         tipDao.editTipByTitle(title, "title", id);
         tipDao.editTipByTitle(title, "author", author);
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "ISBN", ISBN);
+        redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen onnistui!");
         return "redirect:/books";
     }
 
     @PostMapping("/books")
     public String addBook(@RequestParam String author, @RequestParam String title,
-            @RequestParam String description, @RequestParam String ISBN) {
+            @RequestParam String description, @RequestParam String ISBN, RedirectAttributes redirectAttributes) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
-            return "redirect:/fail";
+            redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
+            return "redirect:/books";
         }
         tipDao.addTip(new Book(title, author));
-
+        redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen onnistui!");
         return "redirect:/books";
     }
 
     @GetMapping("/fail")
     public String fail(Model model) {
-        model.addAttribute("message", "fail"); // jos haluaa viestin täältä... 
         return "fail";
     }
 
     @DeleteMapping("/books/{id}")
-    public String deleteBook(Model model, @PathVariable String id) {
+    public String deleteBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         tipDao.removeTip(id);
+        redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen onnistui!");
         return "redirect:/books";
     }
 }
