@@ -21,7 +21,7 @@ public class BookController {
 
     @Test
     public void addTest() throws Exception {
-        this.mockMvc.perform(get("/"))
+        this.mockMvc.perform(get("/test"))
                 .andExpect(content().string("Hello!"));
     }
 }
