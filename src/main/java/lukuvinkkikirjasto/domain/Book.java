@@ -19,10 +19,19 @@ public class Book implements Tip {
         this(title, author, "", "", false);
     }
 
+    @Override
     public boolean markRead(){
         if(this.read)
             return false;
         this.read=true;
+        return true;
+    }
+    
+    @Override
+    public boolean markNotRead(){
+        if (!this.read)
+            return false;
+        this.read = false;
         return true;
     }
 

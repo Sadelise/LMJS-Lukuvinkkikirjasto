@@ -76,7 +76,11 @@ public class FireBaseTipDao implements TipDao {
         if (tip == null) {
             return;
         }
-        tip.markRead();
+        if (!tip.isRead()) {
+            tip.markRead();
+        } else {
+            tip.markNotRead();
+        }
 
         new Firebase(this.url).child(tip.identify()).setValue(tip);
         this.tips.put(tip.identify(), tip);

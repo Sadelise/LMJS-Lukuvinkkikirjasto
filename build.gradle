@@ -44,9 +44,15 @@ repositories {
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
 }
 
+task( browse, dependsOn: jar, type: JavaExec ) {
+    main = 'lukuvinkkikirjasto.main'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 project.ext {
     cucumberVersion = '1.2.5'
     junitVersion = '4.12'
+    seleniumVersion = '2.41.0'
 }
 
 dependencies {
@@ -69,7 +75,13 @@ dependencies {
     // https://mvnrepository.com/artifact/com.firebase/firebase-client-jvm
     compile group: 'com.firebase', name: 'firebase-client-jvm', version: '2.5.2'    
     // compile 'com.google.firebase:firebase-admin:5.5.0'
-
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion   
+    compile ("io.github.bonigarcia:webdrivermanager:1.6.2") {
+        exclude group: 'org.seleniumhq.selenium'
+    }
 
 }
 

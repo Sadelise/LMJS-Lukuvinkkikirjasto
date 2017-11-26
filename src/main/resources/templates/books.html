@@ -25,6 +25,7 @@ and open the template in the editor.
                     <th align="left">Kirjoittaja</th>
                     <th align="left">Kuvaus</th>
                     <th align="left">ISBN</th>
+                    <th align="left">Luettu</th>
                     <th align="left"></th>
                 </tr>
 
@@ -33,6 +34,7 @@ and open the template in the editor.
                     <td><span th:text="${book.author}">author</span></td>
                     <td><span th:text="${book.description}">description</span></td>
                     <td><span th:text="${book.ISBN}">ISBN</span></td>
+                    <td><span th:text="${book.read}">read</span></td>
                     <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" value="Delete"/></form></td>
                 </tr>
             </table>

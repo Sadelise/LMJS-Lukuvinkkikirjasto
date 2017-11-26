@@ -20,8 +20,10 @@ and open the template in the editor.
                 <span>Kuvaus: </span>
                 <input type="text" name="description" th:field="${book.description}"/>
                 <span>ISBN: </span>
-                <input type="text" name="ISBN" th:field="${book.ISBN}"/>-->
-
+                <input type="text" name="ISBN" th:field="${book.ISBN}"/>
+                <span>Luettu:</span>
+                <input type="checkbox" name="read" th:field="${book.read}"/>
+                    
                 <input type="submit" value="Tallenna muutokset"/>
             </form>
         </div>

@@ -33,7 +33,11 @@ public class BasicTipDao implements TipDao {
     @Override
     public void markTip(String id) {
         Tip tip = tips.get(id);
-        tip.markRead();
+        if (!tip.isRead()) {
+            tip.markRead();
+        } else {
+            tip.markNotRead();
+        }
     }
 
     @Override
