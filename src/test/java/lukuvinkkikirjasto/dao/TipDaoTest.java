@@ -43,7 +43,7 @@ public class TipDaoTest {
             return id;
         }
 
-        @Override
+//        @Override
         public boolean edit(String element, String edit) {
             if (!element.equals("description"))
                 return false;

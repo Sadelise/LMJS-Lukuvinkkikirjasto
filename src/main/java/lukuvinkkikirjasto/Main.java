@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
 
-        run(new ConsoleIO(), new FireBaseTipDao());
+//        run(new ConsoleIO(), new FireBaseTipDao());
     }
 
     public static void run(IO scanner, TipDao tipDao) {

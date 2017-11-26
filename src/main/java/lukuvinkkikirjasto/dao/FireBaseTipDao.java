@@ -32,8 +32,8 @@ public class FireBaseTipDao implements TipDao {
                     tips.put(tip.identify(), tip);
                 }
                 /*for (String key : tips.keySet()) {
-                    System.out.println(tips.get(key));
-                }*/
+                 System.out.println(tips.get(key));
+                 }*/
             }
 
             @Override
@@ -65,14 +65,19 @@ public class FireBaseTipDao implements TipDao {
     }
 
     @Override
+    public Tip getTip(String title) {
+        return tips.get(title);
+    }
+
+    @Override
     public void markTip(String id) {
         Tip tip = tips.get(id);
-        
+
         if (tip == null) {
             return;
         }
         tip.markRead();
-        
+
         new Firebase(this.url).child(tip.identify()).setValue(tip);
         this.tips.put(tip.identify(), tip);
     }
@@ -94,9 +99,19 @@ public class FireBaseTipDao implements TipDao {
     @Override
     public void editTip(int id, String element, String edit) {
         Tip tip = getTipByNumber(id);
-        if(tip == null)
+        if (tip == null) {
             return;
+        }
 
+        tip.edit(element, edit);
+
+        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        this.tips.put(tip.identify(), tip);
+    }
+
+    @Override
+    public void editTipByTitle(String title, String element, String edit) {
+        Tip tip = getTip(title);
         tip.edit(element, edit);
 
         new Firebase(this.url).child(tip.identify()).setValue(tip);
