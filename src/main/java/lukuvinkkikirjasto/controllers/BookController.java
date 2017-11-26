@@ -45,8 +45,8 @@ public class BookController {
     }
 
     @PostMapping("/books/{id}")
-    public String viewBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String author, @RequestParam String title,
-            @RequestParam String description, @RequestParam String ISBN) {
+    public String editBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String author, @RequestParam String title,
+            String description, String ISBN) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -61,7 +61,7 @@ public class BookController {
 
     @PostMapping("/books")
     public String addBook(@RequestParam String author, @RequestParam String title,
-            @RequestParam String description, @RequestParam String ISBN, RedirectAttributes redirectAttributes) {
+            String description, String ISBN, RedirectAttributes redirectAttributes) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
             return "redirect:/books";
@@ -78,8 +78,12 @@ public class BookController {
 
     @DeleteMapping("/books/{id}")
     public String deleteBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
-        tipDao.removeTip(id);
-        redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen onnistui!");
+        if (tipDao.getTip(id) != null) {
+            tipDao.removeTip(id);
+            redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen onnistui!");
+            return "redirect:/books";
+        }
+        redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen epäonnistui!");
         return "redirect:/books";
     }
 }
