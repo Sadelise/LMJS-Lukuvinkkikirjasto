@@ -51,7 +51,7 @@ public class BookControllerTest {
                 .andExpect(model().attributeExists("book"))
                 .andExpect(status().isOk());
 
-        this.mockMvc.perform(delete("/books/{id}", "kirjoittaja"));
+        this.mockMvc.perform(delete("/books/{id}", "kirja"));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class BookControllerTest {
                 .andReturn();
         assertTrue(result.getFlashMap().containsValue("Kirjan lisääminen onnistui!"));
 
-        this.mockMvc.perform(delete("/books/{id}", "kirjoittaja"));
+        this.mockMvc.perform(delete("/books/{id}", "kirja"));
     }
 
     @Test
@@ -89,6 +89,6 @@ public class BookControllerTest {
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Kirjan muokkaaminen onnistui!"));
 
-        this.mockMvc.perform(delete("/books/{id}", "kirjoittaja"));
+        this.mockMvc.perform(delete("/books/{id}", "kirja"));
     }
 }
