@@ -52,12 +52,17 @@ task( browse, dependsOn: jar, type: JavaExec ) {
 project.ext {
     cucumberVersion = '1.2.5'
     junitVersion = '4.12'
-    seleniumVersion = '2.41.0'
+    seleniumVersion = '3.4.0'
+    //seleniumVersion = '2.41.0'
+
 }
 
 dependencies {
     // You can read more about how to add dependency here: http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
-    compile 'com.google.guava:guava:20.0'
+
+    //compile 'com.google.guava:guava:20.0'
+
+    testCompile "info.cukes:cucumber-core:" + cucumberVersion
     testCompile 'info.cukes:cucumber-java:' + cucumberVersion
     testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
     testCompile "info.cukes:cucumber-spring:" + cucumberVersion
@@ -65,29 +70,30 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.16.18'
     apt "org.projectlombok:lombok:1.16.18"
 
-
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework:spring-test")
     testCompile 'org.mockito:mockito-core:2.7.21'
+
     // https://mvnrepository.com/artifact/com.firebase/firebase-client-jvm
     compile group: 'com.firebase', name: 'firebase-client-jvm', version: '2.5.2'    
     // compile 'com.google.firebase:firebase-admin:5.5.0'
-    testCompile group: 'net.sourceforge.htmlunit', name: 'webdriver', version: '2.6'
-    
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion 
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: seleniumVersion
+    //compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: seleniumVersion
-  
+
     compile ("io.github.bonigarcia:webdrivermanager:1.6.2") {
         exclude group: 'org.seleniumhq.selenium'
     }
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver',version: seleniumVersion     
+
 }
 
 mainClass = 'lukuvinkkikirjasto.Main'
