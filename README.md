@@ -6,6 +6,8 @@
 #### Web-versio
 Ohjelma sijaitsee herokussa nimellä [lmjs-lukuvinkkikirjasto](https://lmjs-lukuvinkkikirjasto.herokuapp.com).
 
+Etusivulla on listattuna kaikki lisätyt lukuvinkit. Vinkkejä voi lisätä antamalla sivun alalaidassa oleviin tekstikenttiin ainakin kirjan nimen ja kirjailijan ja painamalla sitten "Lisää!"-nappia. Vinkin nimeä klikkaamalla pääsee tarkastelemaan yksittäistä vinkkiä. Tässä näkymässä voi myös muokata vinkin tietoja ja merkata vinkin luetuksi/lukemattomaksi. Painamalla "Tallenna muutokset"-painiketta tehdyt muutokset tallentuvat järjestelmään. "Kaikki vinkit"-napilla voi palata takaisin vinkkien listausnäkymään. 
+
 #### Komentoriviversio
 Ohjelman voi ottaa käyttöön kloonamalla sen GitHub-repositoriosta tai käynnistämällä [jar-tiedoston](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/blob/master/LMJS-Lukuvinkkikirjasto.jar). Jar-tiedoston voi käynnistää jar-tiedoston sisältämässä kansiossa käyttämällä komentoa _java -jar LMJS-Lukuvinkkikirjasto.jar_.
 
