@@ -32,7 +32,7 @@ public class SeleniumStepdefs {
     String baseUrl = "http://localhost:8080";
 
     public SeleniumStepdefs() {
-        if (System.getenv("TRAVIS") == "true") {
+        if (System.getenv("TRAVIS") == null) {
             driver = new ChromeDriver();
         } else {
             File file;

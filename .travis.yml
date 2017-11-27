@@ -6,6 +6,7 @@ addons:
 #      - oracle-java8-installer
 jdk:
   - oraclejdk8
+
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
@@ -15,3 +16,12 @@ before_install:
   - mkdir geckodriver
   - tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
+
+  - chmod +x chromedriver.exe
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: XmnDBGGC1/zR0j+ftzc1PgXKLaz68qMOMdn7bGbvL13Z0XrJJG98GdIrjydozR380iHYTScbHmD2MllVFExdgyx683PeN2bTeUaR/Wke1M9qeokHM3yqq/lhAiOdPggz3JxSxPN2pecFOSpjHVfT6FNd8G4cRr43oMs5eK/IAUg4IAUXPccWdCVZodFDIsO8QfFij0UTm+VPrkvztdQ4J0pFfoDX2V04fugq06DQSS+Cs3yacN740rEuFm/3sENoL7n3gPmJ66bNnKlWonId7+zHj/5MIJJwY/RQxSRy86ENB6nGJIC2EIAigtjFMiSCsRskQwV5V+bqcYQg3uQjr4yjhyPqt0aA3lyE3T+uVapEFBSm5RCYxtM7ViGkbvUrzkmDXOLaZUkYip3ndGYRgeNtdmp9+ryyVvY6DLeQi+ZkikvP93e93dX198TnQ/T9LLRYJnrgd7TYz59RZHVVekLVg2CidT340hnqVtW433Yw9xHgSD1pLpLkRwAkR6l//EAU2JFVVXhLsZIWinelMIKLVXlZkIRUVeDZTtcMa1PM6b3MGUcQ4I0fBapGV//W2oB5QVfE3W6cj+ZUH9DYzBtT54uEiQjYbi8NGXMVJRHUrwcm9XC9i1NEHV9iXb0UEo5WSpC8kGnvC4DVKVdMyT7SbwOZdaB68XK7Jg2YDSk=
+  app: lmjs-lukuvinkkikirjasto
+  on: travis-heroku-test
