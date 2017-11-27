@@ -60,6 +60,7 @@ dependencies {
     compile 'com.google.guava:guava:20.0'
     testCompile 'info.cukes:cucumber-java:' + cucumberVersion
     testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    testCompile "info.cukes:cucumber-spring:" + cucumberVersion
     testCompile 'junit:junit:' + junitVersion
     compileOnly 'org.projectlombok:lombok:1.16.18'
     apt "org.projectlombok:lombok:1.16.18"
@@ -78,7 +79,9 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion   
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion 
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: seleniumVersion
+  
     compile ("io.github.bonigarcia:webdrivermanager:1.6.2") {
         exclude group: 'org.seleniumhq.selenium'
     }
