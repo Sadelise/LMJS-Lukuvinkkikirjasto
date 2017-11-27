@@ -13,15 +13,32 @@ and open the template in the editor.
         <div>
             <h1>Lukuvinkit</h1>
 
-            <ul>
-                <li th:each="book : ${books}">
+            <div>
+                <font color="red">
+                    <span th:text="${message}"></span>
+                </font>    
+            </div>
+            <br></br>
+            <table border="1" frame="void" rules="rows">
+                <tr>
+                    <th align="left">Otsikko</th>
+                    <th align="left">Kirjoittaja</th>
+                    <th align="left">Kuvaus</th>
+                    <th align="left">ISBN</th>
+                    <th align="left">Luettu</th>
+                    <th align="left"></th>
+                </tr>
 
-                    <span th:text="${book.title}">title</span> --
-                    <span th:text="${book.author}">author</span> -- 
-                    <span th:text="${book.description}">description</span> -- 
-                    <span th:text="${book.ISBN}">ISBN</span> -- 
-                </li>
-            </ul>
+                <tr th:each="book : ${books}">
+                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}">title</a></td>
+                    <td><span th:text="${book.author}">author</span></td>
+                    <td><span th:text="${book.description}">description</span></td>
+                    <td><span th:text="${book.ISBN}">ISBN</span></td>
+                    <td><span th:text="${book.read}">read</span></td>
+                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" value="Delete"/></form></td>
+                </tr>
+            </table>
+
         </div>
         <h2>Lisää lukuvinkki</h2>
         <div>
@@ -35,7 +52,7 @@ and open the template in the editor.
                 <span>ISBN: </span>
                 <input type="text" name="ISBN"/>-->
 
-                <input type="submit" value="Lisää!"/>
+                <input type="submit" name="submit" value="Lisää!"/>
             </form>
         </div>
     </body>

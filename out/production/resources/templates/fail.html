@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Something went wrong</title>
+        <meta charset="utf-8"></meta>
+    </head>
+    <body>
+        <h1>Something went wrong</h1>
+        <div>
+            <span th:text="${message}">Unknown error</span>
+        </div>
+        <form action="/books">
+            <input type="submit" value="Takaisin listaukseen" />
+        </form>
+    </body>
+</html>

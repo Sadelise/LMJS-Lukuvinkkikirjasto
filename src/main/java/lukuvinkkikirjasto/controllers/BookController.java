@@ -63,12 +63,14 @@ public class BookController {
 
     @PostMapping("/books")
     public String addBook(@RequestParam String author, @RequestParam String title,
-            String description, String ISBN, RedirectAttributes redirectAttributes) {
+                          @RequestParam String description, @RequestParam String ISBN,
+                          RedirectAttributes redirectAttributes) {
+
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
-        tipDao.addTip(new Book(title, author));
+        tipDao.addTip(new Book(title, author, description, ISBN, false));
         redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen onnistui!");
         return "redirect:/books";
     }

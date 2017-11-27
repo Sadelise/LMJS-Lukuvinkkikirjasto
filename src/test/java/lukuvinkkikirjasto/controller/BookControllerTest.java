@@ -45,7 +45,9 @@ public class BookControllerTest {
     public void bookPageHasBook() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
                 .param("title", "kirja")
-                .param("author", "kirjoittaja"));
+                .param("author", "kirjoittaja")
+                .param("description", "")
+                .param("ISBN", ""));
 
         this.mockMvc.perform(get("/books/{id}", "kirja"))
                 .andExpect(model().attributeExists("book"))
@@ -58,7 +60,9 @@ public class BookControllerTest {
     public void addingBookWorks() throws Exception {
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
                 .param("title", "kirja")
-                .param("author", "kirjoittaja"))
+                .param("author", "kirjoittaja")
+                .param("description", "")
+                .param("ISBN", ""))
                 .andReturn();
         assertTrue(result.getFlashMap().containsValue("Kirjan lisääminen onnistui!"));
 
@@ -69,7 +73,9 @@ public class BookControllerTest {
     public void deletingBookWorks() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
                 .param("title", "kirja")
-                .param("author", "kirjoittaja"));
+                .param("author", "kirjoittaja")
+                .param("description", "")
+                .param("ISBN", ""));
 
         MvcResult result2 = this.mockMvc.perform(delete("/books/{id}", "kirja"))
                 .andReturn();
@@ -80,7 +86,9 @@ public class BookControllerTest {
     public void editingBookWorks() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
                 .param("title", "kirja")
-                .param("author", "kirjoittaja"));
+                .param("author", "kirjoittaja")
+                .param("description", "")
+                .param("ISBN", ""));
 
         MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/books/{id}", "kirja")
                 .param("title", "kirja")
