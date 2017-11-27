@@ -9,11 +9,13 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import java.util.ArrayList;
 import java.util.List;
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.io.StubIO;
 import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,6 +29,11 @@ public class SeleniumStepdefs {
 
     WebDriver driver = new ChromeDriver();
     String baseUrl = "http://localhost:8080";
+
+    @Before
+    public void setUp() {
+        ChromeDriverManager.getInstance().setup();
+    }
 
     @Given("^the page \"([^\"]*)\" has been selected$")
     public void page_selected(String page) throws Throwable {
