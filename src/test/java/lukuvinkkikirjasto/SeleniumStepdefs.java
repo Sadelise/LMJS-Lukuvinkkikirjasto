@@ -26,7 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class SeleniumStepdefs {
 
     WebDriver driver = new ChromeDriver();
-    String baseUrl = "http://localhost:8080";
+    String baseUrl = "http://localhost:6232";
 
     public SeleniumStepdefs() {
         //driver = new HtmlUnitDriver(true);

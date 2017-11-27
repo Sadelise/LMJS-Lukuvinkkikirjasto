@@ -10,5 +10,5 @@ import org.junit.runner.RunWith;
 public class RunCukesTest {
 
     @ClassRule
-    public static ServerRule server = new ServerRule(8080);
+    public static ServerRule server = new ServerRule(6232);
 }
