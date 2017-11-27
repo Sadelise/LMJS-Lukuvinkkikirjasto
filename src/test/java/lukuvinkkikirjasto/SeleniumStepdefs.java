@@ -13,6 +13,7 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.io.StubIO;
 import static org.junit.Assert.assertTrue;
@@ -51,8 +52,6 @@ public class SeleniumStepdefs {
     @Given("^the page \"([^\"]*)\" has been selected$")
     public void page_selected(String page) throws Throwable {
         driver.get(baseUrl + "/" + page);
-        //WebElement element = driver.findElement(By.linkText("login"));
-        //element.click();
     }
 
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" are entered into correct fields$")
@@ -61,11 +60,13 @@ public class SeleniumStepdefs {
         element.sendKeys(title);
         element = driver.findElement(By.name("author"));
         element.sendKeys(author);
-        driver.findElement(By.name("submit")).submit();
+        driver.findElement(By.name("sendtip")).submit();
     }
 
     @Then("^the page will contain \"([^\"]*)\"$")
     public void page_will_contain(String pageContent) throws Throwable {
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Thread.sleep(1000);
         assertTrue(driver.getPageSource().contains(pageContent));
     }
 

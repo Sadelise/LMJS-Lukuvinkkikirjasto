@@ -1,5 +1,6 @@
 package lukuvinkkikirjasto.controllers;
 
+import lukuvinkkikirjasto.dao.BasicTipDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class BookController {
 
-    TipDao tipDao = new FireBaseTipDao();
+    TipDao tipDao = new BasicTipDao();
 
     // This is a test method
     @GetMapping("/test")
