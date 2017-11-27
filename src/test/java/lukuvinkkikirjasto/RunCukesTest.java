@@ -2,7 +2,6 @@ package lukuvinkkikirjasto;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
-import lukuvinkkikirjasto.io.StubIO;
 import org.junit.ClassRule;
 import org.junit.runner.RunWith;
 
@@ -10,7 +9,6 @@ import org.junit.runner.RunWith;
 @CucumberOptions(plugin = {"pretty"})
 public class RunCukesTest {
 
-    @ClassRule
-    public static ServerRule server = new ServerRule(8080);
-
+//    @ClassRule
+//    public static ServerRule server = new ServerRule(8080);
 }
