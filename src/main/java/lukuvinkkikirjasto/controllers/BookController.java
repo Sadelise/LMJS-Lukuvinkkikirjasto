@@ -14,13 +14,18 @@ import lukuvinkkikirjasto.dao.FireBaseTipDao;
 import lukuvinkkikirjasto.dao.TipDao;
 import lukuvinkkikirjasto.domain.Book;
 import lukuvinkkikirjasto.domain.Tip;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BookController {
 
-    TipDao tipDao = new BasicTipDao();
+    TipDao tipDao = new FireBaseTipDao();
 
+    public void setTipDao(TipDao tipDao) {
+        this.tipDao = tipDao;
+    }
+    
     // This is a test method
     @GetMapping("/test")
     @ResponseBody //returns plain object, does not try to find a template

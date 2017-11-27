@@ -5,6 +5,8 @@
  */
 package lukuvinkkikirjasto;
 
+import lukuvinkkikirjasto.controllers.BookController;
+import lukuvinkkikirjasto.dao.BasicTipDao;
 import org.junit.rules.ExternalResource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -21,6 +23,8 @@ class ServerRule extends ExternalResource {
     @Override
     protected void before() throws Throwable {
         this.app = SpringApplication.run(Main.class);
+        BookController controller = this.app.getBean(BookController.class);
+        controller.setTipDao(new BasicTipDao());
     }
 
     @Override
