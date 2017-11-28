@@ -30,12 +30,12 @@ and open the template in the editor.
                 </tr>
 
                 <tr th:each="book : ${books}">
-                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}">title</a></td>
+                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
                     <td><span th:text="${book.author}">author</span></td>
                     <td><span th:text="${book.description}">description</span></td>
                     <td><span th:text="${book.ISBN}">ISBN</span></td>
                     <td><span th:text="${book.read}">read</span></td>
-                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" value="Delete"/></form></td>
+                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" value="Delete" name="delete"/></form></td>
                 </tr>
             </table>
 

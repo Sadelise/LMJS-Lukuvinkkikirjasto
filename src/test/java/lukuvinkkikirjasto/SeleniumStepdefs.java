@@ -63,11 +63,43 @@ public class SeleniumStepdefs {
         driver.findElement(By.name("sendtip")).submit();
     }
 
+    @When("^the delete button is clicked$")
+    public void the_delete_button_is_clicked() throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("delete"));
+        element.click();
+    }
+
     @Then("^the page will contain \"([^\"]*)\"$")
     public void page_will_contain(String pageContent) throws Throwable {
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Thread.sleep(1000);
         assertTrue(driver.getPageSource().contains(pageContent));
+    }
+
+    @When("^the book \"([^\"]*)\" is selected$")
+    public void the_book_is_selected(String book) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("view"));
+        element.click();
+    }
+
+    @When("^the title \"([^\"]*)\" is entered$")
+    public void the_title_is_entered(String title) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("title"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("save"));
+        element.submit();
+    }
+    
+    @When("^the book is marked read$")
+    public void the_book_is_marked_read() throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("read"));
+        element.click();
+        element = driver.findElement(By.name("save"));
+        element.submit();
     }
 
     @After
