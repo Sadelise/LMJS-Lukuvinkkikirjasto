@@ -16,6 +16,7 @@ and open the template in the editor.
             <div>
                 <font color="red">
                     <span th:text="${message}"></span>
+                    <span id="demo"></span>
                 </font>    
             </div>
             <br></br>
@@ -29,15 +30,32 @@ and open the template in the editor.
                     <th align="left"></th>
                 </tr>
 
-                <tr th:each="book : ${books}">
+                <tr th:each="book : ${books}" th:id="${book.author}">
                     <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
                     <td><span th:text="${book.author}">author</span></td>
                     <td><span th:text="${book.description}">description</span></td>
                     <td><span th:text="${book.ISBN}">ISBN</span></td>
                     <td><span th:text="${book.read}">read</span></td>
-                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" value="Delete" name="delete"/></form></td>
+                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
+
+                    <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
+
                 </tr>
             </table>
+
+            <script>
+                function poista(id) {
+                    var txt;
+                    if (confirm("Haluatko varmasti poistaa vinkin?") == true) {
+                        //$('[id="' + id + '"]').click();
+                        document.getElementById(id).click();
+                    } else {
+                        txt = "Vinkkiä ei poistettu!";
+                    }
+                    document.getElementById("demo").innerHTML = txt;
+                }
+            </script>
+
 
         </div>
         <h2>Lisää lukuvinkki</h2>

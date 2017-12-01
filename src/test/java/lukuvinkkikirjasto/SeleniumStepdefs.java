@@ -70,6 +70,18 @@ public class SeleniumStepdefs {
         element.click();
     }
 
+    @Then("^the confirmation prompt is accepted$")
+    public void the_prompt_is_accepted() throws Throwable {
+        Thread.sleep(1000);
+        driver.switchTo().alert().accept();
+    }
+
+    @Then("^the confirmation prompt is not accepted$")
+    public void the_prompt_is_not_accepted() throws Throwable {
+        Thread.sleep(1000);
+        driver.switchTo().alert().dismiss();
+    }
+
     @Then("^the page will contain \"([^\"]*)\"$")
     public void page_will_contain(String pageContent) throws Throwable {
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -92,7 +104,7 @@ public class SeleniumStepdefs {
         element = driver.findElement(By.name("save"));
         element.submit();
     }
-    
+
     @When("^the book is marked read$")
     public void the_book_is_marked_read() throws Throwable {
         Thread.sleep(1000);
