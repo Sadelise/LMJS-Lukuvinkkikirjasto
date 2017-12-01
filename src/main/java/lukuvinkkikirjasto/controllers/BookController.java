@@ -61,6 +61,7 @@ public class BookController {
         tipDao.editTipByTitle(title, "author", author);
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "ISBN", ISBN);
+        
         tipDao.markTip(id);
         
         redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen onnistui!");
@@ -74,7 +75,7 @@ public class BookController {
             redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
-        tipDao.addTip(new Book(title, author));
+        tipDao.addTip(new Book(title, author, description, ISBN));
         redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen onnistui!");
         return "redirect:/books";
     }

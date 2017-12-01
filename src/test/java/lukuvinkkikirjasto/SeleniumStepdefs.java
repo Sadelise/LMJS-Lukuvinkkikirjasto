@@ -56,11 +56,22 @@ public class SeleniumStepdefs {
 
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" are entered into correct fields$")
     public void title_and_author_are_entered_into_fields(String title, String author) throws Throwable {
-        WebElement element = driver.findElement(By.name("title"));
-        element.sendKeys(title);
-        element = driver.findElement(By.name("author"));
-        element.sendKeys(author);
-        driver.findElement(By.name("sendtip")).submit();
+        add_book(title, author, "", "");
+    }
+
+    @When("^only title \"([^\"]*)\" is entered into the correct field$")
+    public void only_title_entered_into_fields(String title) throws Throwable {
+        add_book(title, "", "", "");
+    }
+    @When("^only author \"([^\"]*)\" is entered into the correct field$")
+    public void only_author_entered_into_fields(String author) throws Throwable {
+        add_book("", author, "", "");
+    }
+    
+    @When("^title \"([^\"]*)\" and author \"([^\"]*)\" and description \"([^\"]*)\" "
+            + "and ISBN \"([^\"]*)\" are entered into correct fields$")
+    public void only_title_entered_into_fields(String title, String author, String description, String ISBN) throws Throwable {
+        add_book(title, author, description, ISBN);
     }
 
     @When("^the delete button is clicked$")
@@ -117,5 +128,18 @@ public class SeleniumStepdefs {
     @After
     public void tearDown() {
         driver.quit();
+    }
+
+    private void add_book(String title, String author, String description, String ISBN) {
+        WebElement element = driver.findElement(By.name("title"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("author"));
+        element.sendKeys(author);
+        element = driver.findElement(By.name("description"));
+        element.sendKeys(description);
+        element = driver.findElement(By.name("ISBN"));
+        element.sendKeys(ISBN);
+
+        driver.findElement(By.name("sendtip")).submit();
     }
 }

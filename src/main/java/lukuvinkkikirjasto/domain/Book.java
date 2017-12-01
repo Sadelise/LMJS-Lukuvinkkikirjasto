@@ -19,6 +19,10 @@ public class Book implements Tip {
         this(title, author, "", "", false);
     }
 
+    public Book(String title, String author, String description, String ISBN) {
+        this(title, author, description, ISBN, false);
+    }
+
     @Override
     public boolean markRead(){
         if(this.read)
