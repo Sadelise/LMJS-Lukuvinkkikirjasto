@@ -59,7 +59,6 @@ public class TipDaoTest {
 
         @Override
         public boolean contains(String keyword) {
-            System.out.println("TIPDAOTEST");
             keyword = keyword.toLowerCase().trim();
             if (description != null) {
                 if (description.toLowerCase().contains(keyword)) {

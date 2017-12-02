@@ -52,7 +52,8 @@ public class BookController {
     }
 
     @PostMapping("/books/{id}")
-    public String editBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String author, @RequestParam String title,
+    public String editBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, 
+            @RequestParam String author, @RequestParam String title,
             String description, String ISBN, boolean read) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
@@ -99,9 +100,6 @@ public class BookController {
 
     @PostMapping("/search")
     public String searchTips(Model model, @RequestParam String keyword) {
-        System.out.println("---------------------------------------------------");
-        System.out.println("|" + keyword + "|");
-        System.out.println("---------------------------------------------------");
         List<Tip> results = tipDao.searchByKeyword(keyword);
         if (results.isEmpty()) {
             model.addAttribute("message", "Mitään ei löytynyt. Hae tyhjällä kentällä jos haluat nähdä kaikki vinkit.");

@@ -100,6 +100,14 @@ public class SeleniumStepdefs {
         driver.switchTo().alert().dismiss();
     }
 
+    @Then("^the page will contain the message \"([^\"]*)\"$")
+    public void page_will_contain_message(String pageContent) throws Throwable {
+        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Thread.sleep(1000);
+        assertTrue(driver.getPageSource().contains(pageContent));
+        driver.get(baseUrl + "/books");
+    }
+
     @Then("^the page will contain \"([^\"]*)\"$")
     public void page_will_contain(String pageContent) throws Throwable {
         //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -110,7 +118,7 @@ public class SeleniumStepdefs {
     @When("^the book \"([^\"]*)\" is selected$")
     public void the_book_is_selected(String book) throws Throwable {
         Thread.sleep(1000);
-        WebElement element = driver.findElement(By.name("view"));
+        WebElement element = driver.findElement(By.linkText(book));
         element.click();
     }
 
@@ -136,7 +144,6 @@ public class SeleniumStepdefs {
     public void search_feature_finds_content(String keyword) throws Throwable {
         WebElement element = driver.findElement(By.name("keyword"));
         element.sendKeys(keyword);
-        Thread.sleep(3000);
         driver.findElement(By.name("search")).submit();
     }
 
