@@ -1,19 +1,26 @@
 package lukuvinkkikirjasto.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class YouTubeVideo implements Tip {
 
-    private String url;
-    private String title;
-    private String uploader;
-    private String description;
-    private boolean watched;
+    @Builder.Default
+    private String url = "";
+    @Builder.Default
+    private String title = "";
+    @Builder.Default
+    private String uploader = "";
+    @Builder.Default
+    private String description = "";
+    @Builder.Default
+    private boolean watched = false;
 
     public YouTubeVideo(String url, String title) {
         this(title, url, "", "", false);
@@ -85,11 +92,27 @@ public class YouTubeVideo implements Tip {
     }
 
     @Override
-    public boolean contains(String attribute) {
-        attribute = attribute.toLowerCase().trim();
-        if (this.uploader.toLowerCase().contains(attribute) || this.url.toLowerCase().contains(attribute)
-                || this.description.toLowerCase().contains(attribute) || this.title.toLowerCase().contains(attribute)) {
-            return true;
+    public boolean contains(String keyword) {
+        keyword = keyword.toLowerCase().trim();
+        if (this.uploader != null) {
+            if (this.uploader.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.url != null) {
+            if (this.url.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.description != null) {
+            if (this.description.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.title != null) {
+            if (this.title.toLowerCase().contains(keyword)) {
+                return true;
+            }
         }
         return false;
     }

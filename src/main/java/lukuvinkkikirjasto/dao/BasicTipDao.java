@@ -91,10 +91,10 @@ public class BasicTipDao implements TipDao {
     }
 
     @Override
-    public List<Tip> searchByAttribute(String attribute) {
+    public List<Tip> searchByKeyword(String keyword) {
         List<Tip> filteredTips = new ArrayList<>();
-        for (Tip tip : filteredTips) {
-            if (tip.contains(attribute)) {
+        for (Tip tip : tips.values()) {
+            if (tip.contains(keyword)) {
                 filteredTips.add(tip);
             }
         }

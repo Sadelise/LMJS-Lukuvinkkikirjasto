@@ -12,5 +12,5 @@ public interface Tip {
 
     boolean edit(String element, String edit);
     
-    boolean contains(String attribute);
+    boolean contains(String keyword);
 }

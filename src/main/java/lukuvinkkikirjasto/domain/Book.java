@@ -95,11 +95,26 @@ public class Book implements Tip {
     }
 
     @Override
-    public boolean contains(String attribute) {
-        attribute = attribute.toLowerCase().trim();
-        if (this.ISBN.toLowerCase().contains(attribute) || this.author.toLowerCase().contains(attribute)
-                || this.description.toLowerCase().contains(attribute) || this.title.toLowerCase().contains(attribute)) {
-            return true;
+    public boolean contains(String keyword) {
+        if (this.ISBN != null) {
+            if (this.ISBN.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.author != null) {
+            if (this.author.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.description != null) {
+            if (this.description.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.title != null) {
+            if (this.title.toLowerCase().contains(keyword)) {
+                return true;
+            }
         }
         return false;
     }

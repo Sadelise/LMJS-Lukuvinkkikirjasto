@@ -1,5 +1,6 @@
 package lukuvinkkikirjasto.controllers;
 
+import java.util.List;
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,8 +98,15 @@ public class BookController {
     }
 
     @PostMapping("/search")
-    public String searchTips(Model model, @RequestParam String attribute) {
-        model.addAttribute("books", tipDao.searchByAttribute(attribute));
+    public String searchTips(Model model, @RequestParam String keyword) {
+        System.out.println("---------------------------------------------------");
+        System.out.println("|" + keyword + "|");
+        System.out.println("---------------------------------------------------");
+        List<Tip> results = tipDao.searchByKeyword(keyword);
+        if (results.isEmpty()) {
+            model.addAttribute("message", "Mitään ei löytynyt. Hae tyhjällä kentällä jos haluat nähdä kaikki vinkit.");
+        }
+        model.addAttribute("books", results);
         return "books";
     }
 }

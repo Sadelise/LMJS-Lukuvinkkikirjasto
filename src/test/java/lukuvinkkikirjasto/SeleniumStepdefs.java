@@ -54,6 +54,12 @@ public class SeleniumStepdefs {
         driver.get(baseUrl + "/" + page);
     }
 
+    @Given("^a book by title \"([^\"]*)\" and author \"([^\"]*)\" and description \"([^\"]*)\" exists$")
+    public void page_selected(String title, String author, String description) throws Throwable {
+        add_book(title, author, description, "");
+        Thread.sleep(3000);
+    }
+
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" are entered into correct fields$")
     public void title_and_author_are_entered_into_fields(String title, String author) throws Throwable {
         add_book(title, author, "", "");
@@ -63,11 +69,12 @@ public class SeleniumStepdefs {
     public void only_title_entered_into_fields(String title) throws Throwable {
         add_book(title, "", "", "");
     }
+
     @When("^only author \"([^\"]*)\" is entered into the correct field$")
     public void only_author_entered_into_fields(String author) throws Throwable {
         add_book("", author, "", "");
     }
-    
+
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" and description \"([^\"]*)\" "
             + "and ISBN \"([^\"]*)\" are entered into correct fields$")
     public void only_title_entered_into_fields(String title, String author, String description, String ISBN) throws Throwable {
@@ -123,6 +130,14 @@ public class SeleniumStepdefs {
         element.click();
         element = driver.findElement(By.name("save"));
         element.submit();
+    }
+
+    @When("^keyword \"([^\"]*)\" has been submitted$")
+    public void search_feature_finds_content(String keyword) throws Throwable {
+        WebElement element = driver.findElement(By.name("keyword"));
+        element.sendKeys(keyword);
+        Thread.sleep(3000);
+        driver.findElement(By.name("search")).submit();
     }
 
     @After

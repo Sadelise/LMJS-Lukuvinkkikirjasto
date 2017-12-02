@@ -58,10 +58,13 @@ public class TipDaoTest {
         }
 
         @Override
-        public boolean contains(String attribute) {
-            attribute = attribute.toLowerCase().trim();
-            if (description.toLowerCase().contains(attribute)) {
-                return true;
+        public boolean contains(String keyword) {
+            System.out.println("TIPDAOTEST");
+            keyword = keyword.toLowerCase().trim();
+            if (description != null) {
+                if (description.toLowerCase().contains(keyword)) {
+                    return true;
+                }
             }
             return false;
         }

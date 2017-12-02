@@ -27,5 +27,5 @@ public interface TipDao {
 
     public void editTipByTitle(String title, String element, String edit);
 
-    public List<Tip> searchByAttribute(String attribute);
+    public List<Tip> searchByKeyword(String keyword);
 }

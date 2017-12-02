@@ -47,11 +47,20 @@ public class BookTest {
     }
 
     @Test
-    public void bookCanBeMarkedAsRead(){
+    public void bookCanBeMarkedAsRead() {
         Book book = new Book("Name", "Author");
         TipDao dao = new BasicTipDao();
         assertEquals(false, book.isRead());
         book.markRead();
+        assertEquals(true, book.isRead());
     }
-    
+
+    @Test
+    public void bookCanBeSearchedByWord() {
+        Book book = new Book("Name", "Author");
+        book.setDescription("Testikuvaus");
+        assertTrue(book.contains("testi"));
+        assertTrue(book.contains("kuva"));
+    }
+
 }

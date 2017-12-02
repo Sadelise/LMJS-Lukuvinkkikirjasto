@@ -136,10 +136,10 @@ public class FireBaseTipDao implements TipDao {
     }
 
     @Override
-    public List<Tip> searchByAttribute(String attribute) {
+    public List<Tip> searchByKeyword(String keyword) {
         List<Tip> filteredTips = new ArrayList<>();
         for (Tip tip : tips.values()) {
-            if (tip.contains(attribute)) {
+            if (tip.contains(keyword)) {
                 filteredTips.add(tip);
             }
         }
