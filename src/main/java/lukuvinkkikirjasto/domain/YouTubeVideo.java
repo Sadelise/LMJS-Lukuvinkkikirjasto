@@ -1,38 +1,38 @@
-
 package lukuvinkkikirjasto.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class YouTubeVideo implements Tip {
-    
+
     private String url;
     private String title;
     private String uploader;
     private String description;
     private boolean watched;
-    
+
     public YouTubeVideo(String url, String title) {
         this(title, url, "", "", false);
     }
 
     @Override
     public boolean markRead() {
-        if(this.watched)
+        if (this.watched) {
             return false;
-        this.watched=true;
+        }
+        this.watched = true;
         return true;
     }
 
     @Override
     public boolean markNotRead() {
-        if (!this.watched)
+        if (!this.watched) {
             return false;
+        }
         this.watched = false;
         return true;
     }
@@ -49,7 +49,7 @@ public class YouTubeVideo implements Tip {
 
     @Override
     public boolean edit(String element, String edit) {
-        switch (element ){
+        switch (element) {
             case "title":
                 changeTitle(edit);
                 break;
@@ -83,5 +83,14 @@ public class YouTubeVideo implements Tip {
     private void changeUploader(String edit) {
         this.uploader = edit;
     }
-    
+
+    @Override
+    public boolean contains(String attribute) {
+        attribute = attribute.toLowerCase().trim();
+        if (this.uploader.toLowerCase().contains(attribute) || this.url.toLowerCase().contains(attribute)
+                || this.description.toLowerCase().contains(attribute) || this.title.toLowerCase().contains(attribute)) {
+            return true;
+        }
+        return false;
+    }
 }

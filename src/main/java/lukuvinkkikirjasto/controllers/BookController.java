@@ -25,7 +25,7 @@ public class BookController {
     public void setTipDao(TipDao tipDao) {
         this.tipDao = tipDao;
     }
-    
+
     // This is a test method
     @GetMapping("/test")
     @ResponseBody //returns plain object, does not try to find a template
@@ -61,9 +61,9 @@ public class BookController {
         tipDao.editTipByTitle(title, "author", author);
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "ISBN", ISBN);
-        
+
         tipDao.markTip(id);
-        
+
         redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen onnistui!");
         return "redirect:/books";
     }
@@ -94,5 +94,11 @@ public class BookController {
         }
         redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen epäonnistui!");
         return "redirect:/books";
+    }
+
+    @PostMapping("/search")
+    public String searchTips(Model model, @RequestParam String attribute) {
+        model.addAttribute("books", tipDao.searchByAttribute(attribute));
+        return "books";
     }
 }

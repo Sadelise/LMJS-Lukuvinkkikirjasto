@@ -89,4 +89,15 @@ public class BasicTipDao implements TipDao {
     public void editTipByTitle(String title, String element, String edit) {
 
     }
+
+    @Override
+    public List<Tip> searchByAttribute(String attribute) {
+        List<Tip> filteredTips = new ArrayList<>();
+        for (Tip tip : filteredTips) {
+            if (tip.contains(attribute)) {
+                filteredTips.add(tip);
+            }
+        }
+        return filteredTips;
+    }
 }

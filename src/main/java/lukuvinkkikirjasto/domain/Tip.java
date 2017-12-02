@@ -11,4 +11,6 @@ public interface Tip {
     String identify();
 
     boolean edit(String element, String edit);
+    
+    boolean contains(String attribute);
 }

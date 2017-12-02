@@ -24,24 +24,26 @@ public class Book implements Tip {
     }
 
     @Override
-    public boolean markRead(){
-        if(this.read)
+    public boolean markRead() {
+        if (this.read) {
             return false;
-        this.read=true;
+        }
+        this.read = true;
         return true;
     }
-    
+
     @Override
-    public boolean markNotRead(){
-        if (!this.read)
+    public boolean markNotRead() {
+        if (!this.read) {
             return false;
+        }
         this.read = false;
         return true;
     }
 
     @Override
-    public boolean edit(String element, String edit){
-        switch (element ){
+    public boolean edit(String element, String edit) {
+        switch (element) {
             case "title":
                 changeTitle(edit);
                 break;
@@ -63,29 +65,42 @@ public class Book implements Tip {
     @Override
     public String toString() {
         String r;
-        if(read) r = "Read";
-        else r = "Not read";
-        return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN + "\n"+r;
+        if (read) {
+            r = "Read";
+        } else {
+            r = "Not read";
+        }
+        return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN + "\n" + r;
     }
-    
+
     @Override
     public String identify() {
         return title;
     }
 
-    private void changeTitle(String title){
+    private void changeTitle(String title) {
         this.title = title;
     }
 
-    private void changeAuthor(String author){
+    private void changeAuthor(String author) {
         this.author = author;
     }
 
-    private void changeDescription(String description){
+    private void changeDescription(String description) {
         this.description = description;
     }
 
-    private void changeISBN(String isbn){
+    private void changeISBN(String isbn) {
         this.ISBN = isbn;
+    }
+
+    @Override
+    public boolean contains(String attribute) {
+        attribute = attribute.toLowerCase().trim();
+        if (this.ISBN.toLowerCase().contains(attribute) || this.author.toLowerCase().contains(attribute)
+                || this.description.toLowerCase().contains(attribute) || this.title.toLowerCase().contains(attribute)) {
+            return true;
+        }
+        return false;
     }
 }

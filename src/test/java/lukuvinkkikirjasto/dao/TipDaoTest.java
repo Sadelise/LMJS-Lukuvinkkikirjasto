@@ -18,12 +18,11 @@ public class TipDaoTest {
     BasicTipDao tipDao;
     Tip tip;
 
-
     class TestTip implements Tip {
 
         public boolean isRead;
         String id;
-        public String descrption;
+        public String description;
 
         public TestTip(String id) {
             isRead = false;
@@ -38,16 +37,17 @@ public class TipDaoTest {
         public boolean isRead() {
             return isRead;
         }
-        
+
         public String identify() {
             return id;
         }
 
 //        @Override
         public boolean edit(String element, String edit) {
-            if (!element.equals("description"))
+            if (!element.equals("description")) {
                 return false;
-            descrption = edit;
+            }
+            description = edit;
             return true;
         }
 
@@ -56,12 +56,22 @@ public class TipDaoTest {
             isRead = false;
             return isRead;
         }
+
+        @Override
+        public boolean contains(String attribute) {
+            attribute = attribute.toLowerCase().trim();
+            if (description.toLowerCase().contains(attribute)) {
+                return true;
+            }
+            return false;
+        }
     }
 
     @Before
     public void setUp() {
         tipDao = new BasicTipDao();
         tip = new TestTip("1");
+        tip.edit("description", "Testikuvaus.");
     }
 
     @Test
@@ -108,4 +118,14 @@ public class TipDaoTest {
         assertEquals(1, tipDao.getAllTips().size());
     }
 
+    @Test
+    public void existingAttributeReturnsTrueWhenSearching() {
+        assertTrue(tip.contains("testikuvaus"));
+        assertTrue(tip.contains("testi"));
+    }
+
+    @Test
+    public void nonExistingAttributeReturnsFalseWhenSearching() {
+        assertTrue(!tip.contains("nakki"));
+    }
 }
