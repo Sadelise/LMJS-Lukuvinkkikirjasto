@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -19,7 +18,6 @@ public class Book implements Tip {
 
     private boolean read;
 
-
     public Book(String title, String author) {
         this(title, author, "", "", "", new String[0], false);
     }
@@ -30,7 +28,11 @@ public class Book implements Tip {
 
     @Override
     public boolean markRead() {
-        return this.read;
+        if (!this.read) {
+            this.read = true;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -66,12 +68,14 @@ public class Book implements Tip {
         return true;
     }
 
-
     @Override
     public String toString() {
         String r;
-        if (read) r = "Read";
-        else r = "Not read";
+        if (read) {
+            r = "Read";
+        } else {
+            r = "Not read";
+        }
 
         return "Author: " + this.author + "\nTitle: " + this.title + "\nDescription: " + this.description + "\nISBN: " + this.ISBN + "\nTags: " + tagString + "\n" + r;
     }
@@ -124,8 +128,10 @@ public class Book implements Tip {
 
     private void addTags(String tags) {
         this.tagString = tags;
-        if(tags!=null)
+        if (tags != null) {
             this.tags = tags.split(";(\\s)*");
-        else this.tags = new String[0];
+        } else {
+            this.tags = new String[0];
+        }
     }
 }
