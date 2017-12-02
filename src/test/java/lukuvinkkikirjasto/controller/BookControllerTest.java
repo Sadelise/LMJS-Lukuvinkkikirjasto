@@ -85,7 +85,8 @@ public class BookControllerTest {
         MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/books/{id}", "kirja")
                 .param("title", "kirja")
                 .param("author", "kirjoittaja")
-                .param("description", "hyvä"))
+                .param("description", "hyvä")
+                .param("tags", "tagit"))
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Kirjan muokkaaminen onnistui!"));
 

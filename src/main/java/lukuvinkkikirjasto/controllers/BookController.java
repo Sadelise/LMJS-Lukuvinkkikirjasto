@@ -1,7 +1,6 @@
 package lukuvinkkikirjasto.controllers;
 
 import java.util.List;
-import lukuvinkkikirjasto.dao.BasicTipDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +14,6 @@ import lukuvinkkikirjasto.dao.FireBaseTipDao;
 import lukuvinkkikirjasto.dao.TipDao;
 import lukuvinkkikirjasto.domain.Book;
 import lukuvinkkikirjasto.domain.Tip;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -52,9 +50,9 @@ public class BookController {
     }
 
     @PostMapping("/books/{id}")
-    public String editBook(Model model, RedirectAttributes redirectAttributes, @PathVariable String id, 
-            @RequestParam String author, @RequestParam String title,
-            String description, String ISBN, boolean read) {
+    public String editBook(Model model, RedirectAttributes redirectAttributes, 
+            @PathVariable String id, @RequestParam String author, @RequestParam String title,
+            String description, String ISBN, String tagString, boolean read) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -62,8 +60,8 @@ public class BookController {
         tipDao.editTipByTitle(title, "title", id);
         tipDao.editTipByTitle(title, "author", author);
         tipDao.editTipByTitle(title, "description", description);
-        tipDao.editTipByTitle(title, "ISBN", ISBN);
-
+        tipDao.editTipByTitle(title, "isbn", ISBN);
+        tipDao.editTipByTitle(title, "tags", tagString);
         tipDao.markTip(id);
 
         redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen onnistui!");
@@ -72,12 +70,12 @@ public class BookController {
 
     @PostMapping("/books")
     public String addBook(@RequestParam String author, @RequestParam String title,
-            String description, String ISBN, RedirectAttributes redirectAttributes) {
+            String description, String ISBN, String tags,RedirectAttributes redirectAttributes) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
-        tipDao.addTip(new Book(title, author, description, ISBN));
+        tipDao.addTip(new Book(title, author, description, tags, ISBN));
         redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen onnistui!");
         return "redirect:/books";
     }

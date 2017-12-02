@@ -36,6 +36,7 @@ and open the template in the editor.
                     <th align="left">Kuvaus</th>
                     <th align="left">ISBN</th>
                     <th align="left">Luettu</th>
+                    <th align="left">Tagit</th>
                     <th align="left"></th>
                 </tr>
 
@@ -45,6 +46,7 @@ and open the template in the editor.
                     <td><span th:text="${book.description}">description</span></td>
                     <td><span th:text="${book.ISBN}">ISBN</span></td>
                     <td><span th:text="${book.read}">read</span></td>
+                    <td><span th:text="${book.tagString}">tags</span></td>
                     <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
 
                     <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
@@ -77,7 +79,9 @@ and open the template in the editor.
                 <span>Kuvaus: </span>
                 <input type="text" name="description"/>
                 <span>ISBN: </span>
-                <input type="text" name="ISBN"/>-->
+                <input type="text" name="ISBN"/>
+                <span>Tagit</span>
+                <input type="text" name="tags"/>-->
 
                 <input type="submit" name="sendtip" value="Lisää!"/>
             </form>

@@ -8,19 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 public class YouTubeVideo implements Tip {
 
-    @Builder.Default
-    private String url = "";
-    @Builder.Default
-    private String title = "";
-    @Builder.Default
-    private String uploader = "";
-    @Builder.Default
-    private String description = "";
-    @Builder.Default
-    private boolean watched = false;
+    private String url;
+    private String title;
+    private String uploader;
+    private String description;
+    private boolean watched;
 
     public YouTubeVideo(String url, String title) {
         this(title, url, "", "", false);
