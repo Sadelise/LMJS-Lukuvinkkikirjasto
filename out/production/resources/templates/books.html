@@ -13,15 +13,52 @@ and open the template in the editor.
         <div>
             <h1>Lukuvinkit</h1>
 
-            <ul>
-                <li th:each="book : ${books}">
+            <div>
+                <font color="red">
+                    <span th:text="${message}"></span>
+                    <span id="demo"></span>
+                </font>    
+            </div>
+            <br></br>
+            <table border="1" frame="void" rules="rows">
+                <tr>
+                    <th align="left">Otsikko</th>
+                    <th align="left">Kirjoittaja</th>
+                    <th align="left">Kuvaus</th>
+                    <th align="left">ISBN</th>
+                    <th align="left">Luettu</th>
+                    <th align="left">Tagit</th>
+                    <th align="left"></th>
+                </tr>
 
-                    <span th:text="${book.title}">title</span> --
-                    <span th:text="${book.author}">author</span> -- 
-                    <span th:text="${book.description}">description</span> -- 
-                    <span th:text="${book.ISBN}">ISBN</span> -- 
-                </li>
-            </ul>
+                <tr th:each="book : ${books}" th:id="${book.author}">
+                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
+                    <td><span th:text="${book.author}">author</span></td>
+                    <td><span th:text="${book.description}">description</span></td>
+                    <td><span th:text="${book.ISBN}">ISBN</span></td>
+                    <td><span th:text="${book.read}">read</span></td>
+                    <td><span th:text="${book.tagString}">tags</span></td>
+                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
+
+                    <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
+
+                </tr>
+            </table>
+
+            <script>
+                function poista(id) {
+                    var txt;
+                    if (confirm("Haluatko varmasti poistaa vinkin?") == true) {
+                        //$('[id="' + id + '"]').click();
+                        document.getElementById(id).click();
+                    } else {
+                        txt = "Vinkkiä ei poistettu!";
+                    }
+                    document.getElementById("demo").innerHTML = txt;
+                }
+            </script>
+
+
         </div>
         <h2>Lisää lukuvinkki</h2>
         <div>
@@ -33,9 +70,11 @@ and open the template in the editor.
                 <span>Kuvaus: </span>
                 <input type="text" name="description"/>
                 <span>ISBN: </span>
-                <input type="text" name="ISBN"/>-->
+                <input type="text" name="ISBN"/>
+                <span>Tagit</span>
+                <input type="text" name="tags"/>-->
 
-                <input type="submit" value="Lisää!"/>
+                <input type="submit" name="sendtip" value="Lisää!"/>
             </form>
         </div>
     </body>

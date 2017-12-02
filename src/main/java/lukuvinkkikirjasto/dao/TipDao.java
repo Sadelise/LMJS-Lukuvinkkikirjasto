@@ -23,4 +23,5 @@ public interface TipDao {
     public void editTip(int tip, String element, String edit);
 
     public void editTipByTitle(String title, String element, String edit);
+
 }

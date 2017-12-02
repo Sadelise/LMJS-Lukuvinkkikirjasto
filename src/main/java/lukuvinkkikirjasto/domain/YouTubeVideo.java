@@ -10,22 +10,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class YouTubeVideo implements Tip {
-    
+
     private String url;
     private String title;
     private String uploader;
     private String description;
     private boolean watched;
-    
+
     public YouTubeVideo(String url, String title) {
         this(title, url, "", "", false);
     }
 
     @Override
     public boolean markRead() {
-        if(this.watched)
+        if (this.watched)
             return false;
-        this.watched=true;
+        this.watched = true;
         return true;
     }
 
@@ -49,7 +49,7 @@ public class YouTubeVideo implements Tip {
 
     @Override
     public boolean edit(String element, String edit) {
-        switch (element ){
+        switch (element) {
             case "title":
                 changeTitle(edit);
                 break;
@@ -83,5 +83,6 @@ public class YouTubeVideo implements Tip {
     private void changeUploader(String edit) {
         this.uploader = edit;
     }
-    
+
+
 }

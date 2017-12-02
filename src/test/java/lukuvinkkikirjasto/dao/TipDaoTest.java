@@ -51,6 +51,7 @@ public class TipDaoTest {
             return true;
         }
 
+
         @Override
         public boolean markNotRead() {
             isRead = false;
