@@ -103,6 +103,11 @@ public class Book implements Tip {
 
     @Override
     public boolean contains(String keyword) {
+        if (this.tagString != null) {
+            if (this.tagString.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         if (this.ISBN != null) {
             if (this.ISBN.toLowerCase().contains(keyword)) {
                 return true;

@@ -17,7 +17,7 @@ import lukuvinkkikirjasto.domain.Tip;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class BookController {
+public class TipController {
 
     TipDao tipDao = new FireBaseTipDao();
 

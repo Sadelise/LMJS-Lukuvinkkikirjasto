@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
     <head>
         <title>Lukuvinkit</title>
         <meta charset="utf-8"></meta>
@@ -70,8 +71,32 @@ and open the template in the editor.
 
         </div>
         <h2>Lisää lukuvinkki</h2>
-        <div>
-            <form action="/books" method="POST">
+
+        <select id="optionsList" name="optionsList">
+            <option value="Kirja" selected="selected">Kirja</option>
+            <option value="YouTubeVideo">YouTubeVideo</option>
+        </select> 
+        <br></br>
+        
+        <script>
+            $("#optionsList").change(function () {
+                var string = "";
+                string = $("select#optionsList option:selected").text();
+                if (string == "Kirja") {
+                    $("#fields .youtubevideo").hide();
+                    $("#fields .book").show();
+                    $("#fields").show();
+                } else if (string == "YouTubeVideo") {
+                    $("#fields .book").hide();
+                    $("#fields .youtubevideo").show();
+                    $("#fields").show();
+                }
+
+            })
+        </script>
+
+        <div id="fields">
+            <form class="book" action="/books" method="POST" style="display: inline">
                 <span>Kirjan nimi: </span>
                 <input type="text" name="title"/>
                 <span>Kirjailija: </span>
@@ -85,6 +110,22 @@ and open the template in the editor.
 
                 <input type="submit" name="sendtip" value="Lisää!"/>
             </form>
+
+            <form class="youtubevideo" action="/books" method="POST" style="display: none">
+                <span>Videon nimi: </span>
+                <input type="text" name="title"/>
+                <span>Linkki: </span>
+                <input type="text" name="link"/>
+                <span>Kuvaus: </span>
+                <input type="text" name="description"/>
+                <span>Lataaja: </span>
+                <input type="text" name="uploader"/>
+                <span>Tagit</span>
+                <input type="text" name="tags"/>-->
+
+                <input type="submit" name="sendtip" value="Lisää!"/>
+            </form>
         </div>
+
     </body>
 </html>
