@@ -98,7 +98,7 @@ public class BookController {
 
     @PostMapping("/search")
     public String searchTips(Model model, @RequestParam String keyword) {
-        List<Tip> results = tipDao.searchByKeyword(keyword);
+        List<Tip> results = tipDao.searchByKeyword(keyword.toLowerCase().trim());
         if (results.isEmpty()) {
             model.addAttribute("message", "Mitään ei löytynyt. Hae tyhjällä kentällä jos haluat nähdä kaikki vinkit.");
         }
