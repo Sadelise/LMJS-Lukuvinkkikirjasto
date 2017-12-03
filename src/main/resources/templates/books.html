@@ -39,7 +39,7 @@ and open the template in the editor.
                     <th align="left"></th>
                 </tr>
 
-                <tr th:each="book : ${books}" th:id="${book.title}">
+                <tr th:each="book : ${books}">
                     <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
                     <td><span th:text="${book.type}">type</span></td>
                     <td><span th:text="${book.tagString}">tags</span></td>
@@ -58,8 +58,8 @@ and open the template in the editor.
                         document.getElementById(id).click();
                     } else {
                         txt = "Vinkkiä ei poistettu!";
+                        document.getElementById("demo").innerHTML = txt;
                     }
-                    document.getElementById("demo").innerHTML = txt;
                 }
             </script>
 
@@ -72,7 +72,7 @@ and open the template in the editor.
             <option value="YouTubeVideo">YouTubeVideo</option>
         </select> 
         <br></br>
-        
+
         <script>
             $("#optionsList").change(function () {
                 var string = "";

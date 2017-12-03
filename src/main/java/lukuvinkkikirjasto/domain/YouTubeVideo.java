@@ -49,6 +49,10 @@ public class YouTubeVideo implements Tip {
     public boolean isRead() {
         return watched;
     }
+        
+    public void setRead(boolean watched) {
+        this.watched = watched;
+    }
 
     @Override
     public String identify() {

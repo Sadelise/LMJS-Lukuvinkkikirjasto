@@ -7,13 +7,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-@JsonTypeInfo(use = Id.CLASS,
-              include = JsonTypeInfo.As.PROPERTY,
-              property = "type")
-@JsonSubTypes({
-    @Type(value = Book.class, name="Book"),
-    @Type(value = YouTubeVideo.class, name="YouTubeVideo"),
-    })
 public interface Tip {
     boolean markRead();
 
