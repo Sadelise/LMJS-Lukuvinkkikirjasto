@@ -18,10 +18,12 @@ import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.io.StubIO;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  *
@@ -60,9 +62,21 @@ public class SeleniumStepdefs {
         Thread.sleep(3000);
     }
 
+    @When("^the tip type \"([^\"]*)\" has been selected in the dropdown menu$")
+    public void type_selection_selected(String choice) {
+        WebElement element = driver.findElement(By.id("optionsList"));
+        Select menu = new Select(element);
+        menu.selectByVisibleText(choice);
+    }
+
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" are entered into correct fields$")
     public void title_and_author_are_entered_into_fields(String title, String author) throws Throwable {
         add_book(title, author, "", "");
+    }
+
+    @When("^title \"([^\"]*)\" and URL \"([^\"]*)\" are entered into the video-adding form")
+    public void title_and_URL_are_entered_into_fields(String title, String URL) throws Throwable {
+        add_youtubeVideo(title, URL, "", "");
     }
 
     @When("^only title \"([^\"]*)\" is entered into the correct field$")
@@ -118,7 +132,14 @@ public class SeleniumStepdefs {
     @When("^the book \"([^\"]*)\" is selected$")
     public void the_book_is_selected(String book) throws Throwable {
         Thread.sleep(1000);
-        WebElement element = driver.findElement(By.linkText(book));
+        WebElement element = driver.findElement(By.linkText("muokkaa"));
+        element.click();
+    }
+
+    @When("^the video \"([^\"]*)\" is selected$")
+    public void the_video_is_selected(String video) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.linkText("muokkaa"));
         element.click();
     }
 
@@ -148,7 +169,20 @@ public class SeleniumStepdefs {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws Throwable {
+        WebElement element = null;
+
+        while (true) {
+            try {
+                element = driver.findElement(By.name("delete"));
+            } catch (NoSuchElementException ex) {
+                driver.quit();
+                break;
+            }
+            element.click();
+            Thread.sleep(1000);
+            driver.switchTo().alert().accept();
+        }
         driver.quit();
     }
 
@@ -163,5 +197,19 @@ public class SeleniumStepdefs {
         element.sendKeys(ISBN);
 
         driver.findElement(By.name("sendtip")).submit();
+    }
+
+    private void add_youtubeVideo(String title, String URL, String description, String uploader) {
+        WebElement element = driver.findElement(By.id("youtubeTitle"));
+        element.sendKeys(title);
+        element = driver.findElement(By.name("link"));
+        element.sendKeys(URL);
+        element = driver.findElement(By.id("youtubeDesc"));
+        element.sendKeys(description);
+        element = driver.findElement(By.name("uploader"));
+        element.sendKeys(uploader);
+
+        driver.findElement(By.name("sendYouTubetip")).submit();
+
     }
 }

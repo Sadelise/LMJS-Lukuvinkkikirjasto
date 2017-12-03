@@ -18,13 +18,14 @@ public class YouTubeVideo implements Tip {
     private String[] tags;
     private String type;
     private boolean watched;
+    private boolean urlpresent;
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", false, true);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false);
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false, true);
     }
 
     @Override
@@ -138,4 +139,11 @@ public class YouTubeVideo implements Tip {
     public String getType() {
         return this.type;
     }
+
+    @Override
+    public boolean isUrlpresent() {
+        return true;
+    }
+    
+    
 }

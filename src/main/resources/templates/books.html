@@ -40,10 +40,13 @@ and open the template in the editor.
                 </tr>
 
                 <tr th:each="book : ${books}">
-                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
+                    <td th:if="${book.urlpresent}"><a th:href="${book.url}" th:text="${book.title}" th:name="view">title</a></td>>
+                    <td th:unless="${book.urlpresent}"> <span th:text="${book.title}" th:name="view">title></span></td>
                     <td><span th:text="${book.type}">type</span></td>
+                    <td><span th:text="${book.description}">description</span></td>
                     <td><span th:text="${book.tagString}">tags</span></td>
                     <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
+                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="muokkaa" th:name="view">title</a></td>
 
                     <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
 
@@ -106,17 +109,17 @@ and open the template in the editor.
 
             <form class="youtubevideo" action="/videos" method="POST" style="display: none" id="youtubevideo">
                 <span>Videon nimi: </span>
-                <input type="text" name="title"/>
+                <input id="youtubeTitle" type="text" name="title"/>
                 <span>Linkki: </span>
                 <input type="text" name="link"/>
                 <span>Kuvaus: </span>
-                <input type="text" name="description"/>
+                <input id="youtubeDesc" type="text" name="description"/>
                 <span>Lataaja: </span>
                 <input type="text" name="uploader"/>
                 <span>Tagit</span>
-                <input type="text" name="tags"/>-->
+                <input id="youtubeTags" type="text" name="tags"/>-->
 
-                <input type="submit" name="sendtip" value="Lisää!"/>
+                <input type="submit" name="sendYouTubetip" value="Lisää!"/>
             </form>
         </div>
 

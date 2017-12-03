@@ -17,6 +17,14 @@ public interface Tip {
     String identify();
     
     String getType();
+        
+    String getDescription();
+    
+    String getTitle();
+    
+    String getUrl();
+    
+    boolean isUrlpresent();
 
     boolean edit(String element, String edit);
     

@@ -38,6 +38,29 @@ public class TipDaoTest {
             return isRead;
         }
 
+        @Override
+        public String getUrl() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public String getTitle() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        @Override
+        public boolean isUrlpresent() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
         public String identify() {
             return id;
         }
@@ -72,67 +95,67 @@ public class TipDaoTest {
         public String getType() {
             return "Book";
         }
+    }
 
-        @Before
-        public void setUp() {
-            tipDao = new BasicTipDao();
-            tip = new TestTip("1");
-            tip.edit("description", "Testikuvaus.");
-        }
+    @Before
+    public void setUp() {
+        tipDao = new BasicTipDao();
+        tip = new TestTip("1");
+        tip.edit("description", "Testikuvaus.");
+    }
 
-        @Test
-        public void tipCanBeAddedAndRead() {
-            assertEquals(tipDao.getAllTips().size(), 0);
-            tipDao.addTip(tip);
-            assertEquals(tipDao.getAllTips().size(), 1);
-        }
+    @Test
+    public void tipCanBeAddedAndRead() {
+        assertEquals(tipDao.getAllTips().size(), 0);
+        tipDao.addTip(tip);
+        assertEquals(tipDao.getAllTips().size(), 1);
+    }
 
-        @Test
-        public void multipleTipsCanBeAddedAndRead() {
-            assertEquals(tipDao.getAllTips().size(), 0);
-            tipDao.addTip(tip);
-            Tip tip2 = new TestTip("2");
-            tipDao.addTip(tip2);
-            assertEquals(tipDao.getAllTips().size(), 2);
-        }
+    @Test
+    public void multipleTipsCanBeAddedAndRead() {
+        assertEquals(tipDao.getAllTips().size(), 0);
+        tipDao.addTip(tip);
+        Tip tip2 = new TestTip("2");
+        tipDao.addTip(tip2);
+        assertEquals(tipDao.getAllTips().size(), 2);
+    }
 
-        @Test
-        public void nonexistentBookCanNotFound() {
-            TipDao dao = new BasicTipDao();
-            assertEquals(false, dao.testTipNumber(0));
-        }
+    @Test
+    public void nonexistentBookCanNotFound() {
+        TipDao dao = new BasicTipDao();
+        assertEquals(false, dao.testTipNumber(0));
+    }
 
-        @Test
-        public void bookCanBeMarkedAsRead() {
-            assertFalse(tip.isRead());
-            tipDao.addTip(tip);
-            tipDao.markTip(tip.identify());
-            assertTrue(tip.isRead());
-        }
+    @Test
+    public void bookCanBeMarkedAsRead() {
+        assertFalse(tip.isRead());
+        tipDao.addTip(tip);
+        tipDao.markTip(tip.identify());
+        assertTrue(tip.isRead());
+    }
 
-        @Test
-        public void bookCanBeRemoved() {
-            tipDao.addTip(tip);
-            tipDao.removeTip(tip.identify());
-            assertEquals(0, tipDao.getAllTips().size());
-        }
+    @Test
+    public void bookCanBeRemoved() {
+        tipDao.addTip(tip);
+        tipDao.removeTip(tip.identify());
+        assertEquals(0, tipDao.getAllTips().size());
+    }
 
-        @Test
-        public void nonexistentBookCanNotBeRemoved() {
-            tipDao.addTip(tip);
-            tipDao.removeTip("Wrong");
-            assertEquals(1, tipDao.getAllTips().size());
-        }
+    @Test
+    public void nonexistentBookCanNotBeRemoved() {
+        tipDao.addTip(tip);
+        tipDao.removeTip("Wrong");
+        assertEquals(1, tipDao.getAllTips().size());
+    }
 
-        @Test
-        public void existingAttributeReturnsTrueWhenSearching() {
-            assertTrue(tip.contains("testikuvaus"));
-            assertTrue(tip.contains("testi"));
-        }
+    @Test
+    public void existingAttributeReturnsTrueWhenSearching() {
+        assertTrue(tip.contains("testikuvaus"));
+        assertTrue(tip.contains("testi"));
+    }
 
-        @Test
-        public void nonExistingAttributeReturnsFalseWhenSearching() {
-            assertTrue(!tip.contains("nakki"));
-        }
+    @Test
+    public void nonExistingAttributeReturnsFalseWhenSearching() {
+        assertTrue(!tip.contains("nakki"));
     }
 }

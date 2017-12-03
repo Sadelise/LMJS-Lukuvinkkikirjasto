@@ -12,22 +12,24 @@ public class Book implements Tip {
     private String title;
     private String author;
     private String description;
+    private String url;
     private String ISBN;
     private String tagString;
     private String[] tags;
     private String type;
     private boolean read;
+    private boolean urlpresent;
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", new String[0], "Book", false);
+        this(title, author, "", "", "", "", new String[0], "Book", false, false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, ISBN, tag, new String[0], "Book", false);
+        this(title, author, description, "", ISBN, tag, new String[0], "Book", false, false);
     }
-    
+
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, ISBN, "", new String[0], "Book", false);
+        this(title, author, description, "", ISBN, "", new String[0], "Book", false, false);
     }
 
     @Override
@@ -143,9 +145,23 @@ public class Book implements Tip {
             this.tags = new String[0];
         }
     }
-    
+
     @Override
     public String getType() {
         return this.type;
     }
+
+    @Override
+    public String getUrl() {
+        return url;
+    }
+
+    @Override
+    public boolean isUrlpresent() {
+        if (url.length() == 0) {
+            return false;
+        }
+        return true;
+    }
+
 }
