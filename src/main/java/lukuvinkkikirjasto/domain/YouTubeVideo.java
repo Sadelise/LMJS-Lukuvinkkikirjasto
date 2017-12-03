@@ -22,9 +22,9 @@ public class YouTubeVideo implements Tip {
     public YouTubeVideo(String title, String url) {
         this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
     }
-    
+
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description,  tag, new String[0], "YouTubeVideo", false);
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class YouTubeVideo implements Tip {
     public boolean isRead() {
         return watched;
     }
-        
+
     public void setRead(boolean watched) {
         this.watched = watched;
     }
@@ -73,6 +73,9 @@ public class YouTubeVideo implements Tip {
                 break;
             case "uploader":
                 changeUploader(edit);
+                break;
+            case "tags":
+                addTags(edit);
                 break;
             default:
                 return false;
@@ -121,7 +124,7 @@ public class YouTubeVideo implements Tip {
         }
         return false;
     }
-    
+
     private void addTags(String tags) {
         this.tagString = tags;
         if (tags != null) {
@@ -130,7 +133,7 @@ public class YouTubeVideo implements Tip {
             this.tags = new String[0];
         }
     }
-    
+
     @Override
     public String getType() {
         return this.type;

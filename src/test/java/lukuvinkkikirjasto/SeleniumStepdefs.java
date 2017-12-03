@@ -122,11 +122,11 @@ public class SeleniumStepdefs {
         element.click();
     }
 
-    @When("^the title \"([^\"]*)\" is entered$")
-    public void the_title_is_entered(String title) throws Throwable {
+    @When("^the description \"([^\"]*)\" is entered$")
+    public void the_description_is_entered(String desc) throws Throwable {
         Thread.sleep(1000);
-        WebElement element = driver.findElement(By.name("title"));
-        element.sendKeys(title);
+        WebElement element = driver.findElement(By.name("description"));
+        element.sendKeys(desc);
         element = driver.findElement(By.name("save"));
         element.submit();
     }

@@ -79,7 +79,9 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "isbn", ISBN);
         tipDao.editTipByTitle(title, "tags", tagString);
-        tipDao.markTip(id);
+        if (tipDao.getTip(title).isRead() != read) {
+            tipDao.markTip(id);
+        }
 
         redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen onnistui!");
         return "redirect:/books";
@@ -98,8 +100,9 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "uploader", uploader);
         tipDao.editTipByTitle(title, "tags", tagString);
+        if (tipDao.getTip(title).isRead() != watched) {
         tipDao.markTip(id);
-
+        }
         redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen onnistui!");
         return "redirect:/books";
     }
