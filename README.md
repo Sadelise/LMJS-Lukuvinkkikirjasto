@@ -31,5 +31,7 @@ Ohjelmasta voi poistua "quit"-komennolla.
 
 [Linkki Travisiin](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto?utm_source=email&utm_medium=notification)
 
-
+###Codecov
+[![codecov](https://codecov.io/gh/Sadelise/LMJS-Lukuvinkkikirjasto/branch/master/graph/badge.svg)](https://codecov.io/gh/Sadelise/LMJS-Lukuvinkkikirjasto)
+[Codecovin testiraportointi](https://codecov.io/gh/Sadelise/LMJS-Lukuvinkkikirjasto)
 
