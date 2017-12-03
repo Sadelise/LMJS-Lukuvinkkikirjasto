@@ -5,6 +5,7 @@
  */
 package lukuvinkkikirjasto;
 
+import lukuvinkkikirjasto.main.Main;
 import lukuvinkkikirjasto.controllers.BookController;
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import org.junit.rules.ExternalResource;

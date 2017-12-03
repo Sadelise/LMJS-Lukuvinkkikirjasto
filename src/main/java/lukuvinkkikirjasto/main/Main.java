@@ -1,4 +1,4 @@
-package lukuvinkkikirjasto;
+package lukuvinkkikirjasto.main;
 
 import lukuvinkkikirjasto.dao.BasicTipDao;
 import lukuvinkkikirjasto.dao.FireBaseTipDao;

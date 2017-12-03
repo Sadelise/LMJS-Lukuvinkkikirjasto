@@ -1,5 +1,6 @@
 package lukuvinkkikirjasto;
 
+import lukuvinkkikirjasto.main.Main;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
