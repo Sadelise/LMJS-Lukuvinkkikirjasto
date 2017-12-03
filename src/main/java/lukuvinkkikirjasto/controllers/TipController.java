@@ -14,6 +14,7 @@ import lukuvinkkikirjasto.dao.FireBaseTipDao;
 import lukuvinkkikirjasto.dao.TipDao;
 import lukuvinkkikirjasto.domain.Book;
 import lukuvinkkikirjasto.domain.Tip;
+import lukuvinkkikirjasto.domain.YouTubeVideo;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -42,15 +43,31 @@ public class TipController {
     public String viewBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         Tip tip = tipDao.getTip(id);
         if (tip != null) {
-            model.addAttribute("book", tip);
-            return "book";
+            if (tip.getType().equals("Book")) {
+                model.addAttribute("book", tip);
+                return "book";
+            } else {
+                model.addAttribute("video", tip);
+                return "redirect:/videos/{id}";
+            }
+        }
+        redirectAttributes.addFlashAttribute("message", "Jokin meni vikaan... :(");
+        return "redirect:/fail";
+    }
+
+    @GetMapping("/videos/{id}")
+    public String viewVideo(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
+        Tip tip = tipDao.getTip(id);
+        if (tip != null) {
+            model.addAttribute("video", tip);
+            return "video";
         }
         redirectAttributes.addFlashAttribute("message", "Jokin meni vikaan... :(");
         return "redirect:/fail";
     }
 
     @PostMapping("/books/{id}")
-    public String editBook(Model model, RedirectAttributes redirectAttributes, 
+    public String editBook(Model model, RedirectAttributes redirectAttributes,
             @PathVariable String id, @RequestParam String author, @RequestParam String title,
             String description, String ISBN, String tagString, boolean read) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
@@ -68,15 +85,46 @@ public class TipController {
         return "redirect:/books";
     }
 
+    @PostMapping("/videos/{id}")
+    public String editVideo(Model model, RedirectAttributes redirectAttributes,
+            @PathVariable String id, @RequestParam String title, @RequestParam String url,
+            String description, String uploader, String tagString, boolean watched) {
+        if (title.trim().isEmpty() || url.trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä.");
+            return "redirect:/books";
+        }
+        tipDao.editTipByTitle(title, "title", id);
+        tipDao.editTipByTitle(title, "url", url);
+        tipDao.editTipByTitle(title, "description", description);
+        tipDao.editTipByTitle(title, "uploader", uploader);
+        tipDao.editTipByTitle(title, "tags", tagString);
+        tipDao.markTip(id);
+
+        redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen onnistui!");
+        return "redirect:/books";
+    }
+
     @PostMapping("/books")
     public String addBook(@RequestParam String author, @RequestParam String title,
-            String description, String ISBN, String tags,RedirectAttributes redirectAttributes) {
+            String description, String ISBN, String tags, RedirectAttributes redirectAttributes) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen epäonnistui. Nimi ja tekijä ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
         tipDao.addTip(new Book(title, author, description, tags, ISBN));
         redirectAttributes.addFlashAttribute("message", "Kirjan lisääminen onnistui!");
+        return "redirect:/books";
+    }
+
+    @PostMapping("/videos")
+    public String addVideo(@RequestParam String title, @RequestParam String link,
+            String description, String uploader, String tags, RedirectAttributes redirectAttributes) {
+        if (link.trim().isEmpty() || title.trim().isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Nimi ja linkki ovat pakollisia kenttiä.");
+            return "redirect:/books";
+        }
+        tipDao.addTip(new YouTubeVideo(title, link, description, tags, uploader));
+        redirectAttributes.addFlashAttribute("message", "Videon lisääminen onnistui!");
         return "redirect:/books";
     }
 
@@ -89,10 +137,10 @@ public class TipController {
     public String deleteBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         if (tipDao.getTip(id) != null) {
             tipDao.removeTip(id);
-            redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen onnistui!");
+            redirectAttributes.addFlashAttribute("message", "Vinkin poistaminen onnistui!");
             return "redirect:/books";
         }
-        redirectAttributes.addFlashAttribute("message", "Kirjan poistaminen epäonnistui!");
+        redirectAttributes.addFlashAttribute("message", "Vinkin poistaminen epäonnistui!");
         return "redirect:/books";
     }
 

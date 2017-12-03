@@ -29,7 +29,12 @@ public class FireBaseTipDao implements TipDao {
             @Override
             public void onDataChange(DataSnapshot data) {
                 for (DataSnapshot snapshot : data.getChildren()) {
-                    Tip tip = snapshot.getValue(Book.class);
+                    Tip tip = snapshot.getValue(Tip.class);
+                    if (tip.getType().equals("YouTubeVideo")) {
+                        tip = snapshot.getValue(YouTubeVideo.class);
+                    } else {
+                        tip = snapshot.getValue(Book.class);
+                    }
                     tips.put(tip.identify(), tip);
                 }
                 /*for (String key : tips.keySet()) {

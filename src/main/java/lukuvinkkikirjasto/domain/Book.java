@@ -15,15 +15,15 @@ public class Book implements Tip {
     private String ISBN;
     private String tagString;
     private String[] tags;
-
+    private String type;
     private boolean read;
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", new String[0], false);
+        this(title, author, "", "", "", new String[0], "Book", false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, ISBN, tag, new String[0], false);
+        this(title, author, description, ISBN, tag, new String[0], "Book", false);
     }
 
     @Override
@@ -138,5 +138,10 @@ public class Book implements Tip {
         } else {
             this.tags = new String[0];
         }
+    }
+    
+    @Override
+    public String getType() {
+        return this.type;
     }
 }

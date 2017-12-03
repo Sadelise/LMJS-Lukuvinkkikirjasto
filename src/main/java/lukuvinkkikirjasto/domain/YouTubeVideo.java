@@ -10,14 +10,21 @@ import lombok.NoArgsConstructor;
 @Data
 public class YouTubeVideo implements Tip {
 
-    private String url;
     private String title;
+    private String url;
     private String uploader;
     private String description;
+    private String tagString;
+    private String[] tags;
+    private String type;
     private boolean watched;
 
-    public YouTubeVideo(String url, String title) {
-        this(title, url, "", "", false);
+    public YouTubeVideo(String title, String url) {
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
+    }
+    
+    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
+        this(title, url, uploader, description,  tag, new String[0], "YouTubeVideo", false);
     }
 
     @Override
@@ -109,5 +116,19 @@ public class YouTubeVideo implements Tip {
             }
         }
         return false;
+    }
+    
+    private void addTags(String tags) {
+        this.tagString = tags;
+        if (tags != null) {
+            this.tags = tags.split(";(\\s)*");
+        } else {
+            this.tags = new String[0];
+        }
+    }
+    
+    @Override
+    public String getType() {
+        return this.type;
     }
 }

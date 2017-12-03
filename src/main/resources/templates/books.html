@@ -34,20 +34,14 @@ and open the template in the editor.
             <table border="1" frame="void" rules="rows">
                 <tr>
                     <th align="left">Otsikko</th>
-                    <th align="left">Kirjoittaja</th>
-                    <th align="left">Kuvaus</th>
-                    <th align="left">ISBN</th>
-                    <th align="left">Luettu</th>
+                    <th align="left">Tyyppi</th>
                     <th align="left">Tagit</th>
                     <th align="left"></th>
                 </tr>
 
-                <tr th:each="book : ${books}" th:id="${book.author}">
+                <tr th:each="book : ${books}" th:id="${book.title}">
                     <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
-                    <td><span th:text="${book.author}">author</span></td>
-                    <td><span th:text="${book.description}">description</span></td>
-                    <td><span th:text="${book.ISBN}">ISBN</span></td>
-                    <td><span th:text="${book.read}">read</span></td>
+                    <td><span th:text="${book.type}">type</span></td>
                     <td><span th:text="${book.tagString}">tags</span></td>
                     <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
 
@@ -110,7 +104,7 @@ and open the template in the editor.
                 <input type="submit" name="sendtip" value="Lisää!"/>
             </form>
 
-            <form class="youtubevideo" action="/books" method="POST" style="display: none" id="youtubevideo">
+            <form class="youtubevideo" action="/videos" method="POST" style="display: none" id="youtubevideo">
                 <span>Videon nimi: </span>
                 <input type="text" name="title"/>
                 <span>Linkki: </span>
