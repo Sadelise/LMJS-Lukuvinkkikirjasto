@@ -73,7 +73,7 @@ public class BookControllerTest {
 
         MvcResult result2 = this.mockMvc.perform(delete("/books/{id}", "kirja"))
                 .andReturn();
-        assertTrue(result2.getFlashMap().containsValue("Kirjan poistaminen onnistui!"));
+        assertTrue(result2.getFlashMap().containsValue("Vinkin poistaminen onnistui!"));
     }
 
     @Test

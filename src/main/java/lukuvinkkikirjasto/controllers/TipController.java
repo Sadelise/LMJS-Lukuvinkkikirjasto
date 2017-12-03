@@ -134,7 +134,7 @@ public class TipController {
     }
 
     @DeleteMapping("/books/{id}")
-    public String deleteBook(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
+    public String deleteTip(Model model, @PathVariable String id, RedirectAttributes redirectAttributes) {
         if (tipDao.getTip(id) != null) {
             tipDao.removeTip(id);
             redirectAttributes.addFlashAttribute("message", "Vinkin poistaminen onnistui!");

@@ -18,6 +18,7 @@ Feature: A book can be added with the browser
   Scenario: One book is added with all attributes
     Given the page "books" has been selected
     When title "Booky book" and author "Pekkanen, Paavo" and description "good" and ISBN "1234" are entered into correct fields
+    And the book "Booky book" is selected    
     Then the page will contain "Booky"
     And the page will contain "good"
     And the page will contain "1234"
