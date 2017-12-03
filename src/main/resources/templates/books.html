@@ -9,6 +9,7 @@ and open the template in the editor.
     <head>
         <title>Lukuvinkit</title>
         <meta charset="utf-8"></meta>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     </head>
     <body>
         <div>
@@ -83,20 +84,18 @@ and open the template in the editor.
                 var string = "";
                 string = $("select#optionsList option:selected").text();
                 if (string == "Kirja") {
-                    $("#fields .youtubevideo").hide();
-                    $("#fields .book").show();
-                    $("#fields").show();
+                    document.getElementById("youtubevideo").style.display = "none";
+                    document.getElementById("book").style.display = "inline"
                 } else if (string == "YouTubeVideo") {
-                    $("#fields .book").hide();
-                    $("#fields .youtubevideo").show();
-                    $("#fields").show();
+                    document.getElementById("book").style.display = "none"
+                    document.getElementById("youtubevideo").style.display = "inline"
                 }
 
             })
         </script>
 
         <div id="fields">
-            <form class="book" action="/books" method="POST" style="display: inline">
+            <form class="book" action="/books" method="POST" style="display: inline" id="book">
                 <span>Kirjan nimi: </span>
                 <input type="text" name="title"/>
                 <span>Kirjailija: </span>
@@ -111,7 +110,7 @@ and open the template in the editor.
                 <input type="submit" name="sendtip" value="Lisää!"/>
             </form>
 
-            <form class="youtubevideo" action="/books" method="POST" style="display: none">
+            <form class="youtubevideo" action="/books" method="POST" style="display: none" id="youtubevideo">
                 <span>Videon nimi: </span>
                 <input type="text" name="title"/>
                 <span>Linkki: </span>
