@@ -21,7 +21,7 @@ deploy:
   app: lmjs-lukuvinkkikirjasto
 
 script:
-  - ./gradlew check
-  - ./gradlew jacocoTestReport
+  - gradle check
+  - gradle jacocoTestReport
 after_success:
   - bash <(curl -s https://codecov.io/bash)
