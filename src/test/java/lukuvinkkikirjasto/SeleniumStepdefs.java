@@ -148,9 +148,24 @@ public class SeleniumStepdefs {
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.name("description"));
         element.sendKeys(desc);
-        element = driver.findElement(By.name("save"));
+        /*element = driver.findElement(By.name("save"));
+        element.submit();*/
+    }
+    
+    @When("^the tag \"([^\"]*)\" is entered$")
+    public void the_tag_is_entered(String tag) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("tagString"));
+        element.sendKeys(tag);
+    }
+    
+    @When("^save is clicked$")
+    public void save_is_clicked() throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("save"));
         element.submit();
     }
+
 
     @When("^the book is marked read$")
     public void the_book_is_marked_read() throws Throwable {

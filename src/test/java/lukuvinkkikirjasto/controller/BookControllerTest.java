@@ -94,6 +94,36 @@ public class BookControllerTest {
     }
 
     @Test
+    public void addingVideoWorks() throws Exception {
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
+                .param("title", "video")
+                .param("link", "http://testi"))
+                .andReturn();
+        assertTrue(result.getFlashMap().containsValue("Videon lisääminen onnistui!"));
+
+        this.mockMvc.perform(delete("/books/{id}", "video"));
+    }
+
+    /*@Test
+    public void editingVideoWorks() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
+                .param("title", "video")
+                .param("link", "http://testi"))
+                .andReturn();
+
+        MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")
+                .param("title", "video")
+                .param("link", "http://testi")
+                .param("uploader", "youtuber")
+                .param("description", "hyvä")
+                .param("tags", "tagit"))
+                .andReturn();
+        assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen onnistui!"));
+
+        this.mockMvc.perform(delete("/books/{id}", "kirja"));
+    }*/
+    
+    @Test
     public void searchReturnsAList() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
                 .param("title", "kirja")
