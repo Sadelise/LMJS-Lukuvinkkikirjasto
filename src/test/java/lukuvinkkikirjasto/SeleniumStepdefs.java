@@ -13,11 +13,12 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import org.openqa.selenium.WebDriver;
 
 /**
  *
@@ -78,6 +79,7 @@ public class SeleniumStepdefs {
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.linkText("muokkaa"));
         element.click();
+        Thread.sleep(3000);
         element = driver.findElement(By.name("read"));
         element.click();
         element = driver.findElement(By.name("save"));
@@ -87,7 +89,6 @@ public class SeleniumStepdefs {
 
     @Then("^a book titled \"([^\"]*)\" is found on list \"([^\"]*)\"$")
     public void a_book_titled_is_found_on_list(String title, String listName) throws Throwable {
-        Thread.sleep(5000);
         WebElement element = driver.findElement(By.id(listName));
         assertTrue(element.getText().contains(title));
     }
