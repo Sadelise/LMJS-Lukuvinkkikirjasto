@@ -204,6 +204,7 @@ public class SeleniumStepdefs {
         element.click();
         element = driver.findElement(By.name("save"));
         element.submit();
+        driver.get(baseUrl + "/");
     }
 
     @When("^keyword \"([^\"]*)\" has been submitted$")
