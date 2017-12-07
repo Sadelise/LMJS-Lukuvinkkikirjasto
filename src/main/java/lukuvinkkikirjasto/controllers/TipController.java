@@ -1,5 +1,6 @@
 package lukuvinkkikirjasto.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,18 @@ public class TipController {
 
     @GetMapping("/books")
     public String listBooks(Model model) {
-        model.addAttribute("books", tipDao.getAllTips());
+        List<Tip> allTips = tipDao.getAllTips();
+        List<Tip> read = new ArrayList<>();
+        List<Tip> notRead = new ArrayList<>();
+        for (Tip tip : allTips) {
+            if (tip.isRead()) {
+                read.add(tip);
+            } else {
+                notRead.add(tip);
+            }
+        }
+        model.addAttribute("readTips", read);
+        model.addAttribute("notReadTips", notRead);
         return "books";
     }
 
@@ -101,7 +113,7 @@ public class TipController {
         tipDao.editTipByTitle(title, "uploader", uploader);
         tipDao.editTipByTitle(title, "tags", tagString);
         if (tipDao.getTip(title).isRead() != watched) {
-        tipDao.markTip(id);
+            tipDao.markTip(id);
         }
         redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen onnistui!");
         return "redirect:/books";
@@ -150,10 +162,20 @@ public class TipController {
     @PostMapping("/search")
     public String searchTips(Model model, @RequestParam String keyword) {
         List<Tip> results = tipDao.searchByKeyword(keyword.toLowerCase().trim());
-        if (results.isEmpty()) {
-            model.addAttribute("message", "Mitään ei löytynyt. Hae tyhjällä kentällä jos haluat nähdä kaikki vinkit.");
+        List<Tip> read = new ArrayList<>();
+        List<Tip> notRead = new ArrayList<>();
+        if(results.isEmpty()) {
+            model.addAttribute("message", "Valitettavasti hakuehdoillasi ei löytynyt mitään.");
         }
-        model.addAttribute("books", results);
+        for (Tip tip : results) {
+            if (tip.isRead()) {
+                read.add(tip);
+            } else {
+                notRead.add(tip);
+            }
+        }
+        model.addAttribute("readTips", read);
+        model.addAttribute("notReadTips", notRead);
         return "books";
     }
 }

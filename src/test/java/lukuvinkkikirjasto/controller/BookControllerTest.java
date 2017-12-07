@@ -37,7 +37,8 @@ public class BookControllerTest {
     @Test
     public void bookListHasBooks() throws Exception {
         ResultActions res = this.mockMvc.perform(get("/books"))
-                .andExpect(model().attributeExists("books"))
+                .andExpect(model().attributeExists("readTips"))
+                .andExpect(model().attributeExists("notReadTips"))
                 .andExpect(status().isOk());
     }
 
@@ -105,24 +106,23 @@ public class BookControllerTest {
     }
 
     /*@Test
-    public void editingVideoWorks() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
-                .param("title", "video")
-                .param("link", "http://testi"))
-                .andReturn();
+     public void editingVideoWorks() throws Exception {
+     this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
+     .param("title", "video")
+     .param("link", "http://testi"))
+     .andReturn();
 
-        MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")
-                .param("title", "video")
-                .param("link", "http://testi")
-                .param("uploader", "youtuber")
-                .param("description", "hyvä")
-                .param("tags", "tagit"))
-                .andReturn();
-        assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen onnistui!"));
+     MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")
+     .param("title", "video")
+     .param("link", "http://testi")
+     .param("uploader", "youtuber")
+     .param("description", "hyvä")
+     .param("tags", "tagit"))
+     .andReturn();
+     assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen onnistui!"));
 
-        this.mockMvc.perform(delete("/books/{id}", "kirja"));
-    }*/
-    
+     this.mockMvc.perform(delete("/books/{id}", "kirja"));
+     }*/
     @Test
     public void searchReturnsAList() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
@@ -132,7 +132,8 @@ public class BookControllerTest {
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/search")
                 .param("keyword", "testi"))
-                .andExpect(model().attributeExists("books"));
+                .andExpect(model().attributeExists("readTips"))
+                .andExpect(model().attributeExists("notReadTips"));
 
         this.mockMvc.perform(delete("/books/{id}", "kirja"));
     }

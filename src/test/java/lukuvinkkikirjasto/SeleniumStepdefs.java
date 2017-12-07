@@ -9,13 +9,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import lukuvinkkikirjasto.dao.BasicTipDao;
-import lukuvinkkikirjasto.io.StubIO;
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -51,6 +45,22 @@ public class SeleniumStepdefs {
         }
     }
 
+    @After
+    public void tearDown() throws Throwable {
+        Thread.sleep(1000);
+
+        while (driver.getPageSource().contains("hiddenDelete")) {
+            try {
+                WebElement element = driver.findElement(By.name("hiddenDelete"));
+                element.submit();
+                Thread.sleep(1000);
+            } catch (NoSuchElementException ex) {
+            }
+        }
+
+        driver.quit();
+    }
+
     @Given("^the page \"([^\"]*)\" has been selected$")
     public void page_selected(String page) throws Throwable {
         driver.get(baseUrl + "/" + page);
@@ -60,6 +70,27 @@ public class SeleniumStepdefs {
     public void page_selected(String title, String author, String description) throws Throwable {
         add_book(title, author, description, "");
         Thread.sleep(3000);
+    }
+
+    @When("^a book titled \"([^\"]*)\" by \"([^\"]*)\" has been added and marked read$")
+    public void book_added_and_marked_read(String title, String author) throws Throwable {
+        add_book(title, author, "", "");
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.linkText("muokkaa"));
+        element.click();
+        element = driver.findElement(By.name("read"));
+        element.click();
+        element = driver.findElement(By.name("save"));
+        element.submit();
+        Thread.sleep(1000);
+    }
+
+    @Then("^a book titled \"([^\"]*)\" is found on list \"([^\"]*)\"$")
+    public void a_book_titled_is_found_on_list(String title, String listName) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.id(listName));
+        System.out.println("ELEMENT\n " + element.getText() + "\nLOOKING FOR " + title);
+        assertTrue(element.getText().contains(title));
     }
 
     @When("^the tip type \"([^\"]*)\" has been selected in the dropdown menu$")
@@ -149,23 +180,22 @@ public class SeleniumStepdefs {
         WebElement element = driver.findElement(By.name("description"));
         element.sendKeys(desc);
         /*element = driver.findElement(By.name("save"));
-        element.submit();*/
+         element.submit();*/
     }
-    
+
     @When("^the tag \"([^\"]*)\" is entered$")
     public void the_tag_is_entered(String tag) throws Throwable {
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.name("tagString"));
         element.sendKeys(tag);
     }
-    
+
     @When("^save is clicked$")
     public void save_is_clicked() throws Throwable {
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.name("save"));
         element.submit();
     }
-
 
     @When("^the book is marked read$")
     public void the_book_is_marked_read() throws Throwable {
@@ -181,22 +211,6 @@ public class SeleniumStepdefs {
         WebElement element = driver.findElement(By.name("keyword"));
         element.sendKeys(keyword);
         driver.findElement(By.name("search")).submit();
-    }
-
-    @After
-    public void tearDown() throws Throwable {
-        Thread.sleep(1000);
-        
-        while (driver.getPageSource().contains("hiddenDelete")) {
-            try {
-                WebElement element = driver.findElement(By.name("hiddenDelete"));
-                element.submit();
-                Thread.sleep(1000);
-            } catch (NoSuchElementException ex) {
-            }
-        }
-
-        driver.quit();
     }
 
     private void add_book(String title, String author, String description, String ISBN) {

@@ -10,6 +10,7 @@ and open the template in the editor.
         <title>Lukuvinkit</title>
         <meta charset="utf-8"></meta>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link href="css/style.css" rel="stylesheet"/>
     </head>
     <body>
         <div>
@@ -29,9 +30,14 @@ and open the template in the editor.
                     <input type="text" name="keyword"/>
                     <input type="submit" th:name="search" value="Hae!"/>
                 </form>
+                <br></br>
+                <a href="/books"><input type="button" value="Näytä kaikki"/></a>
             </div>
             <br></br>
-            <table border="1" frame="void" rules="rows">
+            <hr></hr>
+
+            <h2>Lukemattomat</h2>
+            <table id="notRead">
                 <tr>
                     <th align="left">Otsikko</th>
                     <th align="left">Tyyppi</th>
@@ -40,17 +46,41 @@ and open the template in the editor.
                     <th align="left"></th>
                 </tr>
 
-                <tr th:each="book : ${books}">
-                    <td th:if="${book.urlpresent}"><a th:href="${book.url}" th:text="${book.title}" th:name="view">title</a></td>
-                    <td th:unless="${book.urlpresent}"> <span th:text="${book.title}" th:name="view">title</span></td>
-                    <td><span th:text="${book.type}">type</span></td>
-                    <td><span th:text="${book.description}">description</span></td>
-                    <td><span th:text="${book.tagString}">tags</span></td>
-                    <td><form th:action="@{/books/{id}(id=${book.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
-                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="muokkaa" th:name="view">title</a></td>
+                <tr th:each="tip : ${notReadTips}">
+                    <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
+                    <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
+                    <td><span th:text="${tip.type}">type</span></td>
+                    <td><span th:text="${tip.description}">description</span></td>
+                    <td><span th:text="${tip.tagString}">tags</span></td>
+                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
+                    <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
 
-                    <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
+                    <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+                </tr>
+            </table>
+            <br></br>
+            <hr></hr>
+            <h2>Luetut</h2>
+            <table id="read">
+                <tr>
+                    <th align="left">Otsikko</th>
+                    <th align="left">Tyyppi</th>
+                    <th align="left">Kuvaus</th>
+                    <th align="left">Tagit</th>
+                    <th align="left"></th>
+                </tr>
 
+                <!--<tr th:each="book : ${books}">-->
+                <tr th:each="tip : ${readTips}">
+                    <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
+                    <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
+                    <td><span th:text="${tip.type}">type</span></td>
+                    <td><span th:text="${tip.description}">description</span></td>
+                    <td><span th:text="${tip.tagString}">tags</span></td>
+                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
+                    <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
+
+                    <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
                 </tr>
             </table>
 
@@ -68,8 +98,9 @@ and open the template in the editor.
 
 
         </div>
-        <h2>Lisää lukuvinkki</h2>
+        <hr></hr>
 
+        <h2>Lisää lukuvinkki</h2>
         <select id="optionsList" name="optionsList">
             <option value="Kirja" selected="selected">Kirja</option>
             <option value="YouTubeVideo">YouTubeVideo</option>
@@ -122,6 +153,6 @@ and open the template in the editor.
                 <input type="submit" name="sendYouTubetip" value="Lisää!"/>
             </form>
         </div>
-
+        <hr></hr>
     </body>
 </html>

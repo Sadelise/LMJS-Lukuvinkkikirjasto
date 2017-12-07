@@ -9,4 +9,4 @@ Feature: Tips can be searched for with keywords
   Scenario: Page will not show books containing keyword when it does not exist
     Given the page "books" has been selected
     When keyword "aaaaaaaaaaaa" has been submitted
-    Then the page will contain the message "Mitään ei löytynyt. Hae tyhjällä kentällä jos haluat nähdä kaikki vinkit."
+    Then the page will contain the message "Valitettavasti hakuehdoillasi ei löytynyt mitään."
