@@ -89,7 +89,6 @@ public class SeleniumStepdefs {
     public void a_book_titled_is_found_on_list(String title, String listName) throws Throwable {
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.id(listName));
-        System.out.println("ELEMENT\n " + element.getText() + "\nLOOKING FOR " + title);
         assertTrue(element.getText().contains(title));
     }
 
