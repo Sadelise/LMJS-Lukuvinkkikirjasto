@@ -133,7 +133,7 @@ public class TipController {
 
     @GetMapping("/fail")
     public String fail(Model model) {
-        return "failed";
+        return "fail";
     }
 
     @DeleteMapping("/books/{id}")
