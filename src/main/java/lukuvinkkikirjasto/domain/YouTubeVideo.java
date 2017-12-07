@@ -123,6 +123,11 @@ public class YouTubeVideo implements Tip {
                 return true;
             }
         }
+        if (this.tagString != null) {
+            if (this.tagString.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         return false;
     }
 
