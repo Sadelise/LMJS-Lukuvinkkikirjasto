@@ -87,7 +87,7 @@ public class SeleniumStepdefs {
 
     @Then("^a book titled \"([^\"]*)\" is found on list \"([^\"]*)\"$")
     public void a_book_titled_is_found_on_list(String title, String listName) throws Throwable {
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         WebElement element = driver.findElement(By.id(listName));
         assertTrue(element.getText().contains(title));
     }
