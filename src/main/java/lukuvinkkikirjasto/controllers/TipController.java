@@ -96,6 +96,10 @@ public class TipController {
             redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä.");
             return "redirect:/books";
         }
+        if (!validateYouTubeVideo(url)) {
+            redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen epäonnistui. Linkki ei kelvollinen.");
+            return "redirect:/books";
+        }
         tipDao.editTipByTitle(title, "title", id);
         tipDao.editTipByTitle(title, "url", url);
         tipDao.editTipByTitle(title, "description", description);
@@ -127,6 +131,10 @@ public class TipController {
             redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Nimi ja linkki ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
+        if (!validateYouTubeVideo(link)) {
+            redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Linkki ei kelvollinen.");
+            return "redirect:/books";
+        }
         tipDao.addTip(new YouTubeVideo(title, link, uploader, description, tags));
         redirectAttributes.addFlashAttribute("message", "Videon lisääminen onnistui!");
         return "redirect:/books";
@@ -156,5 +164,12 @@ public class TipController {
         }
         model.addAttribute("books", results);
         return "books";
+    }
+    
+    public boolean validateYouTubeVideo(String url) {
+        if (url.contains("https://www.youtube.com/watch?")) {
+            return true;
+        }
+        return false;
     }
 }
