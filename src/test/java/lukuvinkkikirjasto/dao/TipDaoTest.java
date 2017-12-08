@@ -52,12 +52,17 @@ public class TipDaoTest {
             return id;
         }
 
+        @Override
+        public String[] getTags() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
         public String getDescription() {
             return description;
         }
 
         @Override
-        public boolean isUrlpresent() {
+        public boolean getUrlpresent() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 

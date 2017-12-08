@@ -21,7 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TipController {
 
     TipDao tipDao = new FireBaseTipDao();
-
+    //TipDao tipDao = new lukuvinkkikirjasto.dao.BasicTipDao();
+    
     public void setTipDao(TipDao tipDao) {
         this.tipDao = tipDao;
     }

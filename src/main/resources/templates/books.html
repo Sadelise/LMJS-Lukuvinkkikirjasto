@@ -38,6 +38,7 @@ and open the template in the editor.
                     <th align="left">Kuvaus</th>
                     <th align="left">Tagit</th>
                     <th align="left"></th>
+                    <th align="left"></th>
                 </tr>
 
                 <tr th:each="book : ${books}">
@@ -45,7 +46,11 @@ and open the template in the editor.
                     <td th:unless="${book.urlpresent}"> <span th:text="${book.title}" th:name="view">title</span></td>
                     <td><span th:text="${book.type}">type</span></td>
                     <td><span th:text="${book.description}">description</span></td>
-                    <td><span th:text="${book.tagString}">tags</span></td>
+                    <!--<td><span th:text="${book.tagString}">tags</span></td>-->
+                    <td><form th:each="tag : ${book.tags}" action="/search" method="POST">
+                            <input type="hidden" name="keyword" th:value="${tag}" /> 
+                            <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
+                    </td>
                     <td><form th:action="@{/books/{id}(id=${book.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
                     <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="muokkaa" th:name="view">title</a></td>
 

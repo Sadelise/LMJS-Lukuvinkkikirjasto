@@ -29,21 +29,28 @@ public class FireBaseTipDao implements TipDao {
             @Override
             public void onDataChange(DataSnapshot data) {
                 for (DataSnapshot snapshot : data.getChildren()) {
-                    if (snapshot.child("author").getValue() != null) {
+                    String type = (String) snapshot.child("type").getValue();
+                    if (type.equals("Book")) {
                         System.out.println("Kirja tunnistettu!");
-                        Tip tip = snapshot.getValue(Book.class);
-                        tips.put(tip.identify(), tip);
-                    } else if (snapshot.child("uploader").getValue() != null) {
+                        TipData tipData = snapshot.getValue(TipData.class);
+                        Book book = new Book(tipData);
+                        tips.put(book.identify(), book);
+                    }
+                    type = (String) snapshot.child("type").getValue();
+                    if (type.equals("YouTubeVideo")) {
                         System.out.println("Youtubevideo tunnistettu!");
-                        Tip tip = snapshot.getValue(YouTubeVideo.class);
-                        tips.put(tip.identify(), tip);
+                        TipData tipData = snapshot.getValue(TipData.class);
+                        YouTubeVideo video = new YouTubeVideo(tipData);
+                        //Tip tip = snapshot.getValue(YouTubeVideo.class);
+                        tips.put(video.identify(), video);
                     }
                 }
-                /*for (String key : tips.keySet()) {
-                 System.out.println(tips.get(key));
-                 }*/
             }
 
+            /*for (String key : tips.keySet()) {
+                 System.out.println(tips.get(key));
+                 }*/
+            
             @Override
             public void onCancelled(FirebaseError firebaseError) {
             }
@@ -51,13 +58,14 @@ public class FireBaseTipDao implements TipDao {
     }
 
     @Override
+
     public List<Tip> getAllTips() {
         return new ArrayList<>(tips.values());
     }
 
     @Override
     public void addTip(Tip tip) {
-        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        new Firebase(this.url).child(tip.identify()).setValue(new TipData(tip));
         this.tips.put(tip.identify(), tip);
     }
 
@@ -90,7 +98,7 @@ public class FireBaseTipDao implements TipDao {
             tip.markNotRead();
         }
 
-        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        new Firebase(this.url).child(tip.identify()).setValue(new TipData(tip));
         this.tips.put(tip.identify(), tip);
     }
 
@@ -117,7 +125,7 @@ public class FireBaseTipDao implements TipDao {
 
         tip.edit(element, edit);
 
-        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        new Firebase(this.url).child(tip.identify()).setValue(new TipData(tip));
         this.tips.put(tip.identify(), tip);
     }
 
@@ -126,7 +134,7 @@ public class FireBaseTipDao implements TipDao {
         Tip tip = getTip(title);
         tip.edit(element, edit);
 
-        new Firebase(this.url).child(tip.identify()).setValue(tip);
+        new Firebase(this.url).child(tip.identify()).setValue(new TipData(tip));
         this.tips.put(tip.identify(), tip);
     }
 

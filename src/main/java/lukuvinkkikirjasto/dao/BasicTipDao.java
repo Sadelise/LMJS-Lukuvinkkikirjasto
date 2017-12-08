@@ -88,7 +88,8 @@ public class BasicTipDao implements TipDao {
 
     @Override
     public void editTipByTitle(String title, String element, String edit) {
-
+        Tip tip = getTip(title);
+        tip.edit(element, edit);
     }
 
     @Override
