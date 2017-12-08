@@ -33,6 +33,7 @@ public class YouTubeVideo implements Tip {
     }
 
     public YouTubeVideo(String title, String url) {
+<<<<<<< HEAD
         this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false);
     }
 
@@ -42,6 +43,13 @@ public class YouTubeVideo implements Tip {
     
     public YouTubeVideo(String title, String url, String uploader, String description, String tag, String reference) {
         this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", reference, false);
+=======
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false, true);
+    }
+
+    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false, true);
+>>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
     }
 
     @Override
@@ -182,4 +190,9 @@ public class YouTubeVideo implements Tip {
     public String getReference() {
         return this.reference;
     }
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
 }

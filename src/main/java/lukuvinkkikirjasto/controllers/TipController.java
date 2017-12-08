@@ -137,7 +137,11 @@ public class TipController {
             redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Linkki ei kelvollinen.");
             return "redirect:/books";
         }
+<<<<<<< HEAD
         tipDao.addTip(new YouTubeVideo(title, link, uploader, description, reference, tags));
+=======
+        tipDao.addTip(new YouTubeVideo(title, link, uploader, description, tags));
+>>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
         redirectAttributes.addFlashAttribute("message", "Videon lisääminen onnistui!");
         return "redirect:/books";
     }
