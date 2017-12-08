@@ -24,6 +24,8 @@ public interface Tip {
     
     String getUrl();
     
+    String getReference();
+    
     boolean isUrlpresent();
 
     boolean edit(String element, String edit);

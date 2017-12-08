@@ -17,15 +17,16 @@ public class YouTubeVideo implements Tip {
     private String tagString;
     private String[] tags;
     private String type;
+    private String reference;
     private boolean watched;
     private boolean urlpresent;
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", false, true);
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false, true);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false, true);
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false, true);
     }
 
     @Override
@@ -99,6 +100,10 @@ public class YouTubeVideo implements Tip {
     private void changeUploader(String edit) {
         this.uploader = edit;
     }
+    
+    private void changeReference(String ref) {
+        this.reference = ref;
+    }
 
     @Override
     public boolean contains(String keyword) {
@@ -148,6 +153,11 @@ public class YouTubeVideo implements Tip {
     @Override
     public boolean isUrlpresent() {
         return true;
+    }
+
+    @Override
+    public String getReference() {
+        return this.reference;
     }
     
     

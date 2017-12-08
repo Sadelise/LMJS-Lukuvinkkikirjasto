@@ -17,19 +17,20 @@ public class Book implements Tip {
     private String tagString;
     private String[] tags;
     private String type;
+    private String reference;
     private boolean read;
     private boolean urlpresent;
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", "", new String[0], "Book", false, false);
+        this(title, author, "", "", "", "", new String[0], "Book", "", false, false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, new String[0], "Book", false, false);
+        this(title, author, description, "", ISBN, tag, new String[0], "Book", "", false, false);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", new String[0], "Book", false, false);
+        this(title, author, description, "", ISBN, "", new String[0], "Book", "", false, false);
     }
 
     @Override
@@ -106,6 +107,10 @@ public class Book implements Tip {
     private void changeISBN(String isbn) {
         this.ISBN = isbn;
     }
+    
+    private void changeReference(String ref) {
+        this.reference = ref;
+    }
 
     @Override
     public boolean contains(String keyword) {
@@ -162,6 +167,11 @@ public class Book implements Tip {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getReference() {
+        return this.reference;
     }
 
 }
