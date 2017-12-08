@@ -32,27 +32,19 @@ public class Book implements Tip {
     }
 
     public Book(String title, String author) {
-<<<<<<< 47b2f8d34d4a4a76de640853862ad708a7b5568c
-        this(title, author, "", "", "", "", "Book", false);
+        this(title, author, "", "", "", "", "Book", "", false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", false);
+        this(title, author, description, "", ISBN, tag, "Book", "", false);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", false);
-=======
-        this(title, author, "", "", "", "", new String[0], "Book", "", false, false);
+        this(title, author, description, "", ISBN, "", type, "", read);
     }
 
-    public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, new String[0], "Book", "", false, false);
-    }
-
-    public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", new String[0], "Book", "", false, false);
->>>>>>> suosittelijan luominen vinkeille
+    public Book(String title, String author, String description, String tag, String ISBN, String reference) {
+        this(title, author, description, "", ISBN, tag, "Book", reference, false);
     }
 
     @Override
@@ -203,5 +195,4 @@ public class Book implements Tip {
     public String getReference() {
         return this.reference;
     }
-
 }

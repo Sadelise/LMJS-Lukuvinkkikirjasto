@@ -97,7 +97,7 @@ public class BookControllerTest {
     public void addingVideoWorks() throws Exception {
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("link", "http://testi"))
+                .param("link", "https://www.youtube.com/watch?testi"))
                 .andReturn();
         assertTrue(result.getFlashMap().containsValue("Videon lisääminen onnistui!"));
 

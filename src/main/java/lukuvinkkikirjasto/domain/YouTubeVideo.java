@@ -33,19 +33,15 @@ public class YouTubeVideo implements Tip {
     }
 
     public YouTubeVideo(String title, String url) {
-<<<<<<< 47b2f8d34d4a4a76de640853862ad708a7b5568c
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false);
-=======
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false, true);
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false);
     }
-
-    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false, true);
->>>>>>> suosittelijan luominen vinkeille
+    
+    public YouTubeVideo(String title, String url, String uploader, String description, String tag, String reference) {
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", reference, false);
     }
 
     @Override
@@ -181,14 +177,9 @@ public class YouTubeVideo implements Tip {
     public boolean getUrlpresent() {
         return true;
     }
-<<<<<<< 47b2f8d34d4a4a76de640853862ad708a7b5568c
-=======
 
     @Override
     public String getReference() {
         return this.reference;
     }
-    
-    
->>>>>>> suosittelijan luominen vinkeille
 }

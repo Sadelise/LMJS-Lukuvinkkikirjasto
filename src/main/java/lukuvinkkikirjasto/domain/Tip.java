@@ -25,15 +25,11 @@ public interface Tip {
     
     String getUrl();
     
-<<<<<<< 47b2f8d34d4a4a76de640853862ad708a7b5568c
     String[] getTags();
     
     boolean getUrlpresent();
-=======
-    String getReference();
     
-    boolean isUrlpresent();
->>>>>>> suosittelijan luominen vinkeille
+    String getReference();
 
     boolean edit(String element, String edit);
     
