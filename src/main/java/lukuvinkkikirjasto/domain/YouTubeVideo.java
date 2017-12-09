@@ -18,14 +18,25 @@ public class YouTubeVideo implements Tip {
     private String[] tags;
     private String type;
     private boolean watched;
-    private boolean urlpresent;
+    //private boolean urlpresent;
+
+    public YouTubeVideo(TipData tipData) {
+        this.title = tipData.getTitle();
+        this.uploader = tipData.getCreator();
+        this.description = tipData.getDescription();
+        this.url = tipData.url;
+        this.tagString = tipData.getTagString();
+        //addTags(tagString);
+        this.type = tipData.getType();
+        this.watched = tipData.read;
+    }
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", false, true);
+        this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false, true);
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false);
     }
 
     @Override
@@ -123,15 +134,28 @@ public class YouTubeVideo implements Tip {
                 return true;
             }
         }
+        if (this.tagString != null) {
+            if (this.tagString.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         return false;
     }
 
     private void addTags(String tags) {
         this.tagString = tags;
-        if (tags != null) {
+        /*if (tags != null) {
             this.tags = tags.split(";(\\s)*");
         } else {
             this.tags = new String[0];
+        }*/
+    }
+
+    public String[] getTags() {
+        if (tagString.length() > 0) {
+            return tagString.split(";(\\s)*");
+        } else {
+            return null;
         }
     }
 
@@ -141,9 +165,7 @@ public class YouTubeVideo implements Tip {
     }
 
     @Override
-    public boolean isUrlpresent() {
+    public boolean getUrlpresent() {
         return true;
     }
-    
-    
 }

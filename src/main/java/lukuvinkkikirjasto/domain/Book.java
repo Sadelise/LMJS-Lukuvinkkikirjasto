@@ -15,21 +15,31 @@ public class Book implements Tip {
     private String url;
     private String ISBN;
     private String tagString;
-    private String[] tags;
+    //private String[] tags;
     private String type;
     private boolean read;
-    private boolean urlpresent;
+    //private boolean urlpresent;
+
+    public Book(TipData tipData) {
+        this.title = tipData.getTitle();
+        this.author = tipData.getCreator();
+        this.description = tipData.getDescription();
+        this.tagString = tipData.getTagString();
+        this.url = tipData.getUrl();
+        this.type = tipData.getType();
+        this.read = tipData.isRead();
+    }
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", "", new String[0], "Book", false, false);
+        this(title, author, "", "", "", "", "Book", false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, new String[0], "Book", false, false);
+        this(title, author, description, "", ISBN, tag, "Book", false);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", new String[0], "Book", false, false);
+        this(title, author, description, "", ISBN, "", "Book", false);
     }
 
     @Override
@@ -139,10 +149,18 @@ public class Book implements Tip {
 
     private void addTags(String tags) {
         this.tagString = tags;
-        if (tags != null) {
+        /*if (tags != null) {
             this.tags = tags.split(";(\\s)*");
         } else {
             this.tags = new String[0];
+        }*/
+    }
+
+    public String[] getTags() {
+        if (tagString != null && tagString.length() > 0) {
+            return tagString.split(";(\\s)*");
+        } else {
+            return new String[0];
         }
     }
 
@@ -157,8 +175,8 @@ public class Book implements Tip {
     }
 
     @Override
-    public boolean isUrlpresent() {
-        if (url.length() == 0) {
+    public boolean getUrlpresent() {
+        if (url == null || url.length() == 0) {
             return false;
         }
         return true;

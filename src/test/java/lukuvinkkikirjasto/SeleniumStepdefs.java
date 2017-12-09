@@ -11,6 +11,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -69,13 +70,13 @@ public class SeleniumStepdefs {
 
     @Given("^a book by title \"([^\"]*)\" and author \"([^\"]*)\" and description \"([^\"]*)\" exists$")
     public void page_selected(String title, String author, String description) throws Throwable {
-        add_book(title, author, description, "");
+        add_book(title, author, description, "", "");
         Thread.sleep(3000);
     }
 
     @When("^a book titled \"([^\"]*)\" by \"([^\"]*)\" has been added and marked read$")
     public void book_added_and_marked_read(String title, String author) throws Throwable {
-        add_book(title, author, "", "");
+        add_book(title, author, "", "", "");
         Thread.sleep(1000);
         WebElement element = driver.findElement(By.linkText("muokkaa"));
         element.click();
@@ -92,6 +93,19 @@ public class SeleniumStepdefs {
         WebElement element = driver.findElement(By.id(listName));
         assertTrue(element.getText().contains(title));
     }
+    @Given("^a book by title \"([^\"]*)\" and author \"([^\"]*)\" and tags \"([^\"]*)\" exists$")
+    public void book_with_tag_exists(String title, String author, String tags) throws Throwable {
+        add_book(title, author, "", "", tags);
+        Thread.sleep(3000);
+    }
+
+    @When("^tag \"([^\"]*)\" is clicked$")
+    public void tag_is_clicked(String tag) throws Throwable {
+        WebElement element = driver.findElement(By.name("search" + tag));
+        element.submit();
+        Thread.sleep(2000);
+
+    }
 
     @When("^the tip type \"([^\"]*)\" has been selected in the dropdown menu$")
     public void type_selection_selected(String choice) {
@@ -102,7 +116,7 @@ public class SeleniumStepdefs {
 
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" are entered into correct fields$")
     public void title_and_author_are_entered_into_fields(String title, String author) throws Throwable {
-        add_book(title, author, "", "");
+        add_book(title, author, "", "", "");
     }
 
     @When("^title \"([^\"]*)\" and URL \"([^\"]*)\" are entered into the video-adding form")
@@ -112,18 +126,18 @@ public class SeleniumStepdefs {
 
     @When("^only title \"([^\"]*)\" is entered into the correct field$")
     public void only_title_entered_into_fields(String title) throws Throwable {
-        add_book(title, "", "", "");
+        add_book(title, "", "", "", "");
     }
 
     @When("^only author \"([^\"]*)\" is entered into the correct field$")
     public void only_author_entered_into_fields(String author) throws Throwable {
-        add_book("", author, "", "");
+        add_book("", author, "", "", "");
     }
 
     @When("^title \"([^\"]*)\" and author \"([^\"]*)\" and description \"([^\"]*)\" "
             + "and ISBN \"([^\"]*)\" are entered into correct fields$")
     public void only_title_entered_into_fields(String title, String author, String description, String ISBN) throws Throwable {
-        add_book(title, author, description, ISBN);
+        add_book(title, author, description, ISBN, "");
     }
 
     @When("^the delete button is clicked$")
@@ -143,6 +157,13 @@ public class SeleniumStepdefs {
     public void the_prompt_is_not_accepted() throws Throwable {
         Thread.sleep(1000);
         driver.switchTo().alert().dismiss();
+    }
+    
+    @Then("^the page will not contain the message \"([^\"]*)\"$")
+    public void page_will_not_contain_message(String pageContent) throws Throwable {
+        Thread.sleep(1000);
+        assertFalse(driver.getPageSource().contains(pageContent));
+        driver.get(baseUrl + "/books");
     }
 
     @Then("^the page will contain the message \"([^\"]*)\"$")
@@ -214,7 +235,7 @@ public class SeleniumStepdefs {
         driver.findElement(By.name("search")).submit();
     }
 
-    private void add_book(String title, String author, String description, String ISBN) {
+    private void add_book(String title, String author, String description, String ISBN, String tags) {
         WebElement element = driver.findElement(By.name("title"));
         element.sendKeys(title);
         element = driver.findElement(By.name("author"));
@@ -223,6 +244,8 @@ public class SeleniumStepdefs {
         element.sendKeys(description);
         element = driver.findElement(By.name("ISBN"));
         element.sendKeys(ISBN);
+        element = driver.findElement(By.name("tags"));
+        element.sendKeys(tags);
 
         driver.findElement(By.name("sendtip")).submit();
     }
