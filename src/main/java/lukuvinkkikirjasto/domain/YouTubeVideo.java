@@ -33,23 +33,15 @@ public class YouTubeVideo implements Tip {
     }
 
     public YouTubeVideo(String title, String url) {
-<<<<<<< HEAD
         this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
         this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false);
     }
-    
-    public YouTubeVideo(String title, String url, String uploader, String description, String tag, String reference) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", reference, false);
-=======
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", "", false, true);
-    }
 
-    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", "", false, true);
->>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
+    public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag) {
+        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", reference, false);
     }
 
     @Override
@@ -99,6 +91,9 @@ public class YouTubeVideo implements Tip {
             case "uploader":
                 changeUploader(edit);
                 break;
+            case "reference":
+                changeReference(edit);
+                break;
             case "tags":
                 addTags(edit);
                 break;
@@ -123,7 +118,7 @@ public class YouTubeVideo implements Tip {
     private void changeUploader(String edit) {
         this.uploader = edit;
     }
-    
+
     private void changeReference(String ref) {
         this.reference = ref;
     }
@@ -168,6 +163,7 @@ public class YouTubeVideo implements Tip {
         }*/
     }
 
+    @Override
     public String[] getTags() {
         if (tagString.length() > 0) {
             return tagString.split(";(\\s)*");
@@ -190,9 +186,4 @@ public class YouTubeVideo implements Tip {
     public String getReference() {
         return this.reference;
     }
-<<<<<<< HEAD
-=======
-    
-    
->>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
 }

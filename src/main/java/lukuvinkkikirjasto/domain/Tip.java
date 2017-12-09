@@ -25,17 +25,11 @@ public interface Tip {
     
     String getUrl();
     
-<<<<<<< HEAD
     String[] getTags();
     
     boolean getUrlpresent();
     
     String getReference();
-=======
-    String getReference();
-    
-    boolean isUrlpresent();
->>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
 
     boolean edit(String element, String edit);
     

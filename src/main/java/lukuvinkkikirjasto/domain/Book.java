@@ -32,7 +32,6 @@ public class Book implements Tip {
     }
 
     public Book(String title, String author) {
-<<<<<<< HEAD
         this(title, author, "", "", "", "", "Book", "", false);
     }
 
@@ -44,19 +43,8 @@ public class Book implements Tip {
         this(title, author, description, "", ISBN, "", type, "", read);
     }
 
-    public Book(String title, String author, String description, String tag, String ISBN, String reference) {
+    public Book(String title, String author, String description, String reference, String tag, String ISBN) {
         this(title, author, description, "", ISBN, tag, "Book", reference, false);
-=======
-        this(title, author, "", "", "", "", new String[0], "Book", "", false, false);
-    }
-
-    public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, new String[0], "Book", "", false, false);
-    }
-
-    public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", new String[0], "Book", "", false, false);
->>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
     }
 
     @Override
@@ -91,6 +79,9 @@ public class Book implements Tip {
                 break;
             case "isbn":
                 changeISBN(edit);
+                break;
+            case "reference":
+                changeReference(edit);
                 break;
             case "tags":
                 addTags(edit);
@@ -207,8 +198,4 @@ public class Book implements Tip {
     public String getReference() {
         return this.reference;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9d2eae68e8c6ab435cf3210f8a5bb660e542aec5
 }
