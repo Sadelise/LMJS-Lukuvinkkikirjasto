@@ -13,15 +13,13 @@ before_install:
 - tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
 - chmod +x chromedriver.exe
-
 deploy:
   provider: heroku
   api_key:
-    secure: MO6sIZMWB8qyJf1CzIzOCREheY/xiGAzPY5qt703zt2R8+GltRTYsF8poNlBnHKMGZ8p/DOr1gBIxLhy6446fQ075MohFA60KAbk9bIMJV79unjWHmfQfdc5XWHhCm957erpzosvfvyrrScYbfBxuhToJEqzW5j/5nXvnkO2x/hTryItGIFIpQEgWSEQML3uUFS3l/I2nKcpqhuZR2g7zRI2bPjCejG9LSw0JJ69fB2Npj25ykyysB/HzHrUEMg48bm/22afkEbdzI8efr15FjKZnltvsgli3yxs48tyh4VKPm0jHJnv/XOs+vUeuiMLru/0vvQVRQPJnN98JX3zfOzu1bSnxE+gMo8pRHDNNywlx3WWrgcQq7WdgNqHBIWkU8N3JuVvELrZxfgkP4Sug8Nt9xM+8NqAqLafKruFA+XF5oFhUM+a52hjkvhmY+ET9nP33RnFg489hm3eLDo3+QInJMHOznho4KvdFxgiT4nLjOHVeATH66xDgMk5ZOY/qzMrJkvwXRnRtkjJApmZ4NGy13q5/hMOvafv+MGx6MDmcDydPoWavo92MeDRFw1sNGaaj5JUJa3zEuIQfuJ0BVi92wj1vy0rK12XbEx7cziym2GfO2SYTzyKs1giYjKhNmscpYjqsj7S9ptHANnBXhMa3Nf6e8DJ3iA5jcNaqbY=
+    secure: Q16L95XDF3iO1NzGQvQgLGdwOP01taCUdJMZ2yf2qKgfPt/4E+vvBSzWZm9KPGtaM8QUQTILryxfoJzvPIqL64bQ2SMXCTko27nHRZYF/fMyab5/HRqjmyyw8V6slmGOnbGtSKlGZP2WaBCuwtNprAofwvkrRopuplkUialTHAJw2gHGspgQ7k/4nBWbBUqb+EpsvPehDeZYk3pdRsCr4WyzJHdQ+XUPOr97L7wfkJ9BUuhqLRKAxS9rzo7S3Do3cOBU8QV4MSPS9Kdxfq8Z8fJ2JuUJEgbhBXjsthAbqjNy/Q9KcTgGPC+YdUlPE4bZ4r05opasESl3SEP9luqGLxCTC0me7T59zOAZCiFE4Sbeaz2QF670DCUOK8GKYUssETZs7I4SOUNhwHcOEtI5cJkuIP4VRkiiI5pzglsv19GUsD1Yu4q6dVYsINu7vq95gKlMRhBTlU26tts7C0oBUd4XVdGV4mP+lzooWjDHv2eyDhTpniD/7PHqAmW+LdwE+klZt/BIzAjE74nNYT8153mttLs/Zec43v5KsHqaigrKOrnbA12O1Uw3WlarH7gJClRM8CoabnuipaxCnYSJhr0ia7QiKW1d6A2xCTP6tJ4MxMxzgq2v5IDlBrRDg9SkUzdlhwOY9hVH0xs82UTR7L8EgGwDU5xo8D2NUPc5KGI=
   app: lmjs-lukuvinkkikirjasto
-
 script:
-  - gradle check
-  - gradle jacocoTestReport
+- gradle check
+- gradle jacocoTestReport
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
