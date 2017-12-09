@@ -45,7 +45,6 @@ and open the template in the editor.
                     <th align="left">Tagit</th>
                     <th align="left"></th>
                     <th align="left"></th>
-                    <th align="left"></th>
                 </tr>
 
                 <tr th:each="tip : ${notReadTips}">
@@ -53,14 +52,13 @@ and open the template in the editor.
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
-                    <!--<td><span th:text="${book.tagString}">tags</span></td>-->
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
                             <input type="hidden" name="keyword" th:value="${tag}" /> 
                             <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
                     </td>
-                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
                     <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
                     <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
                 </tr>
             </table>
             <br></br>
@@ -74,7 +72,6 @@ and open the template in the editor.
                     <th align="left">Tagit</th>
                     <th align="left"></th>
                     <th align="left"></th>
-                    <th align="left"></th>
                 </tr>
 
                 <tr th:each="tip : ${readTips}">
@@ -82,14 +79,13 @@ and open the template in the editor.
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
-                    <!--<td><span th:text="${book.tagString}">tags</span></td>-->
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
                             <input type="hidden" name="keyword" th:value="${tag}" /> 
                             <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
                     </td>
-                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
                     <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
                     <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+                    <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
                 </tr>
             </table>
 

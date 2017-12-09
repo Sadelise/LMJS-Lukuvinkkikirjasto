@@ -11,3 +11,7 @@ th, td {
 }
 
 tr:hover {background-color:#DEF1FF;}
+
+td:nth-child(8), td:nth-child(7){
+    display: none
+}
