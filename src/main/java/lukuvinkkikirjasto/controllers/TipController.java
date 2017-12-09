@@ -133,13 +133,13 @@ public class TipController {
     }
 
     @PostMapping("/videos")
-    public String addVideo(@RequestParam String title, @RequestParam String link,
+    public String addVideo(@RequestParam String title, @RequestParam String url,
             String description, String uploader, String tags, RedirectAttributes redirectAttributes) {
-        if (link.trim().isEmpty() || title.trim().isEmpty()) {
+        if (url.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Nimi ja linkki ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
-        tipDao.addTip(new YouTubeVideo(title, link, uploader, description, tags));
+        tipDao.addTip(new YouTubeVideo(title, url, uploader, description, tags));
         redirectAttributes.addFlashAttribute("message", "Videon lisääminen onnistui!");
         return "redirect:/books";
     }

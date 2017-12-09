@@ -15,10 +15,8 @@ public class YouTubeVideo implements Tip {
     private String uploader;
     private String description;
     private String tagString;
-    private String[] tags;
     private String type;
     private boolean watched;
-    //private boolean urlpresent;
 
     public YouTubeVideo(TipData tipData) {
         this.title = tipData.getTitle();
@@ -26,17 +24,16 @@ public class YouTubeVideo implements Tip {
         this.description = tipData.getDescription();
         this.url = tipData.url;
         this.tagString = tipData.getTagString();
-        //addTags(tagString);
         this.type = tipData.getType();
         this.watched = tipData.read;
     }
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", new String[0], "YouTubeVideo", false);
+        this(title, url, "", "", "", "YouTubeVideo", false);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, new String[0], "YouTubeVideo", false);
+        this(title, url, uploader, description, tag, "YouTubeVideo", false);
     }
 
     @Override
@@ -152,7 +149,7 @@ public class YouTubeVideo implements Tip {
     }
 
     public String[] getTags() {
-        if (tagString.length() > 0) {
+        if (tagString != null && tagString.length() > 0) {
             return tagString.split(";(\\s)*");
         } else {
             return null;

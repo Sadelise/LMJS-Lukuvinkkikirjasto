@@ -256,7 +256,7 @@ public class SeleniumStepdefs {
     private void add_youtubeVideo(String title, String URL, String description, String uploader) {
         WebElement element = driver.findElement(By.id("youtubeTitle"));
         element.sendKeys(title);
-        element = driver.findElement(By.name("link"));
+        element = driver.findElement(By.name("url"));
         element.sendKeys(URL);
         element = driver.findElement(By.id("youtubeDesc"));
         element.sendKeys(description);

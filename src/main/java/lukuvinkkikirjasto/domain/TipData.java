@@ -28,14 +28,6 @@ public class TipData {
     protected String type;
     protected boolean read;
 
-    public TipData(String title, String author, String type) {
-        this(title, author, "", "", "", "", type, false);
-    }
-
-    public TipData(String title, String author, String description, String tag, String type, String ISBN) {
-        this(title, author, description, "", ISBN, tag, type, false);
-    }
-
     public TipData(Tip tip) {
         if (tip.getType().equals("Book")) {
             createTipData((Book) tip);
