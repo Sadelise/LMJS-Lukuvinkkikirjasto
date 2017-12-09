@@ -5,4 +5,4 @@ Feature: Books are separated in two lists by viewing status
     When a book titled "Art of War" by "Sun Tzu" has been added and marked read
     And title "Prince" and author "Machiavelli" are entered into correct fields
     Then a book titled "Art of War" is found on list "read"
-    And a book titled "Prince" is found on list "notRead"
+    And a book titled "Prince" is found on list "notread"

@@ -90,9 +90,12 @@ public class SeleniumStepdefs {
 
     @Then("^a book titled \"([^\"]*)\" is found on list \"([^\"]*)\"$")
     public void a_book_titled_is_found_on_list(String title, String listName) throws Throwable {
+        Thread.sleep(3000);
         WebElement element = driver.findElement(By.id(listName));
+        Thread.sleep(3000);
         assertTrue(element.getText().contains(title));
     }
+
     @Given("^a book by title \"([^\"]*)\" and author \"([^\"]*)\" and tags \"([^\"]*)\" exists$")
     public void book_with_tag_exists(String title, String author, String tags) throws Throwable {
         add_book(title, author, "", "", tags);
@@ -158,7 +161,7 @@ public class SeleniumStepdefs {
         Thread.sleep(1000);
         driver.switchTo().alert().dismiss();
     }
-    
+
     @Then("^the page will not contain the message \"([^\"]*)\"$")
     public void page_will_not_contain_message(String pageContent) throws Throwable {
         Thread.sleep(1000);
