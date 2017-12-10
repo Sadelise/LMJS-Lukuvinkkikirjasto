@@ -17,6 +17,7 @@ public class Book implements Tip {
     private String tagString;
     //private String[] tags;
     private String type;
+    private String reference;
     private boolean read;
     //private boolean urlpresent;
 
@@ -27,19 +28,24 @@ public class Book implements Tip {
         this.tagString = tipData.getTagString();
         this.url = tipData.getUrl();
         this.type = tipData.getType();
+        this.reference = tipData.getReference();
         this.read = tipData.isRead();
     }
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", "", "Book", false);
+        this(title, author, "", "", "", "", "Book", "", false);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", false);
+        this(title, author, description, "", ISBN, tag, "Book", "", false);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", false);
+        this(title, author, description, "", ISBN, "", type, "", read);
+    }
+
+    public Book(String title, String author, String description, String reference, String tag, String ISBN) {
+        this(title, author, description, "", ISBN, tag, "Book", reference, false);
     }
 
     @Override
@@ -74,6 +80,9 @@ public class Book implements Tip {
                 break;
             case "isbn":
                 changeISBN(edit);
+                break;
+            case "reference":
+                changeReference(edit);
                 break;
             case "tags":
                 addTags(edit);
@@ -115,6 +124,10 @@ public class Book implements Tip {
 
     private void changeISBN(String isbn) {
         this.ISBN = isbn;
+    }
+    
+    private void changeReference(String ref) {
+        this.reference = ref;
     }
 
     @Override
@@ -182,4 +195,8 @@ public class Book implements Tip {
         return true;
     }
 
+    @Override
+    public String getReference() {
+        return this.reference;
+    }
 }

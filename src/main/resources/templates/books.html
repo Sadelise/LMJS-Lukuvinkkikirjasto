@@ -10,7 +10,11 @@ and open the template in the editor.
         <title>Lukuvinkit</title>
         <meta charset="utf-8"></meta>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<<<<<<< HEAD
         <link href="css/style.css" rel="stylesheet"/>
+=======
+        
+>>>>>>> suosittelija
     </head>
     <body>
         <div>
@@ -42,17 +46,29 @@ and open the template in the editor.
                     <th align="left">Otsikko</th>
                     <th align="left">Tyyppi</th>
                     <th align="left">Kuvaus</th>
+                    <th align="left">Suosittelija</th>
                     <th align="left">Tagit</th>
                     <th align="left"></th>
                     <th align="left"></th>
                 </tr>
 
+<<<<<<< HEAD
                 <tr th:each="tip : ${notReadTips}">
                     <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
+=======
+                <tr th:each="book : ${books}">
+                    <td th:if="${book.urlpresent}"><a th:href="${book.url}" th:text="${book.title}" th:name="view">title</a></td>
+                    <td th:unless="${book.urlpresent}"> <span th:text="${book.title}" th:name="view">title</span></td>
+                    <td><span th:text="${book.type}">type</span></td>
+                    <td><span th:text="${book.description}">description</span></td>
+                    <td><span th:text="${book.reference}">reference</span></td>
+                    <!--<td><span th:text="${book.tagString}">tags</span></td>-->
+                    <td><form th:each="tag : ${book.tags}" action="/search" method="POST">
+>>>>>>> suosittelija
                             <input type="hidden" name="keyword" th:value="${tag}" /> 
                             <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
                     </td>
@@ -135,6 +151,8 @@ and open the template in the editor.
                 <input type="text" name="author"/>
                 <span>Kuvaus: </span>
                 <input type="text" name="description"/>
+                <span>Suosittelija: </span>
+                <input type="text" name="reference"/>
                 <span>ISBN: </span>
                 <input type="text" name="ISBN"/>
                 <span>Tagit</span>
@@ -152,6 +170,8 @@ and open the template in the editor.
                 <input id="youtubeDesc" type="text" name="description"/>
                 <span>Lataaja: </span>
                 <input type="text" name="uploader"/>
+                <span>Suosittelija: </span>
+                <input type="text" name="reference"/>
                 <span>Tagit</span>
                 <input id="youtubeTags" type="text" name="tags"/>-->
 

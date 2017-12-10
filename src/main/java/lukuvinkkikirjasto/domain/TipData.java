@@ -26,7 +26,16 @@ public class TipData {
     protected String ISBN;
     protected String tagString;
     protected String type;
+    protected String reference;
     protected boolean read;
+
+    public TipData(String title, String author, String type) {
+        this(title, author, "", "", "", "", type, "", false);
+    }
+
+    public TipData(String title, String author, String description, String tag, String type, String ISBN, String reference) {
+        this(title, author, description, "", ISBN, tag, type, reference, false);
+    }
 
     public TipData(Tip tip) {
         if (tip.getType().equals("Book")) {
@@ -43,6 +52,7 @@ public class TipData {
         this.url = video.getUrl();
         this.tagString = video.getTagString();
         this.type = video.getType();
+        this.reference = video.getReference();
         this.read = video.isWatched();
     }
 
@@ -53,6 +63,7 @@ public class TipData {
         this.url = book.getUrl();
         this.tagString = book.getTagString();
         this.type = book.getType();
+        this.reference = book.getReference();
         this.read = book.isRead();
     }
 }

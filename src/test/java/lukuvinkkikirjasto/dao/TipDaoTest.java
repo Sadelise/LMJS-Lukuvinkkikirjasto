@@ -100,6 +100,11 @@ public class TipDaoTest {
         public String getType() {
             return "Book";
         }
+
+        @Override
+        public String getReference() {
+            return "Suosittelija";
+        }
     }
 
     @Before
