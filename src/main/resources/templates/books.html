@@ -5,16 +5,19 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-    <head>
+   <head>
         <title>Lukuvinkit</title>
         <meta charset="utf-8"></meta>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link href="css/style.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css"/>
     </head>
     <body>
+    <section class="section">
+        <div class="container">
         <div>
-            <h1>Lukuvinkit</h1>
+            <h1 class="title">Lukuvinkit</h1>
 
             <div>
                 <font color="red">
@@ -25,45 +28,62 @@ and open the template in the editor.
             <br></br>
 
             <div>
-                <form action="/search" method="POST">
-                    <span>Haku: </span>
-                    <input type="text" name="keyword"/>
-                    <input type="submit" th:name="search" value="Hae!"/>
-                </form>
+
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <form action="/search" method="POST">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <input class="input" name="keyword" type="text" placeholder="Haku"></input>
+                                    </div>
+                                    <div class="control">
+                                        <input type="submit" class="button is-info" th:name="search" value="Hae!">
+                                        </input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="control">
+                            <a href="/books"><input class="button" type="button" value="Näytä kaikki"/></a>
+                        </div>
+                    </div>
                 <br></br>
-                <a href="/books"><input type="button" value="Näytä kaikki"/></a>
             </div>
             <br></br>
             <hr></hr>
 
-            <h2>Lukemattomat</h2>
+            <h3 class="title">Lukemattomat</h3>
             <table id="notread">
-                <tr>
-                    <th align="left">Otsikko</th>
-                    <th align="left">Tyyppi</th>
-                    <th align="left">Kuvaus</th>
-                    <th align="left">Tagit</th>
-                    <th align="left"></th>
-                    <th align="left"></th>
-                </tr>
-
+                <thead>
+                    <tr>
+                        <th align="left">Otsikko</th>
+                        <th align="left">Tyyppi</th>
+                        <th align="left">Kuvaus</th>
+                        <th align="left">Tagit</th>
+                        <th align="left"></th>
+                        <th align="left"></th>
+                    </tr>
+                </thead>
+                <tbody>
                 <tr th:each="tip : ${notReadTips}">
+
                     <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
                             <input type="hidden" name="keyword" th:value="${tag}" /> 
-                            <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
+                            <input type="submit" th:name="'search' + ${tag}" class="button" th:value="${tag}"/></form>
                     </td>
                     <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
-                    <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+                    <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" class="button" name="delete">Poista</button></td>
                     <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
                 </tr>
+                </tbody>
             </table>
             <br></br>
             <hr></hr>
-            <h2>Luetut</h2>
+            <h2 class="title">Luetut</h2>
             <table id="read">
                 <tr>
                     <th align="left">Otsikko</th>
@@ -105,11 +125,20 @@ and open the template in the editor.
         </div>
         <hr></hr>
 
-        <h2>Lisää lukuvinkki</h2>
-        <select id="optionsList" name="optionsList">
-            <option value="Kirja" selected="selected">Kirja</option>
-            <option value="YouTubeVideo">YouTubeVideo</option>
-        </select> 
+        <h4 class="title">Lisää lukuvinkki</h4>
+        <div class="field">
+            <p class="control has-icons-left">
+            <span class="select">
+            <select id="optionsList" name="optionsList">
+                <option value="Kirja" selected="selected">Kirja</option>
+                <option value="YouTubeVideo">YouTubeVideo</option>
+            </select>
+            </span>
+            <span class="icon is-small is-left">
+                <i class="fa fa-info"></i>
+            </span>
+           </p>
+        </div>
         <br></br>
 
         <script>
@@ -155,9 +184,11 @@ and open the template in the editor.
                 <span>Tagit</span>
                 <input id="youtubeTags" type="text" name="tags"/>-->
 
-                <input type="submit" name="sendYouTubetip" value="Lisää!"/>
+                <input type="submit" class="button" name="sendYouTubetip" value="Lisää!"/>
             </form>
         </div>
         <hr></hr>
+        </div>
+    </section>
     </body>
 </html>
