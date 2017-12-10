@@ -41,8 +41,7 @@ public class Main {
 
     public static void run(IO scanner, TipDao tipDao) {
         while (true) {
-            System.out.println("");
-            String command = scanner.readLine("Type a command and press Enter "
+            String command = scanner.readLine("\nType a command and press Enter "
                     + "(to see the list of all commands, type 'commands' and press Enter)");
             if (command.equals("quit")) {
                 break;
