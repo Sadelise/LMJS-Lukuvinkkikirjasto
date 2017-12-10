@@ -1,6 +1,7 @@
 package lukuvinkkikirjasto.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class Book implements Tip {
     //private String[] tags;
     private String type;
     private boolean read;
+    private int priority;
     //private boolean urlpresent;
 
     public Book(TipData tipData) {
@@ -28,18 +30,19 @@ public class Book implements Tip {
         this.url = tipData.getUrl();
         this.type = tipData.getType();
         this.read = tipData.isRead();
+        this.priority = tipData.priority;
     }
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", "", "Book", false);
+        this(title, author, "", "", "", "", "Book", false, 0);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", false);
+        this(title, author, description, "", ISBN, tag, "Book", false, 0);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", false);
+        this(title, author, description, "", ISBN, "", "Book", false, 0);
     }
 
     @Override
@@ -180,6 +183,16 @@ public class Book implements Tip {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int getPriority(){
+        return this.priority;
+    }
+
+    @Override
+    public void setPriority(int i){
+        this.priority = i;
     }
 
 }

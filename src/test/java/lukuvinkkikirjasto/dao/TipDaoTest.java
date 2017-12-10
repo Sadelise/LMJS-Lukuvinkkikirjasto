@@ -66,6 +66,16 @@ public class TipDaoTest {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
+        @Override
+        public int getPriority() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+        @Override
+        public void setPriority(int i) {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
         public String identify() {
             return id;
         }

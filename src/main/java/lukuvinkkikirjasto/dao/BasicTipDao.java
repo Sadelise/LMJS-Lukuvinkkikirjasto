@@ -87,6 +87,16 @@ public class BasicTipDao implements TipDao {
     }
 
     @Override
+    public int getPriority(Tip tip) {
+        return 0;
+    }
+
+    @Override
+    public void setPriority(String title, int i) {
+
+    }
+
+    @Override
     public void editTipByTitle(String title, String element, String edit) {
         Tip tip = getTip(title);
         tip.edit(element, edit);

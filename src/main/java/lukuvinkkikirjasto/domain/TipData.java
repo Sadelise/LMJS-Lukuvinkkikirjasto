@@ -27,6 +27,7 @@ public class TipData {
     protected String tagString;
     protected String type;
     protected boolean read;
+    protected int priority;
 
     public TipData(Tip tip) {
         if (tip.getType().equals("Book")) {

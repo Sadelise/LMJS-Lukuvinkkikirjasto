@@ -29,6 +29,10 @@ public interface Tip {
     
     boolean getUrlpresent();
 
+    int getPriority();
+
+    void setPriority(int i);
+
     boolean edit(String element, String edit);
     
     boolean contains(String keyword);

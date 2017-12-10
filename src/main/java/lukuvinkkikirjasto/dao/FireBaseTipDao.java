@@ -86,6 +86,16 @@ public class FireBaseTipDao implements TipDao {
     }
 
     @Override
+    public int getPriority(Tip tip) {
+        return tip.getPriority();
+    }
+
+    @Override
+    public void setPriority(String title, int i) {
+        tips.get(title).setPriority(i);
+    }
+
+    @Override
     public void markTip(String id) {
         Tip tip = tips.get(id);
 

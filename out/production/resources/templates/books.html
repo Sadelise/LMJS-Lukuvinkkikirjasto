@@ -5,77 +5,163 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Lukuvinkit</title>
-        <meta charset="utf-8"></meta>
-    </head>
-    <body>
-        <div>
-            <h1>Lukuvinkit</h1>
 
-            <div>
-                <font color="red">
-                    <span th:text="${message}"></span>
-                    <span id="demo"></span>
-                </font>    
-            </div>
-            <br></br>
-            <table border="1" frame="void" rules="rows">
-                <tr>
-                    <th align="left">Otsikko</th>
-                    <th align="left">Kirjoittaja</th>
-                    <th align="left">Kuvaus</th>
-                    <th align="left">ISBN</th>
-                    <th align="left">Luettu</th>
-                    <th align="left">Tagit</th>
-                    <th align="left"></th>
-                </tr>
+<head>
+    <title>Lukuvinkit</title>
+    <meta charset="utf-8"></meta>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <h1>Lukuvinkit</h1>
 
-                <tr th:each="book : ${books}" th:id="${book.author}">
-                    <td><a th:href="@{/books/{id}(id=${book.title})}" th:text="${book.title}" th:name="view">title</a></td>
-                    <td><span th:text="${book.author}">author</span></td>
-                    <td><span th:text="${book.description}">description</span></td>
-                    <td><span th:text="${book.ISBN}">ISBN</span></td>
-                    <td><span th:text="${book.read}">read</span></td>
-                    <td><span th:text="${book.tagString}">tags</span></td>
-                    <td><form th:action="@{/books/{id}(id=${book.title})}" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${book.title}"/></form></td>
+    <div>
+        <font color="red">
+            <span th:text="${message}"></span>
+            <span id="demo"></span>
+        </font>
+    </div>
+    <br></br>
 
-                    <td><button th:onclick="'javascript:poista(\'' + ${book.title} + '\');'" name="delete">Poista</button></td>
+    <div>
+        <form action="/search" method="POST">
+            <span>Haku: </span>
+            <input type="text" name="keyword"/>
+            <input type="submit" th:name="search" value="Hae!"/>
+        </form>
+        <br></br>
+        <a href="/books"><input type="button" value="Näytä kaikki"/></a>
 
-                </tr>
-            </table>
+        <form action="/sort" method="POST">
+            <input type="submit" value="Järjestä prioriteetin mukaan" />
+        </form>
+    </div>
+    <br></br>
+    <hr></hr>
 
-            <script>
-                function poista(id) {
-                    var txt;
-                    if (confirm("Haluatko varmasti poistaa vinkin?") == true) {
-                        //$('[id="' + id + '"]').click();
-                        document.getElementById(id).click();
-                    } else {
-                        txt = "Vinkkiä ei poistettu!";
-                    }
-                    document.getElementById("demo").innerHTML = txt;
-                }
-            </script>
+    <h2>Lukemattomat</h2>
+    <table id="notread">
+        <tr>
+            <th align="left">Otsikko</th>
+            <th align="left">Tyyppi</th>
+            <th align="left">Kuvaus</th>
+            <th align="left">Tagit</th>
+            <th align="left"></th>
+            <th align="left"></th>
+        </tr>
+
+        <tr th:each="tip : ${notReadTips}">
+            <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
+            <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
+            <td><span th:text="${tip.type}">type</span></td>
+            <td><span th:text="${tip.description}">description</span></td>
+            <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
+                <input type="hidden" name="keyword" th:value="${tag}" />
+                <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
+            </td>
+            <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
+            <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+            <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
+        </tr>
+    </table>
+    <br></br>
+    <hr></hr>
+    <h2>Luetut</h2>
+    <table id="read">
+        <tr>
+            <th align="left">Otsikko</th>
+            <th align="left">Tyyppi</th>
+            <th align="left">Kuvaus</th>
+            <th align="left">Tagit</th>
+            <th align="left"></th>
+            <th align="left"></th>
+        </tr>
+
+        <tr th:each="tip : ${readTips}">
+            <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
+            <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
+            <td><span th:text="${tip.type}">type</span></td>
+            <td><span th:text="${tip.description}">description</span></td>
+            <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
+                <input type="hidden" name="keyword" th:value="${tag}" />
+                <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
+            </td>
+            <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
+            <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
+            <td><form th:action="@{/books/{id}(id=${tip.title})}" name="hiddenDelete" th:method="DELETE"><input type="submit" style="display: none;" value="Delete" th:id="${tip.title}"/></form></td>
+        </tr>
+    </table>
+
+    <script>
+        function poista(id) {
+            var txt;
+            if (confirm("Haluatko varmasti poistaa vinkin?") == true) {
+                document.getElementById(id).click();
+            } else {
+                txt = "Vinkkiä ei poistettu!";
+                document.getElementById("demo").innerHTML = txt;
+            }
+        }
+    </script>
 
 
-        </div>
-        <h2>Lisää lukuvinkki</h2>
-        <div>
-            <form action="/books" method="POST">
-                <span>Kirjan nimi: </span>
-                <input type="text" name="title"/>
-                <span>Kirjailija: </span>
-                <input type="text" name="author"/>
-                <span>Kuvaus: </span>
-                <input type="text" name="description"/>
-                <span>ISBN: </span>
-                <input type="text" name="ISBN"/>
-                <span>Tagit</span>
-                <input type="text" name="tags"/>-->
+</div>
+<hr></hr>
 
-                <input type="submit" name="sendtip" value="Lisää!"/>
-            </form>
-        </div>
-    </body>
+<h2>Lisää lukuvinkki</h2>
+<select id="optionsList" name="optionsList">
+    <option value="Kirja" selected="selected">Kirja</option>
+    <option value="YouTubeVideo">YouTubeVideo</option>
+</select>
+<br></br>
+
+<script>
+    $("#optionsList").change(function () {
+        var string = "";
+        string = $("select#optionsList option:selected").text();
+        if (string == "Kirja") {
+            document.getElementById("youtubevideo").style.display = "none";
+            document.getElementById("book").style.display = "inline"
+        } else if (string == "YouTubeVideo") {
+            document.getElementById("book").style.display = "none"
+            document.getElementById("youtubevideo").style.display = "inline"
+        }
+
+    })
+</script>
+
+<div id="fields">
+    <form class="book" action="/books" method="POST" style="display: inline" id="book">
+        <span>Kirjan nimi: </span>
+        <input type="text" name="title"/>
+        <span>Kirjailija: </span>
+        <input type="text" name="author"/>
+        <span>Kuvaus: </span>
+        <input type="text" name="description"/>
+        <span>ISBN: </span>
+        <input type="text" name="ISBN"/>
+        <span>Tagit</span>
+        <input type="text" name="tags"/>-->
+
+        <input type="submit" name="sendtip" value="Lisää!"/>
+    </form>
+
+    <form class="youtubevideo" action="/videos" method="POST" style="display: none" id="youtubevideo">
+        <span>Videon nimi: </span>
+        <input id="youtubeTitle" type="text" name="title"/>
+        <span>Linkki: </span>
+        <input type="text" name="url"/>
+        <span>Kuvaus: </span>
+        <input id="youtubeDesc" type="text" name="description"/>
+        <span>Lataaja: </span>
+        <input type="text" name="uploader"/>
+        <span>Tagit</span>
+        <input id="youtubeTags" type="text" name="tags"/>-->
+
+        <input type="submit" name="sendYouTubetip" value="Lisää!"/>
+    </form>
+</div>
+<hr></hr>
+</body>
 </html>

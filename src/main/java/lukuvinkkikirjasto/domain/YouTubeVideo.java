@@ -17,6 +17,7 @@ public class YouTubeVideo implements Tip {
     private String tagString;
     private String type;
     private boolean watched;
+    private int priority;
 
     public YouTubeVideo(TipData tipData) {
         this.title = tipData.getTitle();
@@ -26,14 +27,15 @@ public class YouTubeVideo implements Tip {
         this.tagString = tipData.getTagString();
         this.type = tipData.getType();
         this.watched = tipData.read;
+        this.priority = tipData.priority;
     }
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", "YouTubeVideo", false);
+        this(title, url, "", "", "", "YouTubeVideo", false, 0);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", false);
+        this(title, url, uploader, description, tag, "YouTubeVideo", false, 0);
     }
 
     @Override
@@ -164,5 +166,15 @@ public class YouTubeVideo implements Tip {
     @Override
     public boolean getUrlpresent() {
         return true;
+    }
+
+    @Override
+    public int getPriority(){
+        return this.priority;
+    }
+
+    @Override
+    public void setPriority(int i){
+        this.priority = i;
     }
 }
