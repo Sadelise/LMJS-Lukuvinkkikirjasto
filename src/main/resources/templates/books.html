@@ -31,7 +31,7 @@ and open the template in the editor.
                     <input type="submit" th:name="search" value="Hae!"/>
                 </form>
                 <br></br>
-                <a href="/books"><input type="button" value="Näytä kaikklement ei"/></a>
+                <a href="/books"><input type="button" value="Näytä kaikki"/></a>
                 
                 <form action="/sort" method="POST">
                     <input type="submit" value="Järjestä prioriteetin mukaan" />
@@ -92,8 +92,8 @@ and open the template in the editor.
                     <td><span th:text="${tip.description}">description</span></td>
                     <td><span th:text="${tip.reference}">reference</span></td>
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
-                            <input type="hidden" name="keyword" th:value="${tag}" /> lement e
-                            <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>lement e
+                            <input type="hidden" name="keyword" th:value="${tag}" />
+                            <input type="submit" th:name="'search' + ${tag}" th:value="${tag}"/></form>
                     </td>
                     <td><a th:href="@{/books/{id}(id=${tip.title})}" th:text="muokkaa" th:name="view">title</a></td>
                     <td><button th:onclick="'javascript:poista(\'' + ${tip.title} + '\');'" name="delete">Poista</button></td>
