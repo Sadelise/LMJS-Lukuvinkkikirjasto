@@ -31,20 +31,8 @@ public class YouTubeVideo implements Tip {
         this.watched = tipData.read;
     }
 
-    public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", "YouTubeVideo", "", false, 0);
-    }
-
-    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", "", false, 0);
-    }
-
     public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag) {
         this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, 0);
-    }
-
-    public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag, int priority) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, priority);
     }
 
     @Override
@@ -188,6 +176,10 @@ public class YouTubeVideo implements Tip {
     @Override
     public boolean getUrlpresent() {
         return true;
+    }
+
+    public String getCreator() {
+        return uploader;
     }
 
     @Override

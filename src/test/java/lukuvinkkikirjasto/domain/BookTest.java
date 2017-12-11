@@ -39,7 +39,7 @@ public class BookTest {
 
     @Test
     public void bookHasAllInformation() {
-        Book book = new Book("A book about books", "Billy Book", "This book has a lot of information about books", "tag","ISBN1234");
+        Book book = new Book("A book about books", "Billy Book", "This book has a lot of information about books", "tag", "ISBN1234");
         assertEquals("A book about books", book.getTitle());
         assertEquals("Billy Book", book.getAuthor());
         assertEquals("This book has a lot of information about books", book.getDescription());
@@ -54,6 +54,11 @@ public class BookTest {
         assertEquals(false, book.isRead());
         book.markRead();
         assertEquals(true, book.isRead());
+        book.markRead();
+        assertTrue(book.isRead());
+        book.markNotRead();
+        assertFalse(book.isRead());
+
     }
 
     @Test
@@ -64,4 +69,27 @@ public class BookTest {
         assertTrue(book.contains("kuva"));
     }
 
+    @Test
+    public void containsWorksForAllIntendedStrings() {
+        Book book = new Book("Name", "Author", "Description", "Ref", "Tag", "ISBN");
+
+        assertTrue(book.contains("Name"));
+        assertTrue(book.contains("Author"));
+        assertTrue(book.contains("Description"));
+        assertTrue(book.contains("Ref"));
+        assertTrue(book.contains("Tag"));
+        assertTrue(book.contains("ISBN"));
+    }
+
+    @Test
+    public void lowerCaseIsDetectedByContainsMethod() {
+        Book book = new Book("Name", "Author", "Description", "Ref", "Tag", "ISBN");
+
+        assertTrue(book.contains("nAme"));
+        assertTrue(book.contains("aUthor"));
+        assertTrue(book.contains("dEscription"));
+        assertTrue(book.contains("rEf"));
+        assertTrue(book.contains("tAg"));
+        assertTrue(book.contains("iSBN"));
+    }
 }
