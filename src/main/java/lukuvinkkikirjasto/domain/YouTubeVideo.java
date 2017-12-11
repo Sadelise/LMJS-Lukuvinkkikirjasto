@@ -154,6 +154,11 @@ public class YouTubeVideo implements Tip {
                 return true;
             }
         }
+        if (this.reference != null) {
+            if (this.reference.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         return false;
     }
 

@@ -160,6 +160,11 @@ public class Book implements Tip {
                 return true;
             }
         }
+        if (this.reference != null) {
+            if (this.reference.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         return false;
     }
 
