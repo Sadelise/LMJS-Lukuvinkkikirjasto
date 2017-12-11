@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${video.title}">Lukuvinkit</title>
+        <meta charset="utf-8"></meta>
+    </head>
+    <body>
+        <h1>Vinkin tiedot</h1>
+        <div>
+            <form th:action= "@{/videos/{id}(id=${video.title})}" method="POST">
+                <span>Videon nimi: </span>
+                <input type="text" name="title" th:field="${video.title}"/>
+                <span>Linkki: </span>
+                <input type="text" name="url" th:field="${video.url}"/>
+                <span>Kuvaus: </span>
+                <input type="text" name="description" th:field="${video.description}"/>
+                <span>Lataaja: </span>
+                <input type="text" name="uploader" th:field="${video.uploader}"/>
+                <span>Tagit: </span>
+                <input type="text" name="tags" th:field="${video.tagString}"/>
+                <span>Prioriteetti:</span>
+                <output name="prioriteettiUlos" id="prio" th:field="${video.priority}"></output>
+                <input type="range" min="0" max="9" step="1" name="priority" th:field="${video.priority}" oninput="prio.value = priority.value"/>
+                <span>Luettu:</span>
+                <span>Katsottu:</span>
+                <input type="checkbox" name="watched" th:field="${video.watched}"/>
+                    
+                <input type="submit" name="save" value="Tallenna muutokset"/>
+            </form>
+        </div>
+        <div>
+            <p></p>
+            <form action="/books">
+                <input type="submit" value="Kaikki vinkit" />
+            </form>
+        </div>
+    </body>
+</html>

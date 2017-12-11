@@ -13,6 +13,10 @@ public interface TipDao {
 
     public Tip getTip(String title);
 
+    public int getPriority(Tip tip);
+
+    public void setPriority(String title, int i);
+
     public void markTip(String id);
 
     public void removeTip(String id);

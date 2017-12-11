@@ -25,6 +25,9 @@ and open the template in the editor.
                 <input type="text" name="ISBN" th:field="${book.ISBN}"/>
                 <span>Tagit: </span>
                 <input type="text" name="tags" th:field="${book.tagString}"/>
+                <span>Prioriteetti:</span>
+                <output name="prioriteettiUlos" id="prio">10</output>
+                <input type="range" min="0" max="9" step="1" name="priority" th:field="${book.priority}" oninput="prio.value = priority.value"/>
                 <span>Luettu:</span>
                 <input type="checkbox" name="read" th:field="${book.read}"/>
                     

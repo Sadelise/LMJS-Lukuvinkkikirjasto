@@ -28,6 +28,7 @@ public class TipData {
     protected String type;
     protected String reference;
     protected boolean read;
+    protected int priority;
 
     public TipData(String title, String author, String type) {
         this(title, author, "", "", "", "", type, "", false);
@@ -54,6 +55,7 @@ public class TipData {
         this.type = video.getType();
         this.reference = video.getReference();
         this.read = video.isWatched();
+        this.priority = video.getPriority();
     }
 
     public void createTipData(Book book) {
@@ -65,5 +67,6 @@ public class TipData {
         this.type = book.getType();
         this.reference = book.getReference();
         this.read = book.isRead();
+        this.priority = book.getPriority();
     }
 }

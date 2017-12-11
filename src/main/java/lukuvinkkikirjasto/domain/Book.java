@@ -1,6 +1,7 @@
 package lukuvinkkikirjasto.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class Book implements Tip {
     private String type;
     private String reference;
     private boolean read;
+    private int priority;
     //private boolean urlpresent;
 
     public Book(TipData tipData) {
@@ -30,9 +32,11 @@ public class Book implements Tip {
         this.type = tipData.getType();
         this.reference = tipData.getReference();
         this.read = tipData.isRead();
+        this.priority = tipData.priority;
     }
 
     public Book(String title, String author) {
+<<<<<<< HEAD
         this(title, author, "", "", "", "", "Book", "", false);
     }
 
@@ -46,6 +50,17 @@ public class Book implements Tip {
 
     public Book(String title, String author, String description, String reference, String tag, String ISBN) {
         this(title, author, description, "", ISBN, tag, "Book", reference, false);
+=======
+        this(title, author, "", "", "", "", "Book", false, 0);
+    }
+
+    public Book(String title, String author, String description, String tag, String ISBN) {
+        this(title, author, description, "", ISBN, tag, "Book", false, 0);
+    }
+
+    public Book(String title, String author, String description, boolean read, String type, String ISBN) {
+        this(title, author, description, "", ISBN, "", "Book", false, 0);
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
     }
 
     @Override
@@ -196,7 +211,19 @@ public class Book implements Tip {
     }
 
     @Override
+<<<<<<< HEAD
     public String getReference() {
         return this.reference;
     }
+=======
+    public int getPriority(){
+        return this.priority;
+    }
+
+    @Override
+    public void setPriority(int i){
+        this.priority = i;
+    }
+
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
 }

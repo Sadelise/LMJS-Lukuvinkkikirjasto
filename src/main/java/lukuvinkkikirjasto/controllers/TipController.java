@@ -1,7 +1,9 @@
 package lukuvinkkikirjasto.controllers;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -82,7 +84,11 @@ public class TipController {
     @PostMapping("/books/{id}")
     public String editBook(Model model, RedirectAttributes redirectAttributes,
             @PathVariable String id, @RequestParam String author, @RequestParam String title,
+<<<<<<< HEAD
             String description, String reference, String ISBN, String tagString, boolean read) {
+=======
+            String description, String ISBN, String tagString, int priority, boolean read) {
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -92,7 +98,11 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "isbn", ISBN);
         tipDao.editTipByTitle(title, "tags", tagString);
+<<<<<<< HEAD
         tipDao.editTipByTitle(title, "reference", reference);
+=======
+        tipDao.setPriority(title, priority);
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (tipDao.getTip(title).isRead() != read) {
             tipDao.markTip(id);
         }
@@ -104,7 +114,11 @@ public class TipController {
     @PostMapping("/videos/{id}")
     public String editVideo(Model model, RedirectAttributes redirectAttributes,
             @PathVariable String id, @RequestParam String title, @RequestParam String url,
+<<<<<<< HEAD
             String description, String uploader, String reference, String tagString, boolean watched) {
+=======
+            String description, String uploader, String tagString, int priority, boolean watched) {
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (title.trim().isEmpty() || url.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -118,7 +132,11 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "uploader", uploader);
         tipDao.editTipByTitle(title, "tags", tagString);
+<<<<<<< HEAD
         tipDao.editTipByTitle(title, "reference", reference);
+=======
+        tipDao.setPriority(title, priority);
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (tipDao.getTip(title).isRead() != watched) {
             tipDao.markTip(id);
         }
@@ -189,6 +207,7 @@ public class TipController {
         model.addAttribute("notReadTips", notRead);
         return "books";
     }
+<<<<<<< HEAD
     
     public boolean validateYouTubeVideo(String url) {
         if (url.contains("https://www.youtube.com/watch?")) {
@@ -196,4 +215,32 @@ public class TipController {
         }
         return false;
     }
+=======
+
+
+    @PostMapping("/sort")
+    public String sortTips(Model model){
+        List<Tip> read = new ArrayList<>();
+        List<Tip> notRead = new ArrayList<>();
+        List<Tip> allTips = tipDao.getAllTips();
+        for (Tip tip : allTips) {
+            if (tip.isRead()) {
+                read.add(tip);
+            } else {
+                notRead.add(tip);
+            }
+        }
+        TipComparator comparator = new TipComparator();
+        read.sort(comparator);
+        notRead.sort(comparator);
+        model.addAttribute("readTips", read);
+        model.addAttribute("notReadTips", notRead);
+        return "books";
+    }
+
+
+
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
 }
+
+

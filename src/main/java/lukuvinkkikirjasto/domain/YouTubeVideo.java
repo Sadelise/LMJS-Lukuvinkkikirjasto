@@ -18,6 +18,7 @@ public class YouTubeVideo implements Tip {
     private String type;
     private String reference;
     private boolean watched;
+    private int priority;
 
     public YouTubeVideo(TipData tipData) {
         this.title = tipData.getTitle();
@@ -28,6 +29,7 @@ public class YouTubeVideo implements Tip {
         this.type = tipData.getType();
         this.reference = tipData.getReference();
         this.watched = tipData.read;
+<<<<<<< HEAD
         
     }
 
@@ -41,6 +43,17 @@ public class YouTubeVideo implements Tip {
 
     public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag) {
         this(title, url, uploader, description, tag, "YouTubeVideo", reference, false);
+=======
+        this.priority = tipData.priority;
+    }
+
+    public YouTubeVideo(String title, String url) {
+        this(title, url, "", "", "", "YouTubeVideo", false, 0);
+    }
+
+    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
+        this(title, url, uploader, description, tag, "YouTubeVideo", false, 0);
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
     }
 
     @Override
@@ -182,7 +195,17 @@ public class YouTubeVideo implements Tip {
     }
 
     @Override
+<<<<<<< HEAD
     public String getReference() {
         return this.reference;
+=======
+    public int getPriority(){
+        return this.priority;
+    }
+
+    @Override
+    public void setPriority(int i){
+        this.priority = i;
+>>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
     }
 }
