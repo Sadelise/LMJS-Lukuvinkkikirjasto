@@ -123,7 +123,8 @@ public class TipControllerTest {
                 .param("title", "kirja")
                 .param("author", "kirjoittaja")
                 .param("description", "hyvä")
-                .param("tags", "tagit"))
+                .param("tags", "tagit")
+                .param("priority", "0"))
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Kirjan muokkaaminen onnistui!"));
 
@@ -141,7 +142,8 @@ public class TipControllerTest {
                 .param("author", "kirjoittaja")
                 .param("description", "hyvä")
                 .param("tags", "tagit")
-                .param("read", "true"))
+                .param("read", "true")
+                .param("priority", "0"))
                 .andReturn();
 
         MvcResult result3 = this.mockMvc.perform(get("/books")).andReturn();
@@ -161,7 +163,8 @@ public class TipControllerTest {
                 .param("title", "kirja")
                 .param("author", "")
                 .param("description", "hyvä")
-                .param("tags", "tagit"))
+                .param("tags", "tagit")
+                .param("priority", "0"))
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä."));
 
@@ -203,7 +206,8 @@ public class TipControllerTest {
                 .param("url", "http://testi")
                 .param("uploader", "youtuber")
                 .param("description", "hyvä")
-                .param("tags", "tagit"))
+                .param("tags", "tagit")
+                .param("priority", "0"))
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen onnistui!"));
 
@@ -223,7 +227,8 @@ public class TipControllerTest {
                 .param("uploader", "youtuber")
                 .param("description", "hyvä")
                 .param("tags", "tagit")
-                .param("watched", "true"))
+                .param("watched", "true")
+                .param("priority", "0"))
                 .andReturn();
         assertTrue(checkIfTipIsOnModelList("video", "readTips"));
 
@@ -242,7 +247,8 @@ public class TipControllerTest {
                 .param("url", "")
                 .param("uploader", "youtuber")
                 .param("description", "hyvä")
-                .param("tags", "tagit"))
+                .param("tags", "tagit")
+                .param("priority", "0"))
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä."));
 

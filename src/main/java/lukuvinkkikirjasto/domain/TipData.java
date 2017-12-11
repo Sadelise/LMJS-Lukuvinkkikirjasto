@@ -45,6 +45,7 @@ public class TipData {
         this.tagString = video.getTagString();
         this.type = video.getType();
         this.read = video.isWatched();
+        this.priority = video.getPriority();
     }
 
     public void createTipData(Book book) {
@@ -55,5 +56,6 @@ public class TipData {
         this.tagString = book.getTagString();
         this.type = book.getType();
         this.read = book.isRead();
+        this.priority = book.getPriority();
     }
 }

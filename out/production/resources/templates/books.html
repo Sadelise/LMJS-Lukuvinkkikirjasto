@@ -43,6 +43,7 @@ and open the template in the editor.
     <h2>Lukemattomat</h2>
     <table id="notread">
         <tr>
+            <th align="left">Prioriteetti</th>
             <th align="left">Otsikko</th>
             <th align="left">Tyyppi</th>
             <th align="left">Kuvaus</th>
@@ -52,6 +53,7 @@ and open the template in the editor.
         </tr>
 
         <tr th:each="tip : ${notReadTips}">
+            <td><span th:text="${tip.priority}">0</span> </td>
             <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
             <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
             <td><span th:text="${tip.type}">type</span></td>
@@ -70,6 +72,7 @@ and open the template in the editor.
     <h2>Luetut</h2>
     <table id="read">
         <tr>
+            <th align="left">Prioriteetti</th>
             <th align="left">Otsikko</th>
             <th align="left">Tyyppi</th>
             <th align="left">Kuvaus</th>
@@ -79,6 +82,7 @@ and open the template in the editor.
         </tr>
 
         <tr th:each="tip : ${readTips}">
+            <td><span th:text="${tip.priority}">0</span> </td>
             <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
             <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
             <td><span th:text="${tip.type}">type</span></td>
