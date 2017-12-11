@@ -84,11 +84,7 @@ public class TipController {
     @PostMapping("/books/{id}")
     public String editBook(Model model, RedirectAttributes redirectAttributes,
             @PathVariable String id, @RequestParam String author, @RequestParam String title,
-<<<<<<< HEAD
-            String description, String reference, String ISBN, String tagString, boolean read) {
-=======
-            String description, String ISBN, String tagString, int priority, boolean read) {
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
+            String description, String reference, String ISBN, String tagString, int priority, boolean read) {
         if (author.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Kirjan muokkaaminen epäonnistui. Nimi ja tekijä eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -98,11 +94,8 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "isbn", ISBN);
         tipDao.editTipByTitle(title, "tags", tagString);
-<<<<<<< HEAD
         tipDao.editTipByTitle(title, "reference", reference);
-=======
         tipDao.setPriority(title, priority);
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (tipDao.getTip(title).isRead() != read) {
             tipDao.markTip(id);
         }
@@ -114,11 +107,7 @@ public class TipController {
     @PostMapping("/videos/{id}")
     public String editVideo(Model model, RedirectAttributes redirectAttributes,
             @PathVariable String id, @RequestParam String title, @RequestParam String url,
-<<<<<<< HEAD
-            String description, String uploader, String reference, String tagString, boolean watched) {
-=======
-            String description, String uploader, String tagString, int priority, boolean watched) {
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
+            String description, String reference, String uploader, String tagString, int priority, boolean watched) {
         if (title.trim().isEmpty() || url.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä.");
             return "redirect:/books";
@@ -132,11 +121,8 @@ public class TipController {
         tipDao.editTipByTitle(title, "description", description);
         tipDao.editTipByTitle(title, "uploader", uploader);
         tipDao.editTipByTitle(title, "tags", tagString);
-<<<<<<< HEAD
         tipDao.editTipByTitle(title, "reference", reference);
-=======
         tipDao.setPriority(title, priority);
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
         if (tipDao.getTip(title).isRead() != watched) {
             tipDao.markTip(id);
         }
@@ -157,17 +143,17 @@ public class TipController {
     }
 
     @PostMapping("/videos")
-    public String addVideo(@RequestParam String title, @RequestParam String link,
+    public String addVideo(@RequestParam String title, @RequestParam String url,
             String description, String uploader, String reference, String tags, RedirectAttributes redirectAttributes) {
-        if (link.trim().isEmpty() || title.trim().isEmpty()) {
+        if (url.trim().isEmpty() || title.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Nimi ja linkki ovat pakollisia kenttiä.");
             return "redirect:/books";
         }
-        if (!validateYouTubeVideo(link)) {
+        if (!validateYouTubeVideo(url)) {
             redirectAttributes.addFlashAttribute("message", "Videon lisääminen epäonnistui. Linkki ei kelvollinen.");
             return "redirect:/books";
         }
-        tipDao.addTip(new YouTubeVideo(title, link, uploader, description, reference, tags));
+        tipDao.addTip(new YouTubeVideo(title, url, uploader, description, reference, tags));
         redirectAttributes.addFlashAttribute("message", "Videon lisääminen onnistui!");
         return "redirect:/books";
     }
@@ -207,7 +193,6 @@ public class TipController {
         model.addAttribute("notReadTips", notRead);
         return "books";
     }
-<<<<<<< HEAD
     
     public boolean validateYouTubeVideo(String url) {
         if (url.contains("https://www.youtube.com/watch?")) {
@@ -215,7 +200,6 @@ public class TipController {
         }
         return false;
     }
-=======
 
 
     @PostMapping("/sort")
@@ -237,10 +221,6 @@ public class TipController {
         model.addAttribute("notReadTips", notRead);
         return "books";
     }
-
-
-
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
 }
 
 

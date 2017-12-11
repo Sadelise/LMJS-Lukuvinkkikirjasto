@@ -29,31 +29,22 @@ public class YouTubeVideo implements Tip {
         this.type = tipData.getType();
         this.reference = tipData.getReference();
         this.watched = tipData.read;
-<<<<<<< HEAD
-        
     }
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", "YouTubeVideo", "", false);
+        this(title, url, "", "", "", "YouTubeVideo", "", false, 0);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", "", false);
+        this(title, url, uploader, description, tag, "YouTubeVideo", "", false, 0);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false);
-=======
-        this.priority = tipData.priority;
+        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, 0);
     }
 
-    public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", "YouTubeVideo", false, 0);
-    }
-
-    public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", false, 0);
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
+    public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag, int priority) {
+        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, priority);
     }
 
     @Override
@@ -195,17 +186,16 @@ public class YouTubeVideo implements Tip {
     }
 
     @Override
-<<<<<<< HEAD
     public String getReference() {
         return this.reference;
-=======
-    public int getPriority(){
+    }
+
+    public int getPriority() {
         return this.priority;
     }
 
     @Override
-    public void setPriority(int i){
+    public void setPriority(int i) {
         this.priority = i;
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
     }
 }

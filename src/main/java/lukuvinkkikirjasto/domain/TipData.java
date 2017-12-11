@@ -31,11 +31,11 @@ public class TipData {
     protected int priority;
 
     public TipData(String title, String author, String type) {
-        this(title, author, "", "", "", "", type, "", false);
+        this(title, author, "", "", "", "", type, "", false, 0);
     }
 
     public TipData(String title, String author, String description, String tag, String type, String ISBN, String reference) {
-        this(title, author, description, "", ISBN, tag, type, reference, false);
+        this(title, author, description, "", ISBN, tag, type, reference, false, 0);
     }
 
     public TipData(Tip tip) {

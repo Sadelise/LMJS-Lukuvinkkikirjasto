@@ -36,31 +36,19 @@ public class Book implements Tip {
     }
 
     public Book(String title, String author) {
-<<<<<<< HEAD
-        this(title, author, "", "", "", "", "Book", "", false);
+        this(title, author, "", "", "", "", "Book", "", false, 0);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", "", false);
-    }
-
-    public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", type, "", read);
+        this(title, author, description, "", ISBN, tag, "Book", "", false, 0);
     }
 
     public Book(String title, String author, String description, String reference, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", reference, false);
-=======
-        this(title, author, "", "", "", "", "Book", false, 0);
-    }
-
-    public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", false, 0);
+        this(title, author, description, "", ISBN, tag, "Book", reference, false, 0);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", false, 0);
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
+        this(title, author, description, "", ISBN, "", "Book", "", false, 0);
     }
 
     @Override
@@ -211,11 +199,10 @@ public class Book implements Tip {
     }
 
     @Override
-<<<<<<< HEAD
     public String getReference() {
         return this.reference;
     }
-=======
+    
     public int getPriority(){
         return this.priority;
     }
@@ -224,6 +211,4 @@ public class Book implements Tip {
     public void setPriority(int i){
         this.priority = i;
     }
-
->>>>>>> 8fd2c6e70277406ca6e495416478f74cd1007af2
 }
