@@ -93,7 +93,7 @@ public class BasicTipDao implements TipDao {
 
     @Override
     public void setPriority(String title, int i) {
-
+        tips.get(title).setPriority(i);
     }
 
     @Override
