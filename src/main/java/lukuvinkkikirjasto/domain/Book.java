@@ -18,6 +18,7 @@ public class Book implements Tip {
     private String tagString;
     //private String[] tags;
     private String type;
+    private String reference;
     private boolean read;
     private int priority;
     //private boolean urlpresent;
@@ -29,20 +30,25 @@ public class Book implements Tip {
         this.tagString = tipData.getTagString();
         this.url = tipData.getUrl();
         this.type = tipData.getType();
+        this.reference = tipData.getReference();
         this.read = tipData.isRead();
         this.priority = tipData.priority;
     }
 
     public Book(String title, String author) {
-        this(title, author, "", "", "", "", "Book", false, 0);
+        this(title, author, "", "", "", "", "Book", "", false, 0);
     }
 
     public Book(String title, String author, String description, String tag, String ISBN) {
-        this(title, author, description, "", ISBN, tag, "Book", false, 0);
+        this(title, author, description, "", ISBN, tag, "Book", "", false, 0);
+    }
+
+    public Book(String title, String author, String description, String reference, String tag, String ISBN) {
+        this(title, author, description, "", ISBN, tag, "Book", reference, false, 0);
     }
 
     public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", false, 0);
+        this(title, author, description, "", ISBN, "", "Book", "", false, 0);
     }
 
     @Override
@@ -77,6 +83,9 @@ public class Book implements Tip {
                 break;
             case "isbn":
                 changeISBN(edit);
+                break;
+            case "reference":
+                changeReference(edit);
                 break;
             case "tags":
                 addTags(edit);
@@ -119,6 +128,10 @@ public class Book implements Tip {
     private void changeISBN(String isbn) {
         this.ISBN = isbn;
     }
+    
+    private void changeReference(String ref) {
+        this.reference = ref;
+    }
 
     @Override
     public boolean contains(String keyword) {
@@ -144,6 +157,11 @@ public class Book implements Tip {
         }
         if (this.title != null) {
             if (this.title.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        if (this.reference != null) {
+            if (this.reference.toLowerCase().contains(keyword)) {
                 return true;
             }
         }
@@ -186,6 +204,10 @@ public class Book implements Tip {
     }
 
     @Override
+    public String getReference() {
+        return this.reference;
+    }
+    
     public int getPriority(){
         return this.priority;
     }
@@ -194,5 +216,4 @@ public class Book implements Tip {
     public void setPriority(int i){
         this.priority = i;
     }
-
 }

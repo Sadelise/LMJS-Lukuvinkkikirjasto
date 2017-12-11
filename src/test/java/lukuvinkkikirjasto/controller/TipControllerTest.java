@@ -61,7 +61,7 @@ public class TipControllerTest {
     public void videoPageHasVideo() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("url", "http://testi"));
+                .param("url", "https://www.youtube.com/watch?testi"));
 
         this.mockMvc.perform(get("/videos/{id}", "video"))
                 .andExpect(model().attributeExists("video"))
@@ -175,7 +175,7 @@ public class TipControllerTest {
     public void addingVideoWorks() throws Exception {
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("url", "http://testi"))
+                .param("url", "https://www.youtube.com/watch?testi"))
                 .andReturn();
         assertTrue(result.getFlashMap().containsValue("Videon lisääminen onnistui!"));
 
@@ -186,7 +186,7 @@ public class TipControllerTest {
     public void addingVideoFailsWhenNoTitle() throws Exception {
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "")
-                .param("url", "http://testi"))
+                .param("url", "https://www.youtube.com/watch?testi"))
                 .andReturn();
         assertTrue(result.getFlashMap().containsValue("Videon lisääminen epäonnistui. "
                 + "Nimi ja linkki ovat pakollisia kenttiä."));
@@ -198,12 +198,12 @@ public class TipControllerTest {
     public void editingVideoWorks() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("url", "http://testi"))
+                .param("url", "https://www.youtube.com/watch?testi"))
                 .andReturn();
 
         MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")
                 .param("title", "video")
-                .param("url", "http://testi")
+                .param("url", "https://www.youtube.com/watch?testi")
                 .param("uploader", "youtuber")
                 .param("description", "hyvä")
                 .param("tags", "tagit")
@@ -218,12 +218,12 @@ public class TipControllerTest {
     public void markingVideoAsReadPutsBookOnReadList() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("url", "http://testi"))
+                .param("url", "https://www.youtube.com/watch?testi"))
                 .andReturn();
 
         MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")
                 .param("title", "video")
-                .param("url", "http://testi")
+                .param("url", "https://www.youtube.com/watch?testi")
                 .param("uploader", "youtuber")
                 .param("description", "hyvä")
                 .param("tags", "tagit")
@@ -239,7 +239,7 @@ public class TipControllerTest {
     public void editingVideoFailsWhenUrlIsEmpty() throws Exception {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/videos")
                 .param("title", "video")
-                .param("url", "http://testi"))
+                .param("url", "https://www.youtube.com/watch?testi"))
                 .andReturn();
 
         MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/videos/{id}", "video")

@@ -16,6 +16,7 @@ public class YouTubeVideo implements Tip {
     private String description;
     private String tagString;
     private String type;
+    private String reference;
     private boolean watched;
     private int priority;
 
@@ -26,16 +27,24 @@ public class YouTubeVideo implements Tip {
         this.url = tipData.url;
         this.tagString = tipData.getTagString();
         this.type = tipData.getType();
+        this.reference = tipData.getReference();
         this.watched = tipData.read;
-        this.priority = tipData.priority;
     }
 
     public YouTubeVideo(String title, String url) {
-        this(title, url, "", "", "", "YouTubeVideo", false, 0);
+        this(title, url, "", "", "", "YouTubeVideo", "", false, 0);
     }
 
     public YouTubeVideo(String title, String url, String uploader, String description, String tag) {
-        this(title, url, uploader, description, tag, "YouTubeVideo", false, 0);
+        this(title, url, uploader, description, tag, "YouTubeVideo", "", false, 0);
+    }
+
+    public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag) {
+        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, 0);
+    }
+
+    public YouTubeVideo(String title, String url, String uploader, String description, String reference, String tag, int priority) {
+        this(title, url, uploader, description, tag, "YouTubeVideo", reference, false, priority);
     }
 
     @Override
@@ -85,6 +94,9 @@ public class YouTubeVideo implements Tip {
             case "uploader":
                 changeUploader(edit);
                 break;
+            case "reference":
+                changeReference(edit);
+                break;
             case "tags":
                 addTags(edit);
                 break;
@@ -108,6 +120,10 @@ public class YouTubeVideo implements Tip {
 
     private void changeUploader(String edit) {
         this.uploader = edit;
+    }
+
+    private void changeReference(String ref) {
+        this.reference = ref;
     }
 
     @Override
@@ -138,6 +154,11 @@ public class YouTubeVideo implements Tip {
                 return true;
             }
         }
+        if (this.reference != null) {
+            if (this.reference.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -150,6 +171,7 @@ public class YouTubeVideo implements Tip {
         }*/
     }
 
+    @Override
     public String[] getTags() {
         if (tagString != null && tagString.length() > 0) {
             return tagString.split(";(\\s)*");
@@ -169,12 +191,16 @@ public class YouTubeVideo implements Tip {
     }
 
     @Override
-    public int getPriority(){
+    public String getReference() {
+        return this.reference;
+    }
+
+    public int getPriority() {
         return this.priority;
     }
 
     @Override
-    public void setPriority(int i){
+    public void setPriority(int i) {
         this.priority = i;
     }
 }

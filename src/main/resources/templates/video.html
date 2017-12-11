@@ -21,12 +21,13 @@ and open the template in the editor.
                 <input type="text" name="description" th:field="${video.description}"/>
                 <span>Lataaja: </span>
                 <input type="text" name="uploader" th:field="${video.uploader}"/>
+                <span>Suosittelija: </span>
+                <input type="text" name="reference" th:field="${video.reference}"/>
                 <span>Tagit: </span>
                 <input type="text" name="tags" th:field="${video.tagString}"/>
                 <span>Prioriteetti:</span>
                 <output name="prioriteettiUlos" id="prio" th:field="${video.priority}"></output>
                 <input type="range" min="0" max="9" step="1" name="priority" th:field="${video.priority}" oninput="prio.value = priority.value"/>
-                <span>Luettu:</span>
                 <span>Katsottu:</span>
                 <input type="checkbox" name="watched" th:field="${video.watched}"/>
                     

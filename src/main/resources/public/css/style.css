@@ -12,6 +12,6 @@ th, td {
 
 tr:hover {background-color:#DEF1FF;}
 
-td:nth-child(9), td:nth-child(8){
+td:nth-child(10), td:nth-child(9){
     display: none
 }

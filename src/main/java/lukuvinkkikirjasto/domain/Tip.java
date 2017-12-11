@@ -28,6 +28,8 @@ public interface Tip {
     String[] getTags();
     
     boolean getUrlpresent();
+    
+    String getReference();
 
     int getPriority();
 
