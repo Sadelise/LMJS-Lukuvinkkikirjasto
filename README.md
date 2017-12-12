@@ -1,4 +1,4 @@
-﻿# LMJS-Lukuvinkkikirjasto
+# LMJS-Lukuvinkkikirjasto
 
 
 
@@ -7,14 +7,11 @@
 #### Web-versio
 Ohjelma sijaitsee herokussa nimellä [lmjs-lukuvinkkikirjasto](https://lmjs-lukuvinkkikirjasto.herokuapp.com).
 
-Etusivulla on listattuna kaikki lisätyt lukuvinkit. Vinkkejä voi lisätä antamalla sivun alalaidassa oleviin tekstikenttiin ainakin kirjan nimen ja kirjailijan ja painamalla sitten "Lisää!"-nappia. Vinkin nimeä klikkaamalla pääsee tarkastelemaan yksittäistä vinkkiä. Tässä näkymässä voi myös muokata vinkin tietoja ja merkata vinkin luetuksi/lukemattomaksi. Painamalla "Tallenna muutokset"-painiketta tehdyt muutokset tallentuvat järjestelmään. "Kaikki vinkit"-napilla voi palata takaisin vinkkien listausnäkymään. 
+Etusivulla on listattuna kaikki lisätyt lukuvinkit. Vinkkejä voi lisätä antamalla sivun alalaidassa oleviin tekstikenttiin ainakin kirjan nimen ja kirjailijan ja painamalla sitten "Lisää!"-nappia.
 
-#### Komentoriviversio
-Ohjelman voi ottaa käyttöön kloonamalla sen GitHub-repositoriosta tai käynnistämällä [jar-tiedoston](https://github.com/Sadelise/LMJS-Lukuvinkkikirjasto/blob/master/LMJS-Lukuvinkkikirjasto.jar). Jar-tiedoston voi käynnistää jar-tiedoston sisältämässä kansiossa käyttämällä komentoa _java -jar LMJS-Lukuvinkkikirjasto.jar_.
+Yksittäisen vinkin kaikkia metatietoja voi tarkastella painamalla oikeassa laidassa kunkin vinkin kohdalla olevaa "muokkaa" -nappulaa. Tässä näkymässä voi myös muokata vinkin tietoja ja merkata vinkin luetuksi/lukemattomaksi. Painamalla "Tallenna muutokset"-painiketta tehdyt muutokset tallentuvat järjestelmään. "Kaikki vinkit"-napilla voi palata takaisin vinkkien listausnäkymään.
 
-Ohjelmaa käytetään komentoriviltä. Käyttäjä näkee kaikki käytettävissä olevat komennot kirjoittamalla "commands" ja painamalla Enteriä. Käyttäjä voi sitten käyttää haluamiaan komentoja kirjoittamalla niitä kysyttäessä ja painaessaan sen jälkeen Enter-näppäintä.
-
-Ohjelmasta voi poistua "quit"-komennolla.
+Vinkkejä voi hakea kirjoittamalla hakusanan yläosassa olevaan kenttään ja painamalla "Hae!"-nappulaa. Painamalla vinkkiin liittyvää tagia voi tehdä haun tämän tagin nimellä. Vinkit voi järjestää prioriteetin mukaan painamalla "Järjestä prioriteetin mukaan" -nappulaa.
 
 
 ### Definition of done
