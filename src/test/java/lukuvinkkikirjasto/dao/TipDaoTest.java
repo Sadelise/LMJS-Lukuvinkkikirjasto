@@ -56,7 +56,7 @@ public class TipDaoTest {
         public String[] getTags() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
-        
+
         public String getDescription() {
             return description;
         }
@@ -80,7 +80,12 @@ public class TipDaoTest {
             return id;
         }
 
-//        @Override
+        @Override
+        public String getCreator() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+//      @Override
         public boolean edit(String element, String edit) {
             if (!element.equals("description")) {
                 return false;
@@ -138,12 +143,6 @@ public class TipDaoTest {
         Tip tip2 = new TestTip("2");
         tipDao.addTip(tip2);
         assertEquals(tipDao.getAllTips().size(), 2);
-    }
-
-    @Test
-    public void nonexistentBookCanNotFound() {
-        TipDao dao = new BasicTipDao();
-        assertEquals(false, dao.testTipNumber(0));
     }
 
     @Test

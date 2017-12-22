@@ -47,10 +47,6 @@ public class Book implements Tip {
         this(title, author, description, "", ISBN, tag, "Book", reference, false, 0);
     }
 
-    public Book(String title, String author, String description, boolean read, String type, String ISBN) {
-        this(title, author, description, "", ISBN, "", "Book", "", false, 0);
-    }
-
     @Override
     public boolean markRead() {
         if (!this.read) {
@@ -128,13 +124,15 @@ public class Book implements Tip {
     private void changeISBN(String isbn) {
         this.ISBN = isbn;
     }
-    
+
     private void changeReference(String ref) {
         this.reference = ref;
     }
 
     @Override
     public boolean contains(String keyword) {
+        keyword = keyword.toLowerCase().trim();
+
         if (this.tagString != null) {
             if (this.tagString.toLowerCase().contains(keyword)) {
                 return true;
@@ -207,13 +205,17 @@ public class Book implements Tip {
     public String getReference() {
         return this.reference;
     }
-    
-    public int getPriority(){
+
+    public int getPriority() {
         return this.priority;
+    }
+    
+    public String getCreator() {
+        return author;
     }
 
     @Override
-    public void setPriority(int i){
+    public void setPriority(int i) {
         this.priority = i;
     }
 }

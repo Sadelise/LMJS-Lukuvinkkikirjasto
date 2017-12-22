@@ -1,4 +1,4 @@
-package lukuvinkkikirjasto;
+/*package lukuvinkkikirjasto;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
@@ -115,4 +115,4 @@ public class Stepdefs {
         tipDao = new BasicTipDao();
         Main.run(io, tipDao);
     }
-}
+}*/

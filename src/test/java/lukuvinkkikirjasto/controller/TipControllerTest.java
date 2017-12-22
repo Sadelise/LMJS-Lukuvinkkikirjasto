@@ -211,7 +211,7 @@ public class TipControllerTest {
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen onnistui!"));
 
-        this.mockMvc.perform(delete("/books/{id}", "kirja"));
+        this.mockMvc.perform(delete("/books/{id}", "video"));
     }
 
     @Test
@@ -252,7 +252,7 @@ public class TipControllerTest {
                 .andReturn();
         assertTrue(result2.getFlashMap().containsValue("Videon muokkaaminen epäonnistui. Nimi ja linkki eivät voi olla tyhjiä."));
 
-        this.mockMvc.perform(delete("/books/{id}", "kirja"));
+        this.mockMvc.perform(delete("/books/{id}", "video"));
     }
 
     @Test
@@ -268,6 +268,38 @@ public class TipControllerTest {
                 .andExpect(model().attributeExists("notReadTips"));
 
         this.mockMvc.perform(delete("/books/{id}", "kirja"));
+    }
+
+    @Test
+    public void sortedListIsSorted() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
+                .param("title", "kirja")
+                .param("description", "Testikirja")
+                .param("author", "kirjoittaja"));
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/books")
+                .param("title", "toinen kirja")
+                .param("description", "Testikirja")
+                .param("author", "kirjoittaja"));
+        
+        
+        MvcResult result2 = this.mockMvc.perform(MockMvcRequestBuilders.post("/books/{id}", "kirja")
+                .param("title", "kirja")
+                .param("author", "kirjoittaja")
+                .param("description", "hyvä")
+                .param("tags", "tagit")
+                .param("priority", "10"))
+                .andReturn();
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders.post("/sort")).andReturn();
+
+        List<Tip> tips = (List<Tip>) result.getModelAndView().getModel().get("notReadTips");
+                
+        assertTrue(tips.get(tips.size() - 1).getTitle().equals("kirja"));
+        
+        this.mockMvc.perform(delete("/books/{id}", "kirja"));
+        this.mockMvc.perform(delete("/books/{id}", "toinen kirja"));
+
     }
 
     public boolean checkIfTipIsOnModelList(String title, String modelList) throws Exception {

@@ -23,6 +23,8 @@ public interface Tip {
     
     String getTitle();
     
+    String getCreator();
+    
     String getUrl();
     
     String[] getTags();

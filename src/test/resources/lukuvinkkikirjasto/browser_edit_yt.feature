@@ -6,5 +6,6 @@ Feature: A Youtube video can be edited with the browser
     When title "Vidya video" and URL "https://www.youtube.com/watch?testurl" are entered into the video-adding form
     And the book "Vidya video" is selected
     And the description "Desc" is entered
+    And the priority of 4 is entered
     And save is clicked
     Then the page will contain "Videon muokkaaminen onnistui!"

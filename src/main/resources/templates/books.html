@@ -32,7 +32,7 @@ and open the template in the editor.
                 </form>
                 <br></br>
                 <a href="/books"><input type="button" value="Näytä kaikki"/></a>
-                
+
                 <form action="/sort" method="POST">
                     <input type="submit" value="Järjestä prioriteetin mukaan" />
                 </form>
@@ -46,6 +46,7 @@ and open the template in the editor.
                     <th align="left">Prioriteetti</th>
                     <th align="left">Otsikko</th>
                     <th align="left">Tyyppi</th>
+                    <th align="left">Tekijä</th>
                     <th align="left">Kuvaus</th>
                     <th align="left">Suosittelija</th>
                     <th align="left">Tagit</th>
@@ -58,6 +59,7 @@ and open the template in the editor.
                     <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
+                    <td><span th:text="${tip.creator}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
                     <td><span th:text="${tip.reference}">reference</span></td>
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">
@@ -77,6 +79,7 @@ and open the template in the editor.
                     <th align="left">Prioriteetti</th>
                     <th align="left">Otsikko</th>
                     <th align="left">Tyyppi</th>
+                    <th align="left">Tekijä</th>
                     <th align="left">Kuvaus</th>
                     <th align="left">Suosittelija</th>
                     <th align="left">Tagit</th>
@@ -89,6 +92,7 @@ and open the template in the editor.
                     <td th:if="${tip.urlpresent}"><a th:href="${tip.url}" th:text="${tip.title}" th:name="view">title</a></td>
                     <td th:unless="${tip.urlpresent}"> <span th:text="${tip.title}" th:name="view">title</span></td>
                     <td><span th:text="${tip.type}">type</span></td>
+                    <td><span th:text="${tip.creator}">type</span></td>
                     <td><span th:text="${tip.description}">description</span></td>
                     <td><span th:text="${tip.reference}">reference</span></td>
                     <td><form th:each="tag : ${tip.tags}" action="/search" method="POST">

@@ -176,7 +176,7 @@ public class TipController {
 
     @PostMapping("/search")
     public String searchTips(Model model, @RequestParam String keyword) {
-        List<Tip> results = tipDao.searchByKeyword(keyword.toLowerCase().trim());
+        List<Tip> results = tipDao.searchByKeyword(keyword.trim());
         List<Tip> read = new ArrayList<>();
         List<Tip> notRead = new ArrayList<>();
         if(results.isEmpty()) {

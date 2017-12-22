@@ -9,8 +9,6 @@ public interface TipDao {
 
     public void addTip(Tip tip);
 
-    public Tip getTipByNumber(int tipNumber);
-
     public Tip getTip(String title);
 
     public int getPriority(Tip tip);
@@ -20,10 +18,6 @@ public interface TipDao {
     public void markTip(String id);
 
     public void removeTip(String id);
-
-    public boolean testTipNumber(int tip);
-
-    public void editTip(int tip, String element, String edit);
 
     public void editTipByTitle(String title, String element, String edit);
 

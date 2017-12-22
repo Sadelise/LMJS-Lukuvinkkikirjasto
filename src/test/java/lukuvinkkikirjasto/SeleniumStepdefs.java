@@ -5,21 +5,21 @@
  */
 package lukuvinkkikirjasto;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
-import org.openqa.selenium.WebDriver;
 
 /**
  *
@@ -276,5 +276,15 @@ public class SeleniumStepdefs {
 
         driver.findElement(By.name("sendYouTubetip")).submit();
 
+    }
+
+    @And("^the priority of (\\d+) is entered$")
+    public void thePriorityOfIsEntered(int arg0) throws Throwable {
+        Thread.sleep(1000);
+        WebElement element = driver.findElement(By.name("priority"));
+        for(int i = 0; i<arg0;i++) {
+            element.sendKeys(Keys.ARROW_RIGHT);
+            Thread.sleep(100);
+        }
     }
 }
