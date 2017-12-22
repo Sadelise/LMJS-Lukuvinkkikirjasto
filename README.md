@@ -27,6 +27,9 @@ Ohjelmasta voi poistua "quit"-komennolla.
 ### Backlog
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/1OgjUlsgwDmvzZTyIIeAkLIftJII5E7hFcgInnRusNN4/edit#gid=1257881806)
 
+### Loppuraportti
+[Linkki raporttiin](https://docs.google.com/document/d/1vH7_cLBgotzAFKMdG0vQjkpRS4yVpPPde2MtRzw5VAE/edit?ts=5a378ffc)
+
 ### Travis
 [![Build Status](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto.svg?branch=master)](https://travis-ci.org/Sadelise/LMJS-Lukuvinkkikirjasto)
 
